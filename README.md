@@ -21,7 +21,7 @@ https://github.com/user-attachments/assets/ef57333e-f879-432a-afb9-180388982478
 
 ## Installation
 
-### Via Claude Code Custom Marketplace Source (Recommended)
+### Via Claude Code Custom Marketplace Source
 
 Install directly from this public GitHub repo. Run these as two separate Claude Code messages; do not paste both lines into the prompt at once.
 
@@ -63,7 +63,13 @@ Then use it by typing `/frontend-slides` in Claude Code. Standalone skills are n
 
 ### Other Coding Agents
 
-Agents such as Codex, Kimi Code, OpenCode, Gemini CLI, or other local coding assistants can use the same core skill by reading `SKILL.md` from this repo together with the referenced support files:
+Agents such as Codex, Kimi Code, OpenCode, Gemini CLI, or other local coding assistants can use the same core skill. The simplest path is to send the agent this GitHub repo link and ask it to use the Frontend Slides skill:
+
+```text
+https://github.com/zarazhangrui/frontend-slides
+```
+
+If the agent can read GitHub repos or browse files, it should start from `SKILL.md` and load only the referenced support files it needs:
 
 - `STYLE_PRESETS.md`
 - `viewport-base.css`
@@ -72,7 +78,9 @@ Agents such as Codex, Kimi Code, OpenCode, Gemini CLI, or other local coding ass
 - `bold-template-pack/`
 - `scripts/`
 
-The Claude Code plugin gives Claude Code a custom marketplace-source install flow and `/frontend-slides:frontend-slides` command. Other agents usually do not use that command surface; they should follow `SKILL.md` directly inside a workspace.
+Some agents can also install the skill for you if they have filesystem access and a known local skills directory. If not, they can still follow `SKILL.md` directly for the current session.
+
+The Claude Code plugin gives Claude Code a custom marketplace-source install flow and `/frontend-slides:frontend-slides` command. Other agents usually do not use that command surface.
 
 ## Usage
 
