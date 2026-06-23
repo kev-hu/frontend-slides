@@ -11,30 +11,31 @@ Use this small file for title-slide previews only.
 
 - slug: `twenty-saas`
 - name: `Twenty SaaS`
-- tagline: Refined high-density SaaS CRM deck — monochrome Inter product surfaces, EB Garamond italic accents, soft bordered app chrome, kanban/task/tweet modules, and pastel isometric feature cards.
+- tagline: Refined high-density SaaS operating deck — monochrome Inter boardroom surfaces, EB Garamond italic accents, thin deck chrome, decision grids, dark stat panels, proof stacks, rollout roadmaps, and pastel artifact cards.
 - mood: polished, product-native, clean, operational, lightly-playful
 - tone: precise, modern, founder-product, calm, scannable
 - formality: medium-high
 - density: medium-high
 - scheme: light
-- best_for: SaaS product launches, CRM/data/workflow decks, product strategy, roadmap reviews, GTM operating reviews, investor updates, and internal product narratives that need to feel like a real polished app rather than a generic presentation. Also strong for any "operating system for X" story where dense product surfaces and clean hierarchy are more persuasive than cinematic visuals.
-- avoid_for: Avoid for emotional consumer storytelling, luxury/editorial fashion, cinematic dark decks, or playful education material where CRM chrome, compact UI density, and restrained monochrome surfaces feel too operational.
+- best_for: SaaS operating reviews, CRM/data/workflow decks, product strategy, roadmap decisions, GTM reviews, investor updates, and "operating system for X" narratives that need to feel boardroom-ready, dense, calm, and product-native. Strong when the deck must make decisions and show evidence, not sell a landing-page story.
+- avoid_for: Avoid for emotional consumer storytelling, luxury/editorial fashion, cinematic dark decks, playful education material, or marketing-site pitch decks where nav bars, CTAs, and product-tour sections are expected.
 
 ## Visual Snapshot
 
-Twenty SaaS is a refined, high-density SaaS presentation system adapted from Twenty.com's CRM interface. It uses white and off-white product surfaces, thin #EDEDED dividers, soft multi-layer shadows, Inter typography, and small EB Garamond italic accents for editorial moments such as an inline `#1` or a single emphasized word.
+Twenty SaaS is a refined, high-density SaaS operating-deck system adapted from Twenty.com's CRM interface without copying its landing page. It uses white and off-white boardroom surfaces, thin #EDEDED dividers, soft multi-layer shadows, Inter typography, and small EB Garamond italic accents for editorial moments such as a large `#1`, numbered agenda rows, or a single emphasized word.
 
-The slide vocabulary is product-native: topbar chrome, pill badges, feature tabs, kanban lanes, deal cards, task rows, keyboard shortcuts, metric tiles, tweet-style testimonials, floating company badges, dotted object fields, and pastel illustrated feature cards. The pastels are controlled accents on a monochrome system, not full-slide backgrounds.
+The slide vocabulary is presentation-native: thin deck chrome, oversized thesis type, artifact boards, floating evidence cards, numbered agenda rows, three-pillar decision grids, dark stat panels, dashboard tables, proof stacks, and rollout roadmaps. CRM UI appears as evidence inside cards and modules, never as a full landing-page screenshot.
 
 ## Preview Ingredients
 
 - Palette: `#FFFFFF` background, `#FCFCFC` surface, `#F9F9F9` sidebar surface, `#111111` foreground, `#1A1A1A` primary, `#666666` muted, `#999999` tertiary, `#EDEDED` border, `#F0F0F0` subtle border.
 - Pastel accents: `#DFF7E9` green, `#DFF5FB` cyan, `#EEE7FF` purple, `#FFE8F1` pink, `#FFF3C4` yellow.
 - Typography: Inter for all core UI/headlines/body, EB Garamond italic for one tiny editorial accent, Fragment Mono only for keyboard keys.
-- Signature move: A slide-native CRM surface, usually a product shell, tab bar, kanban/task panel, or dotted object field, treated as the main evidence object.
-- Signature move: Thin 1px borders, 8-12px radii, and quiet two-layer shadows; selected states use a white card shadow instead of loud color.
-- Signature move: Pastel illustrated feature cards with low-opacity halftone texture and simple isometric blocks.
-- Signature move: Dense product modules arranged with strict alignment and small UI text, balanced by one clear presentation headline.
+- Signature move: Thin deck chrome with section/context/page number, never website navigation or CTA clusters.
+- Signature move: Oversized left-aligned thesis typography paired with a right-side artifact board or evidence system.
+- Signature move: Decision grids, stat dashboards, proof stacks, and rollout roadmaps as the canonical slide modules.
+- Signature move: A dark primary-result panel used sparingly to make one operating metric land hard.
+- Signature move: Pastel artifact panels with low-opacity halftone texture and simple isometric blocks, used as accents inside the monochrome system.
 
 ## International / CJK Preview Note
 

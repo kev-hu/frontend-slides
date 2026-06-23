@@ -163,7 +163,7 @@ This fork adds seven custom KJ templates in `kj-template-pack/selection-index.js
 - **Stagehand Dev** — Developer-tools system: graph-paper grid, dashed borders, golden-yellow accent, and isometric hatched cubes.
 - **Hedgehog OS** — macOS-inspired glassmorphism: frosted app windows, Finder-style sidebars, warm desktop glow, friendly orange accent.
 - **Voltcast** — Dark brutalist hardware-spec deck: acid green on black, uppercase Archivo Black, mono readouts, wire grids.
-- **Twenty SaaS** — Refined high-density SaaS CRM deck: monochrome Inter product surfaces, EB Garamond italic accents, soft app chrome, and pastel isometric feature cards.
+- **Twenty SaaS** — Refined high-density SaaS operating deck: monochrome Inter boardroom surfaces, EB Garamond italic accents, decision grids, dark stat panels, proof stacks, and pastel artifact cards.
 - **KJ Starter** — Placeholder starter cloned from Blue Professional for quickly drafting another KJ template.
 
 ### Bold Template Pack
@@ -246,7 +246,7 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
   <img src="previews/kj-twenty-saas-05.png" width="32.5%" alt="Twenty SaaS — slide 5" />
 </p>
 
-> Refined high-density SaaS CRM deck with monochrome Inter product surfaces, EB Garamond italic accents, soft app chrome, kanban/task/tweet modules, and pastel isometric feature cards.
+> Refined high-density SaaS operating deck with monochrome Inter boardroom surfaces, EB Garamond italic accents, thin deck chrome, decision grids, dark stat panels, proof stacks, rollout roadmaps, and pastel artifact cards.
 
 ## Additional Bold Templates
 

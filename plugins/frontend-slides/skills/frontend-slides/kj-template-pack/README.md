@@ -26,7 +26,7 @@ template's `preview.md`, and fully generated from the selected template's
 | Duolingo Learn | `duolingo-learn` | Bright gamified education, onboarding, habit, and community decks. |
 | Stagehand Dev | `stagehand-dev` | Developer-tools, SDK, API, and technical documentation decks. |
 | Hedgehog OS | `hedgehog-os` | Friendly macOS-inspired product, platform, and onboarding decks. |
-| Twenty SaaS | `twenty-saas` | Refined high-density SaaS, CRM, workflow, GTM, and product strategy decks. |
+| Twenty SaaS | `twenty-saas` | Refined high-density SaaS operating reviews, CRM/workflow strategy, board decks, and rollout decisions. |
 
 ## Implementation Contract
 

@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Twenty SaaS
-description: "A refined, high-density SaaS deck system adapted from Twenty.com's CRM interface: monochrome product surfaces, thin dividers, soft multi-layer shadows, compact app chrome, and pastel illustrated feature cards. Inter carries the entire UI and narrative system with EB Garamond italic reserved for rare editorial accents such as an inline #1 or a quote emphasis. The palette is disciplined white/off-white/black with muted gray text, then a small pastel accent set (#DFF7E9, #DFF5FB, #EEE7FF, #FFE8F1, #FFF3C4) used only for icons, isometric cards, avatars, and product-status dots. The signature move is a slide-native CRM surface: top chrome, pill badges, feature tabs, kanban lanes, task lists, tweet cards, floating company badges, and dotted product fields translated into presentation compositions. Depth comes from 1px borders, 8-12px radii, and quiet two-layer shadows; nothing is glossy, gradient-heavy, or oversized. The register is clean productivity UI with a playful product-card counterpoint, suited to SaaS strategy, product launches, operating reviews, and CRM/data/workflow stories."
+description: "A refined, high-density SaaS operating-deck system adapted from Twenty.com's CRM interface without copying its landing page. Inter carries the boardroom voice with EB Garamond italic reserved for rare editorial accents such as a large #1 marker, numbered agenda rows, or one emphasized word. The palette is disciplined white/off-white/black with muted gray text, then a small pastel accent set (#DFF7E9, #DFF5FB, #EEE7FF, #FFE8F1, #FFF3C4) used only for artifact boards, status dots, isometric panels, avatars, and product-area cues. The signature move is a presentation-native decision surface: thin deck chrome, oversized thesis typography, artifact boards, agenda rows, three-pillar decision grids, dark stat panels, proof stacks, and rollout roadmaps. CRM UI appears as evidence inside cards and dashboard modules, never as a full landing-page screenshot. Depth comes from 1px borders, 8-16px radii, and quiet two-layer shadows; the register is clean SaaS productivity with enough editorial contrast to feel like an authored deck."
 
 colors:
   background: "#FFFFFF"
@@ -103,7 +103,7 @@ typography:
 
 spacing:
   slide-pad: "64px 88px 72px"
-  topbar-height: "64px"
+  chrome-height: "34px"
   card-padding: "24px"
   component-gap: "16px"
   grid-gap: "22px"
@@ -115,23 +115,28 @@ canvas:
   background: "{colors.background}"
 
 components:
-  topbar:
-    height: "{spacing.topbar-height}"
+  deck-chrome:
+    height: "{spacing.chrome-height}"
     borderBottom: "1px solid {colors.border}"
-    background: "rgba(255,255,255,0.92)"
-    description: "Sticky-app-inspired deck chrome with logo, compact navigation labels, and a real content badge."
+    background: "{colors.background}"
+    description: "Thin presentation chrome with logo/section left, context center, page number right; never a website nav bar."
   pill:
     border: "1px solid {colors.border}"
     borderRadius: "999px"
     padding: "0 14px"
     background: "{colors.background}"
     description: "Small rounded metadata chip for status, stars, dates, sections, and filters."
-  product-shell:
+  artifact-board:
     border: "1px solid {colors.border}"
-    borderRadius: "12px"
-    boxShadow: "0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04)"
-    background: "{colors.background}"
-    description: "Large CRM/product screenshot surrogate used as the main evidence object on hero and demo slides."
+    borderRadius: "16px"
+    boxShadow: "0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06)"
+    background: "radial-gradient({colors.border} 1px, transparent 1px) 0 0 / 22px 22px, {colors.surface}"
+    description: "Dotted board surface for floating product-evidence cards, not a screenshot frame or website hero."
+  dark-stat-panel:
+    borderRadius: "18px"
+    background: "{colors.foreground}"
+    boxShadow: "0 14px 42px rgba(0,0,0,.10), 0 3px 10px rgba(0,0,0,.06)"
+    description: "High-contrast metric panel used sparingly for the primary result in an operating review."
   card:
     border: "1px solid {colors.border}"
     borderRadius: "12px"
@@ -162,23 +167,23 @@ Render each slide at 1920×1080, scale the whole stage with one transform, and v
 
 ## Overview
 
-Twenty SaaS translates the feeling of a refined CRM web app into a slide deck, rather than cloning a landing page. The system is built around dense product surfaces: app headers, sidebars, tabs, kanban lanes, task rows, metric cards, floating company badges, and tweet-style testimonials. A viewer should feel like the deck is opening a real operating surface, but the compositions remain presentation-native: big editorial hero lines, clear section breaks, stat moments, quote moments, and closing decision panels.
+Twenty SaaS translates the feeling of a refined CRM web app into a **boardroom operating deck**, not a product landing page. The system is built around presentation-native artifacts: thin deck chrome, oversized thesis typography, floating evidence cards, numbered agenda rows, three-pillar decision grids, dark stat panels, dashboard tables, customer proof stacks, and rollout roadmaps. CRM UI is a supporting vocabulary inside cards and modules; it should never become a full-page website screenshot or CTA-driven marketing hero.
 
 The type system is deliberately restrained. `{typography.hero-title}`, `{typography.section-title}`, `{typography.content-title}`, and almost every UI element use Inter at 500-700 weight with tight negative tracking. `{typography.editorial-accent}` is EB Garamond italic, used sparingly for inline moments like `#1`, a single emphasized word, or quote punctuation. Do not set full headlines in EB Garamond; the accent only works because the rest of the deck is crisp SaaS UI.
 
 The color system is monochrome-first: `{colors.background}`, `{colors.surface}`, `{colors.surface-alt}`, `{colors.foreground}`, `{colors.muted}`, `{colors.tertiary}`, `{colors.border}`, and `{colors.border-subtle}` do nearly all of the work. Pastels are small and purposeful: `{colors.pastel-green}`, `{colors.pastel-cyan}`, `{colors.pastel-purple}`, `{colors.pastel-pink}`, and `{colors.pastel-yellow}` appear in icon dots, illustrated feature panels, avatars, and object badges. Pastels should never flood a whole deck or become gradients.
 
-Depth comes from `{components.card}`, `{components.product-shell}`, and `{components.pill}`: 1px borders, small radii, and soft stacked shadows. The deck should feel polished and quiet, never glassy, glossy, neumorphic, or cartoonish. Density is medium-high; slides can carry self-contained product diagrams and CRM tables, but every dense element must have strong alignment, consistent gutters, and a clear headline hierarchy.
+Depth comes from `{components.card}`, `{components.artifact-board}`, `{components.dark-stat-panel}`, and `{components.pill}`: 1px borders, small radii, and soft stacked shadows. The deck should feel polished and quiet, never glassy, glossy, neumorphic, cartoonish, or landing-page promotional. Density is medium-high; slides can carry self-contained product diagrams and CRM tables, but every dense element must support a boardroom argument.
 
 Key Characteristics:
 
 - White and off-white SaaS surfaces with thin `{colors.border}` dividers.
 - Inter everywhere, EB Garamond italic only as rare editorial accent.
-- App-like topbar chrome, but populated with real deck metadata rather than fake navigation.
+- Thin deck chrome with logo/section, context, and page number; no website navigation or CTA clusters.
 - Pill badges for dates, status, filters, GitHub stars, section labels, and sync states.
 - Feature tabs with colored dots or small icons in the pastel accent set.
-- Kanban cards, task lists, shortcut keycaps, metric tiles, and tweet cards as reusable content modules.
-- Pastel illustrated feature cards with halftone texture and simple isometric blocks.
+- Agenda rows, decision pillars, stat dashboards, proof stacks, and rollout cards as reusable slide modules.
+- Pastel illustrated artifact panels with halftone texture and simple isometric blocks.
 - Floating company badges on dotted product fields for ecosystem/object-map slides.
 - Soft two-layer shadows; no heavy drop shadows or harsh contrast.
 - Medium-high density with scannable hierarchy, not airy marketing whitespace.
@@ -252,28 +257,28 @@ Use `{typography.hero-title}` for the first and last slide. Use `{typography.sec
 
 ## Layout
 
-The canvas is a fixed 1920x1080 stage with `{spacing.slide-pad}`. The default persistent chrome is `{components.topbar}`: 64px tall, stretched edge-to-edge, with brand/section left, compact nav or progress labels center, and one pill/status right. Use topbar chrome on cover, section, and closing slides; omit it on stat/quote slides when a quieter editorial composition is stronger.
+The canvas is a fixed 1920x1080 stage with `{spacing.slide-pad}`. The default persistent chrome is `{components.deck-chrome}`: a 34px row near the top edge with brand/section left, context centered, page number right, and a thin divider underneath. This is deck furniture, not product navigation. Do not add nav links, star badges, login buttons, docs buttons, or CTA clusters.
 
 Layout cycles through six archetypes:
 
 | archetype | composition |
 |---|---|
-| Cover / hero | Centered headline and subtitle above a large `{components.product-shell}` CRM surface. |
-| Section header | Two-column layout: editorial title and body on the left, dotted object field or company badges on the right. |
-| Content / grid | Headline row plus large illustrated feature card beside task/shortcut/product modules. |
-| Stat / statement | Big metric and thesis on the left, 2x2 supporting metric cards on the right. |
-| Quote | Large quote block beside a tweet/testimonial grid. |
-| Closing | Hero-scale decision statement beside a compact next-step panel. |
+| Cover / hero | Huge thesis headline on the left; `{components.artifact-board}` with floating evidence cards on the right; small metric cards along the bottom. |
+| Section / agenda | Oversized argument headline followed by four numbered agenda rows with compact pastel artifact blocks. |
+| Content / grid | Three decision pillars, each with a pastel isometric panel, concise argument copy, and checklist rows. |
+| Stat / statement | `{components.dark-stat-panel}` for the primary result paired with a dashboard surface, metric cards, and a small table. |
+| Quote / proof | Large human quote on the left, proof stack cards on the right; no social-media clutter beyond avatar/name/context. |
+| Closing / roadmap | Hero-scale recommendation plus a four-step rollout cadence with week pills. |
 
 Spacing is tight but not cramped. Keep 22px gutters between major content columns, 14-18px gaps inside product grids, 12-14px padding inside small UI cards, and 22-24px padding in larger content cards. Product shell widths can reach 1280px on hero slides; content columns should fit inside a 1744px safe width after slide padding.
 
-Use `{components.dotted-field}` for abstract company/object maps. Use `{components.pastel-illustration-panel}` only as the top half of an illustrated feature card. Do not use full-bleed pastel backgrounds; the pastel panels are accents inside the otherwise monochrome system.
+Use `{components.artifact-board}` for abstract company/object maps and floating evidence cards. Use `{components.pastel-illustration-panel}` for decision-pillar panels or compact agenda thumbnails. Do not use full-bleed pastel backgrounds; the pastel panels are accents inside the otherwise monochrome system.
 
 ## Depth and Elevation
 
-Depth is created by borders, off-white surfaces, and two soft shadow presets. `{components.card}` uses `0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06)` for default cards. `{components.product-shell}` uses `0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04)` for the large app surface.
+Depth is created by borders, off-white surfaces, and two soft shadow presets. `{components.card}` uses `0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06)` for default cards. `{components.dark-stat-panel}` uses a larger but still soft lift for the one high-contrast result panel. `{components.artifact-board}` stays quiet so floating cards and thesis type remain the focus.
 
-Use elevation to separate surfaces that look like real app UI: product shells, selected sidebar items, deal cards, tweet cards, metric tiles, and floating company badges. Do not shadow every element. Tabs, internal rows, sidebars, and dotted fields rely on borders and fills instead.
+Use elevation to separate presentation artifacts: floating evidence cards, decision pillars, proof cards, metric tiles, and roadmap rows. Do not shadow every element. Rows, dividers, charts, and dotted fields rely on borders and fills instead.
 
 Avoid heavy modal shadows except for a rare overlay pattern. This template is not glassmorphism and not a dramatic dark SaaS pitch; its credibility comes from quiet product realism.
 
@@ -285,30 +290,32 @@ Border weight is almost always 1px. Use `{colors.border}` for external card boun
 
 ### Decorative Element Types
 
-- Product topbar: edge-to-edge 64px chrome that carries real section/progress/status text.
+- Deck chrome: thin top row with section/context/page number; never website navigation.
 - Pastel status dots: 8px circles in the pastel palette, always paired with a tab, sidebar item, or badge.
 - Dotted product field: 20px radial dot grid on `{colors.surface}` for company/object maps.
-- Floating company badges: pill-shaped white badges with small pastel logo squares and soft card shadows.
+- Floating evidence cards: slightly rotated white cards on a dotted board surface, each with a product-area pill and one argument.
 - Isometric blocks: simple skewed rounded rectangles on pastel panels, with one faint offset shadow.
 - Halftone texture: radial dots at 12px spacing with low opacity, used only inside pastel illustration panels.
 - Keyboard keycaps: 42x34px rounded rectangles in `{colors.surface}` with `{typography.mono-key}`.
-- Tweet cards: white cards with avatar, name, handle/date, and body copy mentioning the relevant product or theme.
+- Proof cards: white cards with avatar, name, role/date, and concise operator quote.
+- Dark stat panel: one black result panel with giant metric and short interpretation.
+- Roadmap rows: tall white action cards with numbered serif marker, owner/action text, and week pill.
 
 ## Do's and Don'ts
 
 ### Do
 
-- Do make slides feel like polished SaaS product surfaces translated into deck compositions.
+- Do make slides feel like boardroom operating artifacts, not product landing pages.
 - Do use Inter for nearly everything and EB Garamond italic for one small editorial accent.
 - Do keep the monochrome palette dominant and reserve pastels for icons, dots, cards, and illustrations.
-- Do use kanban lanes, task rows, shortcuts, tweet cards, metric tiles, and company badges as content modules.
+- Do use agenda rows, decision pillars, dashboard metrics, proof cards, and rollout rows as content modules.
 - Do keep density medium-high with clear gutters, aligned edges, and small UI text.
 - Do use soft two-layer shadows only on cards, selected UI, badges, and large product shells.
-- Do populate topbar/nav/pill chrome with real deck metadata, section labels, dates, or statuses.
+- Do populate deck chrome with real section labels, dates, page numbers, or context.
 
 ### Don't
 
-- Don't clone a marketing website hero with fake CTAs on every slide.
+- Don't clone a marketing website hero, nav bar, CTA row, GitHub stars badge, or product-tour page.
 - Don't make full-slide pastel backgrounds or vibrant gradients.
 - Don't use EB Garamond for full headlines, body copy, or labels.
 - Don't add heavy shadows, glass blur, glossy cards, or dramatic lighting.
@@ -331,15 +338,14 @@ Do not apply uppercase label styling to CJK strings. Use short label text, full-
 
 ## Iteration Guide
 
-1. To add a new cover, start with `{components.topbar}`, a centered `{typography.hero-title}` headline, one `{typography.editorial-accent}` inline moment, and a large `{components.product-shell}` below.
-2. To add a section slide, use a two-column layout: `{typography.section-title}` plus body copy on one side, `{components.dotted-field}` or floating company badges on the other.
-3. To add a dense product slide, create a headline row, then combine one large feature card with two or three smaller `{components.card}` modules.
-4. To add a feature card, use a pastel illustration panel on top, halftone texture, 2-3 isometric blocks, a numbered step pill, and a compact Inter title/body.
-5. To add a metric slide, make one `{typography.stat-number}` dominant and support it with 2x2 compact metric cards.
-6. To add workflow/process detail, use task rows with radio circles, short titles, and one-line descriptions; do not use long bullet lists.
-7. To add testimonials, use tweet cards with avatar, name, handle/date, and real quote content; keep cards small enough to preserve the dense grid.
-8. To add a closing slide, return to hero typography and pair it with a next-step panel or decision checklist.
+1. To add a new cover, start with `{components.deck-chrome}`, a huge left-aligned `{typography.hero-title}` thesis, one `{typography.editorial-accent}` accent, a right-side `{components.artifact-board}`, and 2-3 bottom metric cards.
+2. To add an agenda slide, use an oversized `{typography.section-title}` and four numbered rows; each row gets one argument, one sentence of explanation, and a compact pastel artifact block.
+3. To add a decision slide, create three pillars with pastel illustration panels, concise argument titles, and checklist rows. Avoid web-feature cards and CTA language.
+4. To add a metric slide, use `{components.dark-stat-panel}` for one primary result and pair it with dashboard evidence: chart, metric cards, and a small table.
+5. To add workflow/process detail, use roadmap rows, task rows, or checklist rows with short labels; do not use sprawling flowcharts.
+6. To add customer proof, put the human quote at presentation scale and keep proof cards secondary.
+7. To add a closing slide, return to hero typography and pair it with a dated rollout cadence or decision checklist.
 
 ## Known Gaps
 
-This template relies on Google Fonts for Inter, EB Garamond, and Fragment Mono. If fonts fail to load, the deck loses the editorial accent and some UI precision. The product-shell patterns are content-dense and require short labels; long company names, verbose deal descriptions, or too many columns should be split across slides. The isometric illustration vocabulary is intentionally simple; complex bespoke diagrams need custom art direction to stay on-system. EB Garamond has no CJK equivalent in this template, so international decks should reduce or remove the editorial accent rather than forcing a mismatched serif.
+This template relies on Google Fonts for Inter, EB Garamond, and Fragment Mono. If fonts fail to load, the deck loses the editorial accent and some UI precision. The pillar, dashboard, and roadmap patterns require short labels; verbose deal descriptions or too many table columns should be split across slides. The isometric illustration vocabulary is intentionally simple; complex bespoke diagrams need custom art direction to stay on-system. EB Garamond has no CJK equivalent in this template, so international decks should reduce or remove the editorial accent rather than forcing a mismatched serif.

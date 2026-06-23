@@ -168,7 +168,7 @@
     {
       "slug": "twenty-saas",
       "name": "Twenty SaaS",
-      "tagline": "Refined high-density SaaS CRM deck — monochrome Inter product surfaces, EB Garamond italic accents, soft bordered app chrome, kanban/task/tweet modules, and pastel isometric feature cards.",
+      "tagline": "Refined high-density SaaS operating deck — monochrome Inter boardroom surfaces, EB Garamond italic accents, thin deck chrome, decision grids, dark stat panels, proof stacks, rollout roadmaps, and pastel artifact cards.",
       "mood": [
         "polished",
         "product-native",
@@ -186,8 +186,8 @@
       "formality": "medium-high",
       "density": "medium-high",
       "scheme": "light",
-      "best_for": "SaaS product launches, CRM/data/workflow decks, product strategy, roadmap reviews, GTM operating reviews, investor updates, and internal product narratives that need to feel like a real polished app rather than a generic presentation. Also strong for any \"operating system for X\" story where dense product surfaces and clean hierarchy are more persuasive than cinematic visuals.",
-      "avoid_for": "Avoid for emotional consumer storytelling, luxury/editorial fashion, cinematic dark decks, or playful education material where CRM chrome, compact UI density, and restrained monochrome surfaces feel too operational.",
+      "best_for": "SaaS operating reviews, CRM/data/workflow decks, product strategy, roadmap decisions, GTM reviews, investor updates, and \"operating system for X\" narratives that need to feel boardroom-ready, dense, calm, and product-native. Strong when the deck must make decisions and show evidence, not sell a landing-page story.",
+      "avoid_for": "Avoid for emotional consumer storytelling, luxury/editorial fashion, cinematic dark decks, playful education material, or marketing-site pitch decks where nav bars, CTAs, and product-tour sections are expected.",
       "preview_md": "kj-template-pack/templates/twenty-saas/preview.md",
       "design_md": "kj-template-pack/templates/twenty-saas/design.md"
     }
