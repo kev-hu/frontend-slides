@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!--
+  REFERENCE DECK — Hedgehog OS
+  A charming macOS-inspired glassmorphism system: warm-beige desktop wallpaper lit by
+  three radial glows, floating frosted "app windows" with traffic-light titlebars, a
+  Finder-style explorer sidebar, glass widget cards, a floating AI-coach chat, and a
+  single friendly-orange brand accent. Type: Geist (UI) + Geist Mono (chrome).
+  Built render-first; design.md is reverse-documented from these verified values.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reference Deck — Hedgehog OS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* === MANDATORY FIXED-STAGE BASE (verbatim from viewport-base.css) === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* === DESIGN SYSTEM === */
+:root {
+  --stage-bg: #d9d4ca;            /* letterbox just outside the desktop */
+  --slide-bg: #EEEBE4;            /* warm beige desktop */
+
+  --desktop: #EEEBE4;
+  --ink: #1D1B1A;
+  --muted: #6B6560;
+  --accent: #F9A526;             /* friendly orange — the only brand color */
+  --accent-deep: #D9831A;        /* darker orange for text-on-light */
+
+  /* status / glow spectrum — quarantined to badges, dots, traffic lights, wallpaper */
+  --sig-red: #FF5F57;
+  --sig-amber: #FEBC2E;
+  --sig-green: #28C840;
+  --info: #9B8CFF;               /* soft purple */
+  --grn: #2BB673;                /* readable green for badge text */
+
+  /* glass */
+  --glass: rgba(255,253,250,0.66);
+  --glass-strong: rgba(255,254,251,0.82);
+  --glass-card: rgba(255,255,255,0.50);
+  --hairline: rgba(29,27,26,0.10);
+  --hairline-soft: rgba(29,27,26,0.06);
+  --rim: rgba(255,255,255,0.65);  /* top inner highlight on glass */
+
+  --win-shadow: 0 40px 90px -30px rgba(29,27,26,0.45), 0 8px 24px -8px rgba(29,27,26,0.18);
+  --card-shadow: 0 14px 30px -16px rgba(29,27,26,0.30);
+  --accent-glow: 0 10px 26px -6px rgba(249,165,38,0.55), 0 2px 6px rgba(249,165,38,0.35);
+
+  --r-win: 22px;
+  --r-card: 16px;
+  --r-pill: 999px;
+
+  font-family: 'Geist', sans-serif;
+}
+
+/* desktop wallpaper: warm beige + three subtle radial glows */
+.slide {
+  box-sizing: border-box;
+  background:
+    radial-gradient(900px 620px at 12% 6%,  rgba(249,165,38,0.30), transparent 60%),
+    radial-gradient(820px 600px at 92% 4%,  rgba(155,140,255,0.26), transparent 62%),
+    radial-gradient(1000px 680px at 50% 108%, rgba(43,182,115,0.22), transparent 60%),
+    var(--desktop);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- persistent menubar (glass, macOS-style) ---- */
+.menubar {
+  position: absolute; top: 0; left: 0; right: 0; height: 44px;
+  display: flex; align-items: center; gap: 26px;
+  padding: 0 26px;
+  background: rgba(255,253,250,0.55);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid var(--hairline-soft);
+  z-index: 50;
+}
+.mb-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
+.mb-logo { width: 18px; height: 18px; border-radius: 6px; background: linear-gradient(150deg, var(--accent), #ff7b3d); box-shadow: 0 1px 3px rgba(249,165,38,0.6); }
+.mb-menu { display: flex; gap: 22px; color: var(--muted); font-size: 13.5px; font-weight: 500; }
+.mb-right { margin-left: auto; display: flex; align-items: center; gap: 18px; font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--muted); }
+.mb-clock { color: var(--ink); font-weight: 500; }
+
+/* ---- the OS window — the signature ---- */
+.win {
+  position: absolute;
+  background: var(--glass);
+  backdrop-filter: blur(34px) saturate(1.5);
+  -webkit-backdrop-filter: blur(34px) saturate(1.5);
+  border: 1px solid var(--hairline);
+  border-top-color: var(--rim);
+  border-radius: var(--r-win);
+  box-shadow: var(--win-shadow);
+  overflow: hidden;
+}
+.titlebar {
+  height: 54px; flex: 0 0 54px;
+  display: flex; align-items: center; padding: 0 20px;
+  background: rgba(255,255,255,0.30);
+  border-bottom: 1px solid var(--hairline-soft);
+  position: relative;
+}
+.lights { display: flex; gap: 9px; }
+.light { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.18); }
+.light.r { background: var(--sig-red); }
+.light.y { background: var(--sig-amber); }
+.light.g { background: var(--sig-green); }
+.title-pill {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--muted);
+  background: rgba(255,255,255,0.5); border: 1px solid var(--hairline-soft);
+  padding: 5px 16px; border-radius: var(--r-pill);
+  display: flex; align-items: center; gap: 8px;
+}
+.title-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sig-green); }
+.win-body { padding: 46px 52px; }
+
+/* ---- explorer / Finder sidebar ---- */
+.explorer {
+  width: 248px; flex: 0 0 248px;
+  background: rgba(255,255,255,0.28);
+  border-right: 1px solid var(--hairline-soft);
+  padding: 26px 16px;
+}
+.exp-group { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: 0 12px; margin: 22px 0 8px; }
+.exp-group:first-child { margin-top: 0; }
+.exp-item { display: flex; align-items: center; gap: 11px; padding: 9px 12px; border-radius: 9px; font-size: 15px; font-weight: 500; color: var(--ink); }
+.exp-item .ico { font-size: 16px; }
+.exp-item.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px -2px rgba(249,165,38,0.6); }
+.exp-item.dim { color: var(--muted); font-weight: 400; }
+
+/* ---- typography roles ---- */
+.eyebrow { font-family: 'Geist Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent-deep); }
+.display { font-size: 96px; font-weight: 700; line-height: 1.02; letter-spacing: -0.035em; }
+.h1 { font-size: 68px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; }
+.h2 { font-size: 40px; font-weight: 600; line-height: 1.12; letter-spacing: -0.02em; }
+.lead { font-size: 23px; font-weight: 400; line-height: 1.5; color: var(--muted); }
+.body { font-size: 17px; font-weight: 400; line-height: 1.55; color: var(--muted); }
+.card-title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+
+/* ---- badges & snippets ---- */
+.badge { font-family: 'Geist Mono', monospace; font-size: 12px; font-weight: 500; padding: 4px 11px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 6px; }
+.badge .pip { width: 7px; height: 7px; border-radius: 50%; }
+.badge.green { background: rgba(43,182,115,0.14); color: var(--grn); }
+.badge.green .pip { background: var(--sig-green); }
+.badge.orange { background: rgba(249,165,38,0.16); color: var(--accent-deep); }
+.badge.orange .pip { background: var(--accent); }
+.badge.purple { background: rgba(155,140,255,0.18); color: #6f5fd6; }
+.badge.purple .pip { background: var(--info); }
+.snippet { font-family: 'Geist Mono', monospace; font-size: 15px; color: var(--ink); background: rgba(29,27,26,0.05); border: 1px solid var(--hairline-soft); border-radius: 10px; padding: 14px 18px; }
+.snippet .tok-k { color: #6f5fd6; }
+.snippet .tok-s { color: var(--grn); }
+.snippet .tok-c { color: var(--muted); }
+
+/* ---- buttons ---- */
+.btn { display: inline-flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 600; padding: 14px 26px; border-radius: 13px; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: var(--accent-glow); }
+.btn-ghost { font-family: 'Geist Mono', monospace; font-size: 15px; font-weight: 500; background: rgba(255,255,255,0.55); color: var(--ink); border: 1px solid var(--hairline); }
+
+/* ---- glass content card ---- */
+.gcard {
+  background: var(--glass-card);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid var(--hairline);
+  border-top-color: var(--rim);
+  border-radius: var(--r-card);
+  box-shadow: var(--card-shadow);
+  padding: 28px 28px;
+}
+.gcard .ico-tile { width: 50px; height: 50px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 26px; background: rgba(255,255,255,0.7); border: 1px solid var(--hairline-soft); box-shadow: 0 4px 10px -4px rgba(29,27,26,0.2); }
+
+/* ---- right widget rail ---- */
+.widgets { width: 300px; flex: 0 0 300px; padding: 28px 24px; display: flex; flex-direction: column; gap: 18px; background: rgba(255,255,255,0.16); border-left: 1px solid var(--hairline-soft); }
+.widget { background: var(--glass-card); border: 1px solid var(--hairline); border-top-color: var(--rim); border-radius: var(--r-card); padding: 20px; box-shadow: var(--card-shadow); }
+.widget .wlabel { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+
+/* ---- stat figure ---- */
+.stat-num { font-size: 88px; font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; color: var(--accent-deep); }
+.stat-label { font-family: 'Geist Mono', monospace; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+
+/* ---- AI coach floating chat ---- */
+.coach {
+  position: absolute; width: 340px;
+  background: var(--glass-strong);
+  backdrop-filter: blur(30px) saturate(1.5);
+  -webkit-backdrop-filter: blur(30px) saturate(1.5);
+  border: 1px solid var(--hairline); border-top-color: var(--rim);
+  border-radius: 20px; box-shadow: var(--win-shadow); overflow: hidden;
+}
+.coach-head { display: flex; align-items: center; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--hairline-soft); }
+.coach-av { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(150deg, var(--info), var(--accent)); }
+.coach-name { font-size: 15px; font-weight: 600; }
+.coach-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.bubble { font-size: 15px; line-height: 1.45; padding: 12px 15px; border-radius: 15px; max-width: 86%; }
+.bubble.them { background: rgba(255,255,255,0.7); border: 1px solid var(--hairline-soft); border-bottom-left-radius: 5px; }
+.bubble.me { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 5px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; padding: 2px 18px 18px; }
+.chip { font-family: 'Geist Mono', monospace; font-size: 12px; padding: 6px 12px; border-radius: var(--r-pill); background: rgba(155,140,255,0.14); color: #6f5fd6; border: 1px solid rgba(155,140,255,0.25); }
+
+/* ---- dock ---- */
+.dock {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 14px; padding: 12px 16px;
+  background: rgba(255,253,250,0.55); backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid var(--rim); border-radius: 22px; box-shadow: var(--win-shadow);
+}
+.dock-app { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 27px; background: rgba(255,255,255,0.7); border: 1px solid var(--hairline-soft); box-shadow: 0 6px 14px -6px rgba(29,27,26,0.3); }
+
+/* counter chrome */
+.counter { position: absolute; bottom: 22px; right: 30px; font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--muted); z-index: 40; }
+
+/* layout helpers */
+.flex { display: flex; }
+.col { display: flex; flex-direction: column; }
+
+/* one orchestrated entry */
+.slide.active .reveal { animation: rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
+@keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <div class="deck-stage" id="stage">
+
+    <!-- ============ COVER / HERO — the desktop ============ -->
+    <section class="slide active" data-label="Cover">
+      <div class="menubar">
+        <div class="mb-brand"><span class="mb-logo"></span>Hedgehog OS</div>
+        <div class="mb-menu"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+        <div class="mb-right"><span>⌘ Spotlight</span><span>100%</span><span class="mb-clock">9:41 AM</span></div>
+      </div>
+
+      <div class="win reveal" style="--d:.05s; left:170px; top:150px; width:1180px; height:640px;">
+        <div class="titlebar">
+          <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+          <div class="title-pill"><span class="dot"></span>welcome.md — Hedgehog</div>
+        </div>
+        <div class="win-body" style="padding:66px 80px;">
+          <div class="eyebrow reveal" style="--d:.18s">// DESIGN SYSTEM · v1.0</div>
+          <h1 class="display reveal" style="--d:.26s; margin:22px 0 0;">A friendlier OS<br>for technical decks.</h1>
+          <p class="lead reveal" style="--d:.34s; margin:26px 0 0; max-width:760px;">Glassmorphic windows, an explorer sidebar, and one warm accent — the desktop you already know, turned into a slide system.</p>
+          <div class="flex reveal" style="--d:.42s; gap:16px; margin-top:40px; align-items:center;">
+            <span class="btn btn-primary">Get started →</span>
+            <span class="btn btn-ghost">$ brew install hedgehog</span>
+            <span class="badge green" style="margin-left:6px;"><span class="pip"></span>STABLE BUILD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="coach reveal" style="--d:.6s; right:150px; bottom:150px;">
+        <div class="coach-head"><span class="coach-av"></span><span class="coach-name">AI Coach</span><span class="badge purple" style="margin-left:auto;"><span class="pip"></span>ONLINE</span></div>
+        <div class="coach-body">
+          <div class="bubble them">Want me to scaffold the opening slide?</div>
+          <div class="bubble me">Yes — start with the hero window.</div>
+        </div>
+        <div class="chips"><span class="chip">⌘ outline</span><span class="chip">↻ regenerate</span><span class="chip">+ section</span></div>
+      </div>
+
+      <div class="counter">01 / 06</div>
+    </section>
+
+    <!-- ============ SECTION HEADER — explorer + main pane ============ -->
+    <section class="slide" data-label="Section">
+      <div class="menubar">
+        <div class="mb-brand"><span class="mb-logo"></span>Hedgehog OS</div>
+        <div class="mb-menu"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+        <div class="mb-right"><span>⌘ Spotlight</span><span>100%</span><span class="mb-clock">9:41 AM</span></div>
+      </div>
+
+      <div class="win flex reveal" style="--d:.05s; left:170px; top:150px; width:1580px; height:740px; flex-direction:column;">
+        <div class="titlebar">
+          <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+          <div class="title-pill"><span class="dot"></span>~/architecture — Finder</div>
+        </div>
+        <div class="flex" style="flex:1; min-height:0;">
+          <nav class="explorer">
+            <div class="exp-group">Sections</div>
+            <div class="exp-item dim"><span class="ico">📁</span>Introduction</div>
+            <div class="exp-item active"><span class="ico">📐</span>Architecture</div>
+            <div class="exp-item dim"><span class="ico">🧩</span>Components</div>
+            <div class="exp-item dim"><span class="ico">📊</span>Benchmarks</div>
+            <div class="exp-group">Files</div>
+            <div class="exp-item dim"><span class="ico">📄</span>overview.md</div>
+            <div class="exp-item dim"><span class="ico">📄</span>roadmap.md</div>
+          </nav>
+          <div class="col" style="flex:1; padding:88px 80px; justify-content:center;">
+            <div class="flex" style="align-items:baseline; gap:24px;">
+              <div class="reveal" style="--d:.2s; font-family:'Geist Mono',monospace; font-size:150px; font-weight:500; line-height:0.8; color:transparent; -webkit-text-stroke:2px var(--ink);">02</div>
+              <div class="col" style="gap:18px;">
+                <div class="eyebrow reveal" style="--d:.28s">// CHAPTER TWO</div>
+                <h2 class="h1 reveal" style="--d:.34s; margin:0;">How the<br>windows fit together.</h2>
+              </div>
+            </div>
+            <p class="lead reveal" style="--d:.42s; margin:34px 0 0; max-width:720px;">Every surface is a frosted window on a shared desktop. The explorer rail keeps you oriented; the right rail carries live widgets.</p>
+            <div class="flex reveal" style="--d:.5s; gap:10px; margin-top:28px;">
+              <span class="badge orange"><span class="pip"></span>3-COLUMN GRID</span>
+              <span class="badge green"><span class="pip"></span>STICKY RAILS</span>
+              <span class="badge purple"><span class="pip"></span>GLASS SURFACES</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="counter">02 / 06</div>
+    </section>
+
+    <!-- ============ CONTENT / GRID — full three-column OS layout ============ -->
+    <section class="slide" data-label="Content">
+      <div class="menubar">
+        <div class="mb-brand"><span class="mb-logo"></span>Hedgehog OS</div>
+        <div class="mb-menu"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+        <div class="mb-right"><span>⌘ Spotlight</span><span>100%</span><span class="mb-clock">9:41 AM</span></div>
+      </div>
+
+      <div class="win flex reveal" style="--d:.05s; left:90px; top:120px; width:1740px; height:820px; flex-direction:column;">
+        <div class="titlebar">
+          <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+          <div class="title-pill"><span class="dot"></span>components — Hedgehog</div>
+        </div>
+        <div class="flex" style="flex:1; min-height:0;">
+          <nav class="explorer" style="width:230px; flex-basis:230px;">
+            <div class="exp-group">Library</div>
+            <div class="exp-item active"><span class="ico">🧩</span>Components</div>
+            <div class="exp-item dim"><span class="ico">🪟</span>Windows</div>
+            <div class="exp-item dim"><span class="ico">🎛️</span>Controls</div>
+            <div class="exp-item dim"><span class="ico">🔔</span>Notifications</div>
+            <div class="exp-group">Status</div>
+            <div class="exp-item dim"><span class="ico">🟢</span>All passing</div>
+          </nav>
+
+          <div class="col" style="flex:1; padding:38px 36px; gap:22px; min-width:0;">
+            <div class="flex" style="align-items:center; gap:14px;">
+              <h2 class="h2 reveal" style="--d:.16s; margin:0;">Build blocks</h2>
+              <span class="badge green reveal" style="--d:.2s"><span class="pip"></span>12 SHIPPED</span>
+            </div>
+            <div class="flex" style="gap:20px;">
+              <div class="gcard reveal" style="--d:.24s; flex:1;">
+                <div class="ico-tile">🪟</div>
+                <div class="card-title" style="margin:18px 0 8px;">OS Window</div>
+                <p class="body" style="margin:0;">Frosted titlebar, traffic lights, soft shadow. The container for every block.</p>
+                <span class="badge orange" style="margin-top:16px;"><span class="pip"></span>CORE</span>
+              </div>
+              <div class="gcard reveal" style="--d:.3s; flex:1;">
+                <div class="ico-tile">🗂️</div>
+                <div class="card-title" style="margin:18px 0 8px;">Explorer Rail</div>
+                <p class="body" style="margin:0;">Finder-style file tree for navigation. Highlights the active section in orange.</p>
+                <span class="badge purple" style="margin-top:16px;"><span class="pip"></span>NAV</span>
+              </div>
+              <div class="gcard reveal" style="--d:.36s; flex:1;">
+                <div class="ico-tile">💬</div>
+                <div class="card-title" style="margin:18px 0 8px;">AI Coach</div>
+                <p class="body" style="margin:0;">Floating chat with message bubbles and quick-action chips. Always one tap away.</p>
+                <span class="badge green" style="margin-top:16px;"><span class="pip"></span>LIVE</span>
+              </div>
+            </div>
+            <div class="snippet reveal" style="--d:.42s;"><span class="tok-c">// drop a window anywhere on the desktop</span><br><span class="tok-k">import</span> { Window } <span class="tok-k">from</span> <span class="tok-s">'hedgehog/os'</span> &nbsp;<span class="tok-c">→ ⌘N</span></div>
+          </div>
+
+          <aside class="widgets">
+            <div class="widget reveal" style="--d:.3s;">
+              <div class="wlabel">UPTIME</div>
+              <div style="font-size:40px; font-weight:800; letter-spacing:-0.03em; margin-top:6px;">99.9<span style="font-size:22px; color:var(--muted);">%</span></div>
+              <div class="badge green" style="margin-top:10px;"><span class="pip"></span>HEALTHY</div>
+            </div>
+            <div class="widget reveal" style="--d:.38s;">
+              <div class="wlabel">NOW PLAYING</div>
+              <div class="card-title" style="font-size:18px; margin:8px 0 4px;">Focus Mode</div>
+              <p class="body" style="margin:0; font-size:14px;">Deep work · 24 min left</p>
+            </div>
+            <div class="widget reveal" style="--d:.46s;">
+              <div class="wlabel">WEATHER</div>
+              <div class="flex" style="align-items:center; gap:10px; margin-top:6px;">
+                <span style="font-size:34px;">⛅</span>
+                <div><div style="font-size:24px; font-weight:700;">68°</div><div class="body" style="font-size:13px; margin:0;">Partly cloudy</div></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <div class="counter">03 / 06</div>
+    </section>
+
+    <!-- ============ STAT / STATEMENT — Activity Monitor ============ -->
+    <section class="slide" data-label="Stat">
+      <div class="menubar">
+        <div class="mb-brand"><span class="mb-logo"></span>Hedgehog OS</div>
+        <div class="mb-menu"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+        <div class="mb-right"><span>⌘ Spotlight</span><span>100%</span><span class="mb-clock">9:41 AM</span></div>
+      </div>
+
+      <div class="win flex reveal" style="--d:.05s; left:200px; top:160px; width:1520px; height:640px; flex-direction:column;">
+        <div class="titlebar">
+          <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+          <div class="title-pill"><span class="dot"></span>Activity Monitor</div>
+        </div>
+        <div class="col" style="flex:1; padding:54px 64px; justify-content:center;">
+          <div class="eyebrow reveal" style="--d:.16s">// BY THE NUMBERS</div>
+          <h2 class="h2 reveal" style="--d:.22s; margin:14px 0 40px; max-width:900px;">Everything runs lighter on a window manager people actually enjoy.</h2>
+          <div class="flex" style="gap:24px;">
+            <div class="gcard reveal" style="--d:.3s; flex:1; text-align:left;">
+              <div class="stat-num">3×</div>
+              <div class="stat-label" style="margin-top:14px;">FASTER TO DRAFT</div>
+            </div>
+            <div class="gcard reveal" style="--d:.38s; flex:1;">
+              <div class="stat-num">100%</div>
+              <div class="stat-label" style="margin-top:14px;">GLASS, NO GRADIENT SOUP</div>
+            </div>
+            <div class="gcard reveal" style="--d:.46s; flex:1;">
+              <div class="stat-num">1</div>
+              <div class="stat-label" style="margin-top:14px;">ACCENT TO RULE THEM ALL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="counter">04 / 06</div>
+    </section>
+
+    <!-- ============ QUOTE — Spotlight / Notes card ============ -->
+    <section class="slide" data-label="Quote">
+      <div class="menubar">
+        <div class="mb-brand"><span class="mb-logo"></span>Hedgehog OS</div>
+        <div class="mb-menu"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+        <div class="mb-right"><span>⌘ Spotlight</span><span>100%</span><span class="mb-clock">9:41 AM</span></div>
+      </div>
+
+      <div class="win col reveal" style="--d:.05s; left:360px; top:280px; width:1200px; height:480px;">
+        <div class="titlebar">
+          <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+          <div class="title-pill"><span class="dot"></span>Notes — Quote</div>
+        </div>
+        <div class="col" style="flex:1; padding:50px 64px; justify-content:center;">
+          <div class="reveal" style="--d:.18s; font-size:90px; font-weight:800; color:var(--accent); line-height:0.5; height:40px;">“</div>
+          <p class="reveal" style="--d:.26s; font-size:40px; font-weight:600; line-height:1.28; letter-spacing:-0.02em; margin:0; max-width:980px;">Good software feels like a place. Hedgehog makes your deck feel like a desktop you want to live in.</p>
+          <div class="flex reveal" style="--d:.4s; align-items:center; gap:14px; margin-top:32px;">
+            <span style="width:44px; height:44px; border-radius:50%; background:linear-gradient(150deg,var(--info),var(--accent));"></span>
+            <div>
+              <div style="font-size:17px; font-weight:600;">Dana Okonkwo</div>
+              <div class="body" style="margin:0; font-size:14px;">Principal Designer · Hedgehog Labs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="counter">05 / 06</div>
+    </section>
+
+    <!-- ============ CLOSING — desktop + dock ============ -->
+    <section class="slide" data-label="Close">
+      <div class="menubar">
+        <div class="mb-brand"><span class="mb-logo"></span>Hedgehog OS</div>
+        <div class="mb-menu"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></div>
+        <div class="mb-right"><span>⌘ Spotlight</span><span>100%</span><span class="mb-clock">9:41 AM</span></div>
+      </div>
+
+      <div class="win col reveal" style="--d:.05s; left:430px; top:190px; width:1060px; height:520px;">
+        <div class="titlebar">
+          <div class="lights"><span class="light r"></span><span class="light y"></span><span class="light g"></span></div>
+          <div class="title-pill"><span class="dot"></span>get-started.app</div>
+        </div>
+        <div class="col" style="flex:1; padding:58px 64px; justify-content:center; align-items:flex-start;">
+          <div class="eyebrow reveal" style="--d:.16s">// SHIP IT</div>
+          <h2 class="h1 reveal" style="--d:.24s; margin:18px 0 0;">Let's build<br>your window.</h2>
+          <div class="flex reveal" style="--d:.34s; gap:14px; margin-top:34px; align-items:center;">
+            <span class="btn btn-primary">Open Hedgehog →</span>
+            <span class="btn btn-ghost">hedgehog.os/start</span>
+          </div>
+          <div class="flex reveal" style="--d:.42s; gap:22px; margin-top:30px; font-family:'Geist Mono',monospace; font-size:14px; color:var(--muted);">
+            <span>✉ hello@hedgehog.os</span><span>↗ @hedgehog_os</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dock reveal" style="--d:.55s;">
+        <span class="dock-app">🪟</span><span class="dock-app">🗂️</span><span class="dock-app">💬</span><span class="dock-app">📊</span><span class="dock-app">⚙️</span>
+      </div>
+      <div class="counter">06 / 06</div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+/* Minimal fixed-stage scaler + nav (mirrors frontend-slides' runtime). */
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const fit = () => {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `translate(${(innerWidth - 1920 * s) / 2}px, ${(innerHeight - 1080 * s) / 2}px) scale(${s})`;
+  };
+  const show = (n) => {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+  };
+  addEventListener('resize', fit);
+  addEventListener('keydown', (e) => {
+    if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) show(i + 1);
+    else if (['ArrowLeft', 'PageUp'].includes(e.key)) show(i - 1);
+  });
+  fit(); show(0);
+})();
+</script>
+</body>
+</html>

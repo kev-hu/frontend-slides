@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Duolingo Learn
-description: "A bright, gamified deck system that abstracts the Duolingo app's visual language into the six canonical slide archetypes. The whole identity rests on Nunito (weights 600/700/800) with one non-negotiable rule — every display headline is lowercase, rounded, and friendly. Feather Green (#58CC02) is the unmistakable hero brand color, supported by a color-psychology accent system: bee yellow (#FFC800) for XP and crowns, fox orange (#FF9600) for streaks, macaw blue (#1CB0F6) for Super/info, cardinal red (#FF4B4B) for hearts/errors, and beetle purple (#CE82FF) as an accent. The signature depth move is the chunky 3D pressable button: a fully-pill-rounded button with a colored bottom shadow (`0 7px 0`) that compresses to `0 3px 0` plus a 4px downward translate when 'pressed'. The second signature is the circular gamified lesson node — a white-ringed gradient-filled disc with a `0 8px 0` bottom shadow and an optional level badge — used as a section-marker and as a node-path motif. Cards are soft 24px-radius rectangles with a faint `0 4px 8px` shadow; progress bars are fully-pill-rounded. NOTHING has sharp corners. The register is playful, energetic, friendly, and intentionally un-corporate; surfaces are bright (white, polar #F7F7F7, and a full-bleed Feather Green panel)."
+description: "A bright, gamified deck system that abstracts the Duolingo app's visual language into a full presentation-talk archetype set — title cover, winding-path agenda, section divider, bulleted checklist content, two-column comparison, multi-stat metrics row, hero stat, process step-flow, quote, takeaways, and closing — in an internal-talk register (no marketing/landing-page CTAs). The whole identity rests on Nunito (weights 600/700/800) with one non-negotiable rule — every display headline is lowercase, rounded, and friendly. Feather Green (#58CC02) is the unmistakable hero brand color, supported by a color-psychology accent system: bee yellow (#FFC800) for XP and crowns, fox orange (#FF9600) for streaks, macaw blue (#1CB0F6) for Super/info, cardinal red (#FF4B4B) for hearts/errors, and beetle purple (#CE82FF) as an accent. The signature depth move is the chunky 3D pressable button: a fully-pill-rounded button with a colored bottom shadow (`0 7px 0`) that compresses to `0 3px 0` plus a 4px downward translate when 'pressed'. The second signature is the circular gamified lesson node — a white-ringed gradient-filled disc with a `0 8px 0` bottom shadow and an optional level badge — used as a section-marker and as a node-path motif. Cards are soft 24px-radius rectangles with a faint `0 4px 8px` shadow; progress bars are fully-pill-rounded. NOTHING has sharp corners. The register is playful, energetic, friendly, and intentionally un-corporate; surfaces are bright (white, polar #F7F7F7, and a full-bleed Feather Green panel)."
 
 colors:
   green: "#58CC02"
@@ -150,13 +150,13 @@ components:
     background: "{colors.white}"
     color: "{colors.green}"
     boxShadow: "0 7px 0 rgba(0,0,0,0.12)"
-    description: "White-fill variant of the chunky button for use on the full-bleed green panel and the closing CTA. Green label, neutral dark bottom shadow."
+    description: "White-fill variant of the chunky button for use on the full-bleed green panel. Green label, neutral dark bottom shadow."
   chunky-button-ghost:
     background: "{colors.white}"
     color: "{colors.blue}"
     border: "3px solid {colors.swan}"
     boxShadow: "0 7px 0 {colors.swan}"
-    description: "Secondary 'i already have an account' style button — white fill, 3px swan border, blue label, swan bottom shadow. Pairs beside the green primary on the cover."
+    description: "Secondary button — white fill, 3px swan border, blue label, swan bottom shadow. Pairs beside a green primary when two actions are genuinely needed; in a talk deck this is rare."
   lesson-node:
     size: "132px"
     borderRadius: "50%"
@@ -190,7 +190,7 @@ components:
   green-panel:
     background: "{colors.green}"
     color: "{colors.white}"
-    description: "Full-bleed Feather Green statement surface. Carries white lowercase display text, white nodes, and the white-fill chunky button. The deck's one inverted surface — used for the quote and (optionally) closing/CTA moments."
+    description: "Full-bleed Feather Green statement surface. Carries white lowercase display text, white nodes, and (where needed) the white-fill chunky button. The deck's one inverted surface — used for the quote moment."
   deck-progress:
     height: "12px"
     background: "{colors.green}"
@@ -200,7 +200,17 @@ components:
     color: "{colors.hare}"
     description: "Persistent slide counter 'NN / NN' at bottom-right in Nunito 800 lowercase hare grey. Flips to a light green tint (#DFFFC2) on the green panel."
   node-path:
-    description: "A row of lesson nodes connected by short pill-rounded connector bars (green when complete, swan when locked), abstracting the app's winding lesson path into a horizontal progression. Used on the closing slide as a 'you are here' wayfinder."
+    description: "A row of lesson nodes connected by short pill-rounded connector bars (green when complete, swan when locked), abstracting the app's winding lesson path into a horizontal progression. Used on the process-steps and closing slides as a 'you are here' wayfinder."
+  agenda-path:
+    description: "THE table-of-contents move. The app's iconic winding vertical lesson path, used as an agenda: numbered circular nodes (one per agenda item, each in a different accent — green/orange/blue/purple/gold) zigzag left-and-right inside a fixed left rail while their lowercase labels + sub-captions stay aligned to the right of the rail. Consecutive node centers are joined by short green pill-rounded diagonal connectors (the rotated `0 9px` segments), reproducing the snaking path. Nodes are 104px with the same white ring + `0 8px 0` chunky shadow as a lesson-node. The single most recognizable agenda slide in the system."
+  checklist:
+    description: "The workhorse bulleted-content row. A vertical list of points, each led by a 56px green circular checkmark bullet (white ✓, `0 4px 0 {colors.green-hover}` chunky bottom shadow — the 'correct answer' feel), then a lowercase `{typography.card-title}`-weight line + a `{typography.body}` sub-line. A `.cross` variant swaps the disc to `{colors.red}` with a ✗ for the negative column of a comparison. Used for bullets, takeaways, and the per-card header of each comparison column."
+  comparison-card:
+    description: "Two soft-cards side by side contrasting old vs new. The negative card is `{colors.red}`-tinted (#FFF4F4 fill, #FFD4D4 border) headed by a red ✗ checkmark + red lowercase title; the positive card is `{colors.green}`-tinted (#F4FCEC fill, #CFEFA8 border) headed by a green ✓ checkmark + green lowercase title. Each holds 3-4 short rows separated by faint tinted hairlines. Built from `{components.soft-card}` + `{components.checklist}` parts."
+  metric-card:
+    description: "One cell of the multi-stat data row. A `{components.soft-card}` (border tinted to the metric's accent) holding a single leading emoji + a big 96px `{colors}`-accented number + a lowercase `{typography.caption}` label. Three or four sit in a row as a metrics dashboard — distinct from the single hero `{typography.stat-big}` moment. Pair with a source pill below."
+  step-flow:
+    description: "The process/how-it-works archetype. 3-4 oversized (150px) `{components.lesson-node}` discs in a horizontal row — each a different accent with a numbered `{components.node-badge}` — joined by short green pill connectors, with a lowercase `{typography.card-title}` + `{typography.body}` caption stacked beneath each node. The node-path made into a labeled numbered flow."
 ---
 
 ## Frontend Slides Fixed-Stage Policy
@@ -215,7 +225,7 @@ Render each slide at 1920×1080, scale the whole stage with one transform, and v
 
 ## Overview
 
-Duolingo Learn is a **bright gamified deck system** that lifts its visual vocabulary from the Duolingo language-learning app and abstracts it into a slide deck. The premise: a deck should feel like opening the app's home screen — energetic, friendly, rounded, and rewarding — without ever cloning the app's sidebar/topbar/lesson-path chrome onto a slide. Every slide is built from the app's *ingredients* (Feather Green, chunky pressable buttons, circular nodes, XP pills, lowercase rounded type, color-psychology accents) recomposed into the canonical archetypes: cover, section header, content grid, stat, quote, and closing.
+Duolingo Learn is a **bright gamified deck system** that lifts its visual vocabulary from the Duolingo language-learning app and abstracts it into a slide deck. The premise: a deck should feel like opening the app's home screen — energetic, friendly, rounded, and rewarding — but read as a real **presentation talk**, not a marketing landing page. It is built for an internal-talk register (a product review, a growth recap, an all-hands), so the cover is a titled cover with a presenter line and date (no sign-up CTAs), and the closer is a thank-you/recap with at most a single "questions?" button (no conversion CTA). Every slide is built from the app's *ingredients* (Feather Green, chunky pressable buttons, circular nodes, XP pills, lowercase rounded type, color-psychology accents) recomposed into the full deck archetype set: **title cover, winding-path agenda, section divider, bulleted checklist content, two-column comparison, multi-stat metrics row, single hero stat, process/step flow, quote, key takeaways, and closing** — without ever cloning the app's sidebar/topbar chrome onto a slide.
 
 The type system is **one face doing every job: Nunito** (Google Fonts, weights 600/700/800). The discipline that makes it read as designed is not face contrast but a single, repeated, non-negotiable rule: **display headlines are always lowercase**, weight 800, with −0.02em tracking. Body and card copy run Nunito 600 in muted Wolf grey. Buttons and eyebrows are the only uppercase moments — short, wide-tracked labels. Because there is just one family, hierarchy comes entirely from weight (600 vs 700 vs 800), size, case, and color. The roundness of Nunito's letterforms is itself a load-bearing brand signal — it is the "friendly, approachable" voice the whole system depends on.
 
@@ -223,7 +233,7 @@ The color philosophy is **one hero plus a labeled accent system**. Feather Green
 
 Depth is **chunky and physical, never atmospheric**. The system's entire depth language is the *colored bottom shadow*: a solid `0 7px 0` offset under buttons, `0 8px 0` under nodes, that reads as a physical lip of thickness — and on buttons it *compresses* (to `0 3px 0` plus a 4px downward translate) so the button literally depresses when pressed. Cards get a single faint soft shadow (`0 4px 8px rgba(0,0,0,0.06)`) for gentle lift, and progress fills get an inset bottom-rim that echoes the same chunky logic. There are no blurred drop shadows, no glows, no gradients except inside the node discs.
 
-**Density philosophy: medium.** Most slides breathe — a hero is one big lowercase line plus a subhead and two buttons; a stat is one giant green number. The densest the system goes is a three-card content grid, each card a tidy emoji + lowercase title + one body line + a pill progress bar with a numeric callout. The system reads as friendly and confident when it leaves negative space and gamified-but-tidy when it fills a grid; it never goes corporate-dense.
+**Density philosophy: medium-high.** Breathing slides anchor the deck — a title is one big lowercase line plus a subhead and a presenter pill; a hero stat is one giant green number. But the workhorse slides carry real talk content: a five-item checklist, a two-column comparison, a four-card metrics row, a four-node process flow, a five-item winding-path agenda. The system stays gamified-but-tidy when it fills these — each unit (checkmark row, metric card, step node) is a clean rounded module with generous gaps — and never goes corporate-dense or grey. It alternates packed content slides with breathing section/stat/quote slides so the deck has rhythm.
 
 **Key Characteristics:**
 - One typeface, Nunito 600/700/800 — hierarchy from weight, size, case, and color, not from multiple faces.
@@ -231,8 +241,10 @@ Depth is **chunky and physical, never atmospheric**. The system's entire depth l
 - Feather Green (`{colors.green}`) as the one hero color — primary buttons, logo, hero stat, progress bar, the inverted panel.
 - A labeled gamification accent system (yellow=XP/crowns, orange=streaks, blue=Super, red=hearts, purple=accent) — colors carry meaning, not just variety.
 - The chunky 3D pressable button — pill-rounded, colored `0 7px 0` bottom shadow that compresses to `0 3px 0` + 4px translate on press. THE signature.
-- Circular gamified lesson nodes — white-ringed gradient discs with a `0 8px 0` chunky shadow and optional level badge; used as section markers and a horizontal node-path motif.
-- XP-style stat pills — fully-rounded pastel-tinted capsules with a leading emoji and saturated accent text.
+- Circular gamified lesson nodes — white-ringed gradient discs with a `0 8px 0` chunky shadow and optional level badge; used as section markers, a winding-path agenda, a numbered process flow, and a horizontal node-path closer.
+- **The winding-path agenda** (`{components.agenda-path}`) — the app's iconic snaking lesson path used as the table of contents: numbered accent nodes zigzag left/right joined by green diagonal connectors, labels to the right. The signature deck move.
+- **Green-checkmark bullets** (`{components.checklist}`) — every bulleted-content and takeaways point is led by a green circular ✓ disc (the "correct answer" feel); a red ✗ variant carries the negative comparison column.
+- XP-style stat pills — fully-rounded pastel-tinted capsules with a leading emoji and saturated accent text; also used for the presenter/date line on the title and the source line under a metrics row.
 - Soft 24px-radius cards with a faint `0 4px 8px` shadow and pill-rounded progress bars.
 - Gamification emoji motifs throughout: 🔥 streaks, 💎 gems/XP, ❤️ hearts, 👑 crowns, 🦉 the owl, ⭐ stars.
 - **Zero sharp corners** — pills at 9999px, cards at 24px, nodes at 50%. Nothing is angular.
@@ -259,7 +271,7 @@ Depth is **chunky and physical, never atmospheric**. The system's entire depth l
 
 ### Defaults
 
-- **Default surface background**: `{colors.white}`. Alternate to `{colors.polar}` for section-header and stat slides. Switch to a full-bleed `{colors.green}` panel for the quote (and optional CTA) moment.
+- **Default surface background**: `{colors.white}`. Alternate to `{colors.polar}` for agenda, section-header, comparison, stat, and closing slides. Switch to a full-bleed `{colors.green}` panel for the quote moment.
 - **Default headline / display color on light surfaces**: `{colors.eel}`. On the green panel: `{colors.white}`.
 - **Default hero stat color**: `{colors.green}` — the giant stat figure is always Feather Green on a light surface.
 - **Default body text color**: `{colors.wolf}` on light; `{colors.white}` (or `#DFFFC2` light-green) on the green panel.
@@ -347,13 +359,18 @@ Two elements appear on every slide:
 The deck cycles through three surfaces:
 - **White content surfaces** — cover, content grid, closing.
 - **Polar (`{colors.polar}`) soft surfaces** — section header, stat. A barely-grey ground that differentiates without dimming the bright register.
-- **Full-bleed green panel** — the quote (and optional CTA), white text + white nodes + white-fill button.
+- **Full-bleed green panel** — the quote moment, white text + white nodes.
 
 ### Signature Compositions
-- **Cover stat strip**: a top row echoing the app topbar — green logo wordmark left, a cluster of XP pills (🔥 streak / 💎 gems / ❤️ hearts) right — over a centered lowercase hero + subhead + a green button paired with a ghost button.
-- **Section node-marker**: an oversized (260px) circular node (often the gold crown) with a level badge, set beside the lowercase section title and an accent eyebrow.
+- **Title cover with chrome**: a top row echoing the app topbar — green logo wordmark left, a cluster of XP pills (🔥 / 💎 / ❤️, re-voiced as deck chrome) right — over a centered lowercase title + subhead, with a presenter pill and a date pill below (NOT sign-up buttons — this is a cover, not a hero/landing page).
+- **Winding-path agenda**: `{components.agenda-path}` — the table of contents as the app's snaking lesson path. Numbered accent nodes zigzag inside a left rail, joined by green diagonal connectors; each item's lowercase label + sub-caption sits to the right.
+- **Section node-marker**: an oversized (260–280px) circular node with a level badge, set beside the lowercase section title and an accent eyebrow.
+- **Checklist content**: a lowercase content title over a vertical stack of `{components.checklist}` rows (green ✓ disc + lowercase line + body). The most-used deck slide.
+- **Two-column comparison**: `{components.comparison-card}` — a red-tinted "old way" card (✗) beside a green-tinted "duolingo way" card (✓), each with 3–4 hairline-separated rows.
+- **Metrics row**: 3–4 `{components.metric-card}` cells in a row, each emoji + big accent number + lowercase label, with a source pill beneath.
 - **Stat statement**: one giant green lowercase figure centered, an accent eyebrow above, a subhead and a row of XP pills below.
-- **Node-path closer**: a horizontal row of lesson nodes (done → star → next → locked) joined by short pill connectors, abstracting the app's winding path, above the closing headline + CTA.
+- **Process step-flow**: `{components.step-flow}` — 3–4 oversized numbered nodes joined by green pill connectors, each with a lowercase caption beneath.
+- **Node-path closer**: a horizontal row of lesson nodes (done → … → next) joined by short pill connectors, above the closing thank-you headline + a single "questions?" button + a contact pill.
 
 ## Depth and Elevation
 
@@ -388,19 +405,29 @@ Rounded corners are non-negotiable — a sharp corner anywhere collapses the fri
 
 ### Decorative Element Types
 
-**Chunky 3D button** — pill-rounded, colored bottom shadow, compresses on press. The system's signature. Variants: green primary, white-fill (on green panel / CTA), ghost (swan border + blue label).
+**Chunky 3D button** — pill-rounded, colored bottom shadow, compresses on press. The system's signature. Variants: green primary, white-fill (on green panel), ghost (swan border + blue label). Used sparingly in a talk deck — typically just the single "questions?" close.
 
 **Lesson node** — white-ringed gradient circle with a `0 8px 0` chunky shadow holding one emoji/icon. Variants: green (default), gold (crown/mastery), blue (Super), purple (next/accent), locked (swan + grey shadow). Optional clipped level/status badge.
 
 **XP / stat pill** — fully-rounded pastel-tinted capsule, leading emoji + saturated accent text. The gamification stat chrome.
 
-**Soft card** — 24px-radius, 3px swan (or pastel-accent) outline, faint `0 4px 8px` shadow. Holds emoji + lowercase title + body + a pill progress bar + a colored numeric callout.
+**Soft card** — 24px-radius, 3px swan (or pastel-accent) outline, faint `0 4px 8px` shadow. The base of the comparison cards, metric cards, and takeaway cards.
 
 **Pill progress bar** — swan track, accent fill with an inset bottom-rim, fully rounded.
 
-**Node path** — a horizontal row of nodes joined by short pill connectors (green=complete, swan=locked) — the winding-path motif made linear.
+**Agenda winding-path** (`{components.agenda-path}`) — numbered accent nodes zigzagging inside a left rail, joined by short green diagonal pill connectors, with lowercase labels to the right. The table-of-contents signature.
 
-**Green panel** — full-bleed Feather Green inverted surface for the quote/CTA moment.
+**Green checkmark bullet** (`{components.checklist}`) — a 56px green circle with a white ✓ and a `0 4px 0` chunky shadow; the "correct answer" bullet for content and takeaway lists. Red ✗ variant for a negative column.
+
+**Comparison pair** (`{components.comparison-card}`) — a red-tinted ✗ card beside a green-tinted ✓ card, each with hairline-separated rows.
+
+**Metric card** (`{components.metric-card}`) — a soft-card with emoji + big accent number + lowercase label; tiled 3–4 across as a stats dashboard.
+
+**Step-flow** (`{components.step-flow}`) — oversized numbered nodes joined by green pill connectors with captions beneath — the process archetype.
+
+**Node path** — a horizontal row of nodes joined by short pill connectors (green=complete, swan=locked) — the winding-path motif made linear, used on the closer.
+
+**Green panel** — full-bleed Feather Green inverted surface for the quote moment.
 
 ## Do's and Don'ts
 
@@ -425,6 +452,7 @@ Rounded corners are non-negotiable — a sharp corner anywhere collapses the fri
 - Don't go corporate-dense or muted/desaturated — keep it bright, playful, and breathing.
 - Don't use blurred/colored drop shadows beyond the single faint card lift; depth is the chunky colored lip.
 - Don't render the app's literal sidebar/topbar/lesson-path layout onto a slide — abstract the vocabulary into the deck archetypes.
+- Don't write in marketing/landing-page voice or put sign-up / conversion CTAs on slides ("get started for free", "see the path"). This is a presentation talk: the cover carries a title + presenter + date, and the closer carries a thank-you/recap with at most a single "questions?" button.
 
 ## Responsive Behavior
 
@@ -470,15 +498,19 @@ ZCOOL KuaiLe is a rounded, playful Chinese display face that best preserves Nuni
 ## Iteration Guide
 
 1. Any new content slide opens with a `{typography.content-title}` lowercase headline, optionally preceded by a `{typography.eyebrow}` in a semantic accent.
-2. Any new statistic is `{typography.stat-big}` in `{colors.green}`, optionally with `{components.xp-pill}` capsules below.
-3. Any new body paragraph is `{typography.body}` (Nunito 600) in `{colors.wolf}`.
-4. Any new primary action is `{components.chunky-button}` (green); a secondary action is the ghost variant; on the green panel use the white variant.
-5. Any new card uses `{components.soft-card}` (24px radius, faint shadow), holding an emoji + lowercase `{typography.card-title}` + `{typography.body-card}` + a `{components.progress-bar}` + a colored numeric `{typography.caption}`.
-6. Any new section header pairs an oversized `{components.lesson-node}` (260px, often the gold crown with a badge) beside the lowercase `{typography.section-title}`.
-7. Any new quote/statement uses the full-bleed `{components.green-panel}` with white `{typography.quote}` text and a node-avatar attribution.
-8. Any new closing uses a `{components.node-path}` row above the headline + a `{components.chunky-button}` CTA.
-9. To color-code a grid, assign each card a semantic accent (green/orange/blue) and carry it consistently through the card's border tint, progress fill, and numeric callout.
-10. If a slide feels monotone, switch the surface (white → Polar → green panel) — don't add an off-palette color or a second typeface.
+2. Any new **title cover** is a centered lowercase `{typography.hero-title}` + `{typography.body}` subhead, with the logo + XP-pill chrome row at top and a presenter pill + date pill below. Do NOT put sign-up/CTA buttons on the cover — it is a deck cover, not a landing hero.
+3. Any new **agenda** uses `{components.agenda-path}`: one numbered accent node per item zigzagging in the rail, green diagonal connectors between them, lowercase labels + sub-captions to the right.
+4. Any new **bulleted-content / takeaways** slide is a stack of `{components.checklist}` rows — green ✓ disc + lowercase `{typography.card-title}` line + `{typography.body}` sub-line (takeaways may instead use 3 `{components.soft-card}` mini-cards each topped by a ✓ disc).
+5. Any new **comparison** uses `{components.comparison-card}` — a red-tinted ✗ "old way" card beside a green-tinted ✓ "new way" card, 3–4 hairline-separated rows each.
+6. Any new **metrics row** tiles 3–4 `{components.metric-card}` cells (emoji + 96px accent number + lowercase label, border tinted to the accent) with a `{components.xp-pill}` source line beneath.
+7. Any new single statistic is `{typography.stat-big}` in `{colors.green}`, optionally with `{components.xp-pill}` capsules below. Reserve this for ONE headline number; use the metrics row when there are several.
+8. Any new **process flow** uses `{components.step-flow}`: 3–4 oversized numbered nodes joined by green pill connectors, each with a lowercase `{typography.card-title}` + `{typography.body}` caption beneath.
+9. Any new section header pairs an oversized `{components.lesson-node}` (260–280px, often with a unit badge) beside the lowercase `{typography.section-title}`.
+10. Any new quote uses the full-bleed `{components.green-panel}` with white `{typography.quote}` text and a node-avatar attribution.
+11. Any new closing uses a `{components.node-path}` row above a lowercase thank-you/recap headline + at most one `{components.chunky-button}` reading "questions?" + a contact `{components.xp-pill}`. Do NOT use a conversion CTA ("get started for free") — this is a talk close, not a signup.
+12. Any new primary action is `{components.chunky-button}` (green); a secondary action is the ghost variant; on the green panel use the white variant.
+13. To color-code a grid/row, assign each unit a semantic accent (green/orange/blue/purple) and carry it through the border tint, the number/icon color, and any badge.
+14. If a slide feels monotone, switch the surface (white → Polar → green panel) — don't add an off-palette color or a second typeface.
 
 ## Known Gaps
 

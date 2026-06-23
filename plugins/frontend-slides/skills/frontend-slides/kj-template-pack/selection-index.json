@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pack_name": "KJ Template Pack - Kevin's Custom Designs",
   "source_repo": "kev-hu/frontend-slides",
-  "template_count": 5,
+  "template_count": 6,
   "usage": {
     "selection": "Read this compact index first to shortlist KJ templates from metadata.",
     "previews": "For title-slide previews, read only the preview_md files for the shortlisted KJ candidates.",
@@ -94,7 +94,7 @@
     {
       "slug": "duolingo-learn",
       "name": "Duolingo Learn",
-      "tagline": "Bright gamified deck — lowercase rounded Nunito, Feather Green hero, chunky 3D pressable buttons with colored bottom shadows, circular lesson nodes, XP pills, and a labeled color-psychology accent system (yellow=XP, orange=streaks, blue=Super, red=hearts).",
+      "tagline": "Bright gamified presentation deck — lowercase rounded Nunito, Feather Green hero, chunky 3D pressable buttons with colored bottom shadows, circular lesson nodes, a winding-path agenda, green-checkmark bullets, XP pills, and a labeled color-psychology accent system (yellow=XP, orange=streaks, blue=Super, red=hearts). Talk register, not landing-page.",
       "mood": [
         "playful",
         "gamified",
@@ -109,10 +109,10 @@
         "casual"
       ],
       "formality": "low",
-      "density": "medium",
+      "density": "medium-high",
       "scheme": "light",
-      "best_for": "Education, learning products, habit/streak apps, kids/EdTech, community and onboarding decks, and any product update or recap that wants to feel fun, motivating, and approachable rather than corporate. Strong for gamification-themed talks and growth/retention reviews framed as 'leveling up.' Also an unexpectedly good underdog pick for an internal all-hands or OKR recap that wants energy and warmth over polish.",
-      "avoid_for": "Formal, enterprise, luxury, legal/financial-gravitas, or somber material where bright saturated greens, rounded lowercase type, and emoji read as unserious or childish.",
+      "best_for": "Education, learning products, habit/streak apps, kids/EdTech, community and onboarding decks, and any product update or recap that wants to feel fun, motivating, and approachable rather than corporate. Strong for gamification-themed talks, growth/retention reviews framed as 'leveling up,' and content-rich internal presentations (product reviews, all-hands, OKR recaps) that want energy and warmth over polish. Carries real talk content — agendas, bulleted points, comparisons, metrics dashboards, process flows, takeaways.",
+      "avoid_for": "Formal, enterprise, luxury, legal/financial-gravitas, or somber material where bright saturated greens, rounded lowercase type, and emoji read as unserious or childish. Also avoid for marketing/landing-page decks that need conversion CTAs — this system is intentionally a talk register.",
       "preview_md": "kj-template-pack/templates/duolingo-learn/preview.md",
       "design_md": "kj-template-pack/templates/duolingo-learn/design.md"
     },
@@ -139,6 +139,31 @@
       "avoid_for": "Warm, emotional, or consumer-lifestyle decks and expressive brand storytelling — the flat, technical, single-accent register reads as cold there.",
       "preview_md": "kj-template-pack/templates/stagehand-dev/preview.md",
       "design_md": "kj-template-pack/templates/stagehand-dev/design.md"
+    },
+    {
+      "slug": "hedgehog-os",
+      "name": "Hedgehog OS",
+      "tagline": "Charming macOS-inspired glassmorphism — frosted 'app windows' with traffic-light titlebars on a warm-beige desktop lit by orange/purple/green glows, a Finder-style explorer sidebar, glass widgets, a floating AI-coach chat, and one friendly-orange accent. Geist + Geist Mono.",
+      "mood": [
+        "friendly",
+        "polished",
+        "glassy",
+        "desktop-native",
+        "warm-tech"
+      ],
+      "tone": [
+        "approachable",
+        "precise",
+        "product-minded",
+        "modern"
+      ],
+      "formality": "medium-low",
+      "density": "medium",
+      "scheme": "light",
+      "best_for": "Dev-tool and SaaS product launches, design-system and platform overviews, onboarding and changelog decks, and any technical pitch that wants to feel like a friendly, well-made app rather than a corporate slideshow. Strong for product demos, internal tool intros, and 'we built a thing' engineering decks. Also an unexpectedly good pick for an education or community deck that wants warmth and polish without going playful-cartoon.",
+      "avoid_for": "Somber, luxury, formal-financial, or cinematic dark material where soft glass, rounded corners, friendly orange, and emoji read as light or unserious.",
+      "preview_md": "kj-template-pack/templates/hedgehog-os/preview.md",
+      "design_md": "kj-template-pack/templates/hedgehog-os/design.md"
     }
   ]
 }
