@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Stagehand Dev
-description: "A developer-tools landing-page system in the lineage of modern SDK and open-source homepages (Vercel, Browserbase Stagehand, Railway). Its thesis is structural, not typographic: a 1px DASHED-BORDER grid is the signature — a dashed frame insets every slide, a faint 80px dashed graph-paper grid underlays cream surfaces, and cards/dividers/buttons are all ruled in 1px dashes rather than solid lines or shadows. The single brand accent is a golden yellow (#F5A623); a secondary spectrum of red/blue/green/purple appears ONLY inside isometric 3D cube graphics drawn with diagonal line-hatching on one face. Type is the authentic dev pairing: Inter (600 display, 400 body) for everything human-readable, JetBrains Mono for every label, breadcrumb, code block, stat, and chrome detail — the mono carries the 'terminal' voice (`// EYEBROWS`, `~/breadcrumbs`, `$ commands`). Surfaces alternate between warm cream (#F7F4EF) content slides and charcoal (#1F1F1F) sections carrying an feTurbulence noise texture and dashed-light borders. The register is flat, technical, precise, and confidently under-decorated — square 8px radii, zero drop shadows, no gradients."
+description: "A developer-tools presentation system in the lineage of modern SDK and open-source product decks (Vercel, Browserbase Stagehand, Railway). Its thesis is structural, not typographic: a 1px DASHED-BORDER grid is the signature — a dashed frame insets every slide, a faint 80px dashed graph-paper grid underlays cream surfaces, and cards/dividers/buttons are all ruled in 1px dashes rather than solid lines or shadows. The single brand accent is a golden yellow (#F5A623); a secondary spectrum of red/blue/green/purple appears ONLY inside isometric 3D cube graphics drawn with diagonal line-hatching on one face. Type is the authentic dev pairing: Inter (600 display, 400 body) for everything human-readable, JetBrains Mono for every label, breadcrumb, code block, stat, and chrome detail — the mono carries the 'terminal' voice (`// EYEBROWS`, `~/breadcrumbs`, `$ commands`). Surfaces alternate between warm cream (#F7F4EF) content slides and charcoal (#1F1F1F) sections carrying an feTurbulence noise texture and dashed-light borders. The register is flat, technical, precise, and confidently under-decorated — square 8px radii, zero drop shadows, no gradients."
 
 colors:
   bg: "#F7F4EF"
@@ -214,7 +214,7 @@ Render each slide at 1920×1080, scale the whole stage with one transform, and v
 
 ## Overview
 
-Stagehand Dev is a **developer-tools landing-page system** — the visual language of a modern SDK or open-source-framework homepage, brought to slides. Its closest cousins are the homepages of Vercel, Railway, and Browserbase's Stagehand: warm-neutral grounds, an engineering-drawing grid, one confident accent, and small monospace details that signal "this was made by people who ship code." The premise is that a technical deck should feel like documentation you trust — precise, structured, under-decorated — not like a marketing deck dressed in gradients.
+Stagehand Dev is a **developer-tools presentation system** — the visual language of a modern SDK or open-source-framework homepage, brought to slides. Its closest cousins are the homepages of Vercel, Railway, and Browserbase's Stagehand: warm-neutral grounds, an engineering-drawing grid, one confident accent, and small monospace details that signal "this was made by people who ship code." The premise is that a technical deck should feel like documentation you trust — precise, structured, under-decorated — not like a marketing deck dressed in gradients.
 
 The thesis is **structural, not typographic**. The signature move is the **1px dashed border**, used as a complete system: a dashed rectangle insets 56px from every slide edge and frames all content; a faint 80px graph-paper grid underlays every cream surface beneath it; the persistent top bar is divided from the body by a dashed rule; and every card, divider, secondary button, and code block is ruled in 1px dashes rather than solid lines or drop shadows. Where other systems reach for elevation or color blocking, this one reaches for a dashed line. The discipline is what reads as "engineered."
 
@@ -360,6 +360,10 @@ The deck cycles through three surfaces:
 - **Hero**: left-aligned eyebrow → two-line Inter 600 headline → body → dual CTA (yellow primary + dashed command), with an isometric cube cluster floated to the right third.
 - **Section header**: a giant outlined numeral at far left, a dashed vertical rule, then eyebrow + multi-line `{typography.h1}` + lead, right of the rule.
 - **Content**: `{typography.h2}` title → 3-column dashed card grid (each card = cube icon + title + body + `// TAG`) → a full-width dashed code block beneath.
+- **Agenda / roadmap**: `{typography.h2}` title above a 2x2 set of dashed agenda cards, each with a solid-yellow numbered square and a short explanatory body. Use this for deck maps, chapter lists, or question-led setup slides.
+- **Architecture flow**: a full-width dashed container split into 4 equal columns, with a small yellow circular arrow connector between steps. Use mono kickers for stage names (`INPUT`, `OBSERVE`, `RESOLVE`, `EXECUTE`) and optional code snippets inside individual cells.
+- **Comparison matrix**: a dashed table with a warm muted header row and three columns: capability, current/default approach, Stagehand approach. Keep copy terse; no green/red semantic colors. Use weight and mute-gray text for hierarchy.
+- **Implementation timeline**: a 4-step horizontal timeline on a dashed rule, yellow solid-outlined nodes, mono week labels, and concise Inter body text. Add a dashed code block near the bottom when the plan needs an implementation anchor.
 - **Stat**: eyebrow + statement headline → a 3-up row of yellow `{typography.stat-number}` figures divided by dashed-light vertical rules.
 - **Quote**: an oversized yellow outlined `"` glyph → `{typography.quote}` → an accent-bar attribution, with a single hatched cube to the right.
 
@@ -501,12 +505,14 @@ The system is sans-led, so Noto Sans SC carries both display and body (hierarchy
 2. Any new section divider uses an outlined `{typography.section-numeral}` at far left + a dashed vertical rule + eyebrow + `{typography.h1}`.
 3. Any new content slide is a `{typography.h2}` title over a 3-column `{components.feature-card}` grid; add a full-width `{components.code-block}` beneath if a code example helps.
 4. Any new feature card = isometric cube icon (top) + `{typography.card-title}` + `{typography.small}` body + bottom-anchored `{typography.card-tag}` (`// LABEL`).
-5. Any new statistic is `{typography.stat-number}` in `{colors.primary}` with a `{typography.stat-label}` beneath; group 2–4 across a dark surface divided by `{components.stat-divider}` dashed-light rules.
-6. Any new CTA pairs the `{components.btn-primary}` (yellow, solid border, → arrow) with a `{components.btn-dashed}` shell command (`$ …`).
-7. Any new eyebrow is JetBrains Mono uppercase, 3px-tracked, `//`-prefixed; any new breadcrumb/page-tag is JetBrains Mono with `~/` or section-name styling.
-8. Any new illustration is an isometric cube (or 2–3 clustered): assign one icon-spectrum color to the top face, near-black to the left, hatch-or-45% to the right.
-9. If a slide feels flat or monotone, switch the *surface* (cream → noisy charcoal) rather than adding a color or a shadow.
-10. Keep yellow scarce: if more than the CTA, the eyebrow, and the stats are yellow on a slide, pull some back to ink.
+5. Any new agenda slide uses 2x2 dashed agenda cards with solid-yellow numbered squares; any new flow or timeline slide uses dashed connector lines and yellow nodes/arrows instead of colorful process graphics.
+6. Any new comparison matrix uses dashed table borders, muted header fill, and text hierarchy only — no red/green status coloring.
+7. Any new statistic is `{typography.stat-number}` in `{colors.primary}` with a `{typography.stat-label}` beneath; group 2–4 across a dark surface divided by `{components.stat-divider}` dashed-light rules.
+8. Any new CTA pairs the `{components.btn-primary}` (yellow, solid border, → arrow) with a `{components.btn-dashed}` shell command (`$ …`).
+9. Any new eyebrow is JetBrains Mono uppercase, 3px-tracked, `//`-prefixed; any new breadcrumb/page-tag is JetBrains Mono with `~/` or section-name styling.
+10. Any new illustration is an isometric cube (or 2–3 clustered): assign one icon-spectrum color to the top face, near-black to the left, hatch-or-45% to the right.
+11. If a slide feels flat or monotone, switch the *surface* (cream → noisy charcoal) rather than adding a color or a shadow.
+12. Keep yellow scarce: if more than the CTA, the eyebrow, and the stats are yellow on a slide, pull some back to ink.
 
 ## Known Gaps
 
