@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "pack_name": "KJ Template Pack - Kevin's Custom Designs",
+  "source_repo": "kev-hu/frontend-slides",
+  "template_count": 4,
+  "usage": {
+    "selection": "Read this compact index first to shortlist KJ templates from metadata.",
+    "previews": "For title-slide previews, read only the preview_md files for the shortlisted KJ candidates.",
+    "final_generation": "After the user chooses a KJ template, read exactly that template design_md before generating the full deck.",
+    "never": "Do not bulk-read templates/*/design.md and do not read template.html unless the selected design.md is missing a critical implementation detail."
+  },
+  "frontend_slides_policy": {
+    "layout_model": "fixed-stage",
+    "canvas_width": 1920,
+    "canvas_height": 1080,
+    "scaling": "scale-stage-to-viewport",
+    "mobile_behavior": "preserve 16:9 stage; letterbox or pillarbox instead of reflowing slide content"
+  },
+  "templates": [
+    {
+      "slug": "kj-starter",
+      "name": "KJ Starter",
+      "tagline": "Starter template cloned from Blue Professional — edit design.md and preview.md to make it your own.",
+      "mood": [
+        "professional",
+        "modern",
+        "calm",
+        "trustworthy"
+      ],
+      "tone": [
+        "clean",
+        "considered",
+        "polished",
+        "neutral"
+      ],
+      "formality": "medium-high",
+      "density": "medium",
+      "scheme": "light",
+      "best_for": "Placeholder copy of Blue Professional. Replace this with the contexts your real KJ template is built for once you customize design.md.",
+      "avoid_for": "Same as Blue Professional until customized: contexts that should feel hot, playful, or intentionally informal.",
+      "preview_md": "kj-template-pack/templates/kj-starter/preview.md",
+      "design_md": "kj-template-pack/templates/kj-starter/design.md"
+    },
+    {
+      "slug": "voltcast-brutalist",
+      "name": "Voltcast",
+      "tagline": "Acid-green-on-void brutalist hardware-spec deck — screaming Archivo Black uppercase, JetBrains Mono // readout labels, one electric accent, hard wire grids, zero rounded corners.",
+      "mood": [
+        "brutalist",
+        "high-voltage",
+        "technical",
+        "industrial",
+        "nocturnal"
+      ],
+      "tone": [
+        "blunt",
+        "confident",
+        "engineered",
+        "no-nonsense"
+      ],
+      "formality": "medium-low",
+      "density": "medium-high",
+      "scheme": "dark",
+      "best_for": "Hardware, dev-tools, synth/audio, crypto/protocol, and any technical product launch that wants to feel engineered and loud rather than corporate. Strong for spec sheets, changelogs, roadmap decks, and founder keynotes with attitude. Also an unexpectedly good underdog pick for a security, infra, or fintech deck that wants brutalist authority over soft polish.",
+      "avoid_for": "Warm, soft, or human-centered material (healthcare, education, lifestyle, anything requiring approachability) where high-chroma acid-on-black reads as cold or aggressive.",
+      "preview_md": "kj-template-pack/templates/voltcast-brutalist/preview.md",
+      "design_md": "kj-template-pack/templates/voltcast-brutalist/design.md"
+    },
+    {
+      "slug": "redline",
+      "name": "Redline",
+      "tagline": "Swiss/Bauhaus poster meets technical spec sheet — pure white, screaming Archivo-black headlines, a single hot-red carrying every accent, hard 2px bordered boxes, numbered mono eyebrows.",
+      "mood": [
+        "swiss",
+        "brutalist-lite",
+        "editorial",
+        "high-contrast",
+        "engineered"
+      ],
+      "tone": [
+        "blunt",
+        "precise",
+        "confident",
+        "disciplined"
+      ],
+      "formality": "medium-high",
+      "density": "medium",
+      "scheme": "light",
+      "best_for": "Reports, internal reviews, strategy/operating decks, dev-tool and infrastructure onboarding, and any technical or B2B story that wants crisp Swiss authority over soft polish. Also a strong underdog pick for a finance or research deck that wants to feel rigorous and modern, or a product launch that wants confident structure without going dark or neon.",
+      "avoid_for": "Warm, playful, or luxury/lifestyle material where pure-white-plus-hot-red reads as severe or industrial.",
+      "preview_md": "kj-template-pack/templates/redline/preview.md",
+      "design_md": "kj-template-pack/templates/redline/design.md"
+    },
+    {
+      "slug": "duolingo-learn",
+      "name": "Duolingo Learn",
+      "tagline": "Bright gamified deck — lowercase rounded Nunito, Feather Green hero, chunky 3D pressable buttons with colored bottom shadows, circular lesson nodes, XP pills, and a labeled color-psychology accent system (yellow=XP, orange=streaks, blue=Super, red=hearts).",
+      "mood": [
+        "playful",
+        "gamified",
+        "friendly",
+        "energetic",
+        "bright"
+      ],
+      "tone": [
+        "encouraging",
+        "approachable",
+        "upbeat",
+        "casual"
+      ],
+      "formality": "low",
+      "density": "medium",
+      "scheme": "light",
+      "best_for": "Education, learning products, habit/streak apps, kids/EdTech, community and onboarding decks, and any product update or recap that wants to feel fun, motivating, and approachable rather than corporate. Strong for gamification-themed talks and growth/retention reviews framed as 'leveling up.' Also an unexpectedly good underdog pick for an internal all-hands or OKR recap that wants energy and warmth over polish.",
+      "avoid_for": "Formal, enterprise, luxury, legal/financial-gravitas, or somber material where bright saturated greens, rounded lowercase type, and emoji read as unserious or childish.",
+      "preview_md": "kj-template-pack/templates/duolingo-learn/preview.md",
+      "design_md": "kj-template-pack/templates/duolingo-learn/design.md"
+    }
+  ]
+}

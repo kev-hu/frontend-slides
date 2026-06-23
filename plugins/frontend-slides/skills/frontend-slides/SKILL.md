@@ -141,7 +141,7 @@ If the user already gave a vibe, use it. If they did not, infer the likely mood 
 
 If the user explicitly names a preset or bold template, honor that as one option and generate the remaining preview slots around it.
 
-Read [STYLE_PRESETS.md](STYLE_PRESETS.md) for safe preset candidates. If [bold-template-pack/selection-index.json](bold-template-pack/selection-index.json) exists, read that compact index too, but do not read any `design.md` files yet.
+Read [STYLE_PRESETS.md](STYLE_PRESETS.md) for safe preset candidates. If [bold-template-pack/selection-index.json](bold-template-pack/selection-index.json) exists, read that compact index too, but do not read any `design.md` files yet. Also read [kj-template-pack/selection-index.json](kj-template-pack/selection-index.json) if it exists, treating its templates the same way as bold templates.
 
 | Mood                | Suggested Presets                                  |
 | ------------------- | -------------------------------------------------- |
@@ -152,7 +152,7 @@ Read [STYLE_PRESETS.md](STYLE_PRESETS.md) for safe preset candidates. If [bold-t
 
 **Preview mix rules:**
 
-- Generate 3 previews by default: 1 safe preset from `STYLE_PRESETS.md`, at least 1 bold template from `bold-template-pack/selection-index.json`, and 1 wildcard.
+- Generate 3 previews by default: 1 safe preset from `STYLE_PRESETS.md`, at least 1 bold template from `bold-template-pack/selection-index.json` or `kj-template-pack/selection-index.json`, and 1 wildcard.
 - The wildcard may be either a second bold template or a self-generated custom design. Choose whichever creates the strongest, most useful contrast for the user's occasion, audience, mood, and content.
 - Do not force every expressive option to come from the template library. If the brief has a sharper, more specific design opportunity than the available templates, use the wildcard slot to design freely.
 - For conservative or high-stakes decks, make the safe preset especially restrained; choose a calm, higher-formality bold template; make the wildcard either another restrained template or a custom design that feels authoritative rather than decorative.
@@ -214,7 +214,7 @@ If the user's stated needs are mixed, choose the closer of the two modes instead
 
 Never let high density become visual clutter. If a high-density slide starts to overflow, split it or redesign it into a clearer structure.
 
-If the user selected a bold template from `bold-template-pack`, read that one template's full `design.md` before generating. Do not read the other bold templates. Treat `design.md` as the design recipe:
+If the user selected a bold template from `bold-template-pack` or a KJ template from `kj-template-pack`, read that one template's full `design.md` before generating. Do not read the other templates. Treat `design.md` as the design recipe:
 
 - Preserve its fonts, palette, decorative vocabulary, spacing rhythm, and component grammar.
 - Generate the final deck as a fixed 1920×1080 stage scaled uniformly to the viewport, regardless of whether the source template originally used `deck-stage.js` or viewport-fluid CSS.

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!--
+  REFERENCE DECK — "Duolingo Learn" template (duolingo-learn).
+  Render-first proof for the design.md spec. Fixed 1920x1080 stage.
+  Abstracts the Duolingo app vocabulary (Feather Green, chunky 3D pressable
+  buttons, circular gamified nodes, lowercase rounded Nunito, color-psychology
+  accents) into the six canonical deck archetypes.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duolingo Learn — Reference Deck</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* === MANDATORY FIXED-STAGE BASE (verbatim from viewport-base.css) === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* === DESIGN SYSTEM === */
+:root {
+  --stage-bg: #E5E5E5;     /* swan letterbox outside the 16:9 stage */
+  --slide-bg: #FFFFFF;
+
+  /* brand greens */
+  --green: #58CC02;        /* Feather Green — hero brand */
+  --green-hover: #43C000;  /* button bottom-shadow / pressed */
+  --green-mask: #89E219;   /* node-gradient top, light green */
+
+  /* gamification accent system */
+  --blue: #1CB0F6;         /* Macaw — Super / info */
+  --blue-dark: #1899D6;    /* humpback-ish shadow for blue buttons */
+  --yellow: #FFC800;       /* Bee — XP / crowns */
+  --yellow-dark: #E5A100;
+  --orange: #FF9600;       /* Fox — streaks */
+  --orange-dark: #E08600;
+  --red: #FF4B4B;          /* Cardinal — hearts / errors */
+  --red-dark: #E63F3F;
+  --purple: #CE82FF;       /* Beetle — accent */
+  --purple-dark: #B368E0;
+
+  /* neutrals */
+  --eel: #4B4B4B;          /* foreground */
+  --wolf: #777777;         /* muted */
+  --hare: #AFAFAF;         /* muted-light */
+  --swan: #E5E5E5;         /* border */
+  --polar: #F7F7F7;        /* alt surface */
+}
+
+.slide { box-sizing: border-box; font-family: 'Nunito', -apple-system, sans-serif; color: var(--eel); }
+
+/* lowercase rounded display — THE signature type move */
+.display { font-weight: 800; letter-spacing: -0.02em; text-transform: lowercase; line-height: 1.05; color: var(--eel); }
+.h2 { font-weight: 700; text-transform: lowercase; letter-spacing: -0.01em; color: var(--eel); }
+.body { font-weight: 600; color: var(--wolf); line-height: 1.45; }
+.eyebrow { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* chunky 3D pressable button — THE signature depth move */
+.btn {
+  display: inline-flex; align-items: center; gap: 16px;
+  font-family: 'Nunito', sans-serif; font-weight: 700; letter-spacing: 0.03em;
+  text-transform: uppercase; color: #FFFFFF;
+  border: none; border-radius: 9999px;
+  padding: 22px 44px; font-size: 24px;
+  box-shadow: 0 7px 0 var(--btn-shadow, var(--green-hover));
+  background: var(--btn-bg, var(--green));
+}
+.btn.compressed { transform: translateY(4px); box-shadow: 0 3px 0 var(--btn-shadow, var(--green-hover)); }
+.btn--white { color: var(--green); background: #FFFFFF; box-shadow: 0 7px 0 rgba(0,0,0,0.12); }
+.btn--blue { --btn-bg: var(--blue); --btn-shadow: var(--blue-dark); }
+.btn--ghost { color: var(--blue); background: #FFFFFF; box-shadow: 0 7px 0 var(--swan); border: 3px solid var(--swan); }
+
+/* pill — XP-style stat capsule */
+.pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  border-radius: 9999px; padding: 14px 28px;
+  font-weight: 800; font-size: 26px; text-transform: lowercase; letter-spacing: -0.01em;
+}
+
+/* circular lesson node */
+.node {
+  width: 132px; height: 132px; border-radius: 50%;
+  border: 6px solid #FFFFFF;
+  background: linear-gradient(180deg, var(--green-mask) 0%, var(--green) 100%);
+  box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px; position: relative;
+}
+.node.gold { background: linear-gradient(180deg, #FFD93B 0%, var(--yellow) 100%); box-shadow: 0 8px 0 rgba(0,0,0,0.15); }
+.node.blue { background: linear-gradient(180deg, #5FC8FF 0%, var(--blue) 100%); }
+.node.purple { background: linear-gradient(180deg, #E0AEFF 0%, var(--purple) 100%); }
+.node.locked { background: var(--swan); box-shadow: 0 8px 0 #C4C4C4; }
+.node-badge {
+  position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--yellow); color: var(--eel);
+  font-weight: 800; font-size: 20px; padding: 3px 14px;
+  border-radius: 9999px; border: 3px solid #FFFFFF;
+}
+
+/* soft card */
+.card {
+  background: #FFFFFF; border: 3px solid var(--swan); border-radius: 24px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  padding: 40px;
+}
+
+/* progress bar (pill-rounded) */
+.progress-track { background: var(--swan); border-radius: 9999px; height: 28px; overflow: hidden; }
+.progress-fill { background: var(--green); height: 100%; border-radius: 9999px; box-shadow: inset 0 -6px 0 rgba(0,0,0,0.06); }
+
+/* persistent chrome */
+.deck-progress { position: absolute; left: 0; bottom: 0; height: 12px; background: var(--green); border-top-right-radius: 9999px; z-index: 5; }
+.deck-counter { position: absolute; right: 56px; bottom: 28px; font-weight: 800; font-size: 22px; color: var(--hare); text-transform: lowercase; z-index: 5; }
+
+/* entry animation: one orchestrated playful bounce */
+.slide.active .reveal { animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: var(--d, 0s); }
+@keyframes pop { from { opacity: 0; transform: translateY(34px) scale(0.96); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <div class="deck-stage" id="stage">
+
+    <!-- ============ COVER / HERO ============ -->
+    <section class="slide active" data-label="Cover" style="background:#FFFFFF; padding:0;">
+      <!-- topbar-energy stat strip, abstracted -->
+      <div style="position:absolute; top:48px; left:80px; right:80px; display:flex; align-items:center; justify-content:space-between;">
+        <div class="display reveal" style="--d:.02s; font-size:38px; color:var(--green);">duolingo learn</div>
+        <div class="reveal" style="--d:.06s; display:flex; gap:18px;">
+          <div class="pill" style="background:#FFF4E0; color:var(--orange);">🔥 12</div>
+          <div class="pill" style="background:#E6F6FF; color:var(--blue);">💎 540</div>
+          <div class="pill" style="background:#FFECEC; color:var(--red);">❤️ 5</div>
+        </div>
+      </div>
+
+      <div style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 200px;">
+        <div class="eyebrow reveal" style="--d:.10s; color:var(--green); font-size:24px; margin-bottom:28px;">⭐ Q3 LEARNING REVIEW</div>
+        <h1 class="display reveal" style="--d:.16s; font-size:128px; max-width:1400px; margin:0 0 36px;">the free, fun, and effective way to ship.</h1>
+        <p class="body reveal" style="--d:.24s; font-size:32px; max-width:1080px; margin:0 0 56px;">bite-sized progress, real momentum. here's how the team leveled up this quarter.</p>
+        <div class="reveal" style="--d:.32s; display:flex; gap:28px;">
+          <span class="btn compressed">get started</span>
+          <span class="btn btn--ghost compressed">see the path</span>
+        </div>
+      </div>
+      <div class="deck-progress" style="width:16%;"></div>
+      <div class="deck-counter">01 / 06</div>
+    </section>
+
+    <!-- ============ SECTION HEADER ============ -->
+    <section class="slide" data-label="Section" style="background:var(--polar);">
+      <div style="position:absolute; inset:0; display:flex; align-items:center; gap:90px; padding:0 160px;">
+        <!-- circular node motif as the section marker -->
+        <div class="reveal" style="--d:.05s; flex-shrink:0;">
+          <div class="node gold" style="width:260px; height:260px; border-width:10px; font-size:120px; box-shadow:0 14px 0 rgba(0,0,0,0.15);">
+            👑<span class="node-badge" style="font-size:32px; padding:6px 22px; bottom:-16px;">02</span>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow reveal" style="--d:.12s; color:var(--orange); font-size:26px; margin-bottom:24px;">UNIT 02 · GROWTH</div>
+          <h2 class="display reveal" style="--d:.18s; font-size:104px; margin:0 0 28px;">stay motivated.</h2>
+          <p class="body reveal" style="--d:.26s; font-size:34px; max-width:920px;">streaks, rewards, and a path you can actually see — the mechanics that kept retention climbing.</p>
+        </div>
+      </div>
+      <div class="deck-progress" style="width:33%;"></div>
+      <div class="deck-counter">02 / 06</div>
+    </section>
+
+    <!-- ============ CONTENT / GRID ============ -->
+    <section class="slide" data-label="Content" style="background:#FFFFFF;">
+      <div style="position:absolute; top:90px; left:120px; right:120px;">
+        <div class="eyebrow reveal" style="--d:.04s; color:var(--green); font-size:24px; margin-bottom:18px;">WHY IT WORKS</div>
+        <h2 class="display reveal" style="--d:.08s; font-size:76px; margin:0 0 56px;">three habits that compounded.</h2>
+
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:40px;">
+          <div class="card reveal" style="--d:.14s; text-align:center;">
+            <div style="font-size:88px; margin-bottom:20px;">🎮</div>
+            <div class="h2" style="font-size:40px; margin-bottom:14px;">game-like loops</div>
+            <p class="body" style="font-size:26px; margin:0 0 24px;">tiny wins, fast feedback. shipping felt more like play than process.</p>
+            <div class="progress-track"><div class="progress-fill" style="width:82%;"></div></div>
+            <div class="body" style="font-size:22px; font-weight:800; color:var(--green); margin-top:14px;">82% daily active</div>
+          </div>
+          <div class="card reveal" style="--d:.20s; text-align:center; border-color:#FFE2BF;">
+            <div style="font-size:88px; margin-bottom:20px;">🔥</div>
+            <div class="h2" style="font-size:40px; margin-bottom:14px;">streaks held</div>
+            <p class="body" style="font-size:26px; margin:0 0 24px;">consistency beat intensity. a 12-week streak became the default.</p>
+            <div class="progress-track"><div class="progress-fill" style="width:91%; background:var(--orange);"></div></div>
+            <div class="body" style="font-size:22px; font-weight:800; color:var(--orange); margin-top:14px;">91% week-4 retention</div>
+          </div>
+          <div class="card reveal" style="--d:.26s; text-align:center; border-color:#CFEFFF;">
+            <div style="font-size:88px; margin-bottom:20px;">🧠</div>
+            <div class="h2" style="font-size:40px; margin-bottom:14px;">backed by data</div>
+            <p class="body" style="font-size:26px; margin:0 0 24px;">every call grounded in numbers, not vibes. proven, then scaled.</p>
+            <div class="progress-track"><div class="progress-fill" style="width:74%; background:var(--blue);"></div></div>
+            <div class="body" style="font-size:22px; font-weight:800; color:var(--blue); margin-top:14px;">74% lift, validated</div>
+          </div>
+        </div>
+      </div>
+      <div class="deck-progress" style="width:50%;"></div>
+      <div class="deck-counter">03 / 06</div>
+    </section>
+
+    <!-- ============ STAT / STATEMENT ============ -->
+    <section class="slide" data-label="Stat" style="background:var(--polar);">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+        <div class="eyebrow reveal" style="--d:.04s; color:var(--orange); font-size:28px; margin-bottom:30px;">🔥 LONGEST STREAK</div>
+        <div class="display reveal" style="--d:.10s; font-size:380px; color:var(--green); line-height:0.9;">+312%</div>
+        <p class="body reveal" style="--d:.20s; font-size:40px; max-width:1100px; margin:36px 0 44px;">weekly active learners, year over year. the compounding curve, made visible.</p>
+        <div class="reveal" style="--d:.28s; display:flex; gap:24px;">
+          <div class="pill" style="background:#FFF8DC; color:var(--yellow-dark); font-size:30px; box-shadow:0 5px 0 rgba(0,0,0,0.06);">💎 +540 xp</div>
+          <div class="pill" style="background:#E6F6FF; color:var(--blue); font-size:30px; box-shadow:0 5px 0 rgba(0,0,0,0.06);">👑 crown level 5</div>
+        </div>
+      </div>
+      <div class="deck-progress" style="width:66%;"></div>
+      <div class="deck-counter">04 / 06</div>
+    </section>
+
+    <!-- ============ QUOTE ============ -->
+    <section class="slide" data-label="Quote" style="background:var(--green); padding:0;">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 220px;">
+        <div class="node reveal" style="--d:.04s; width:160px; height:160px; font-size:80px; background:#FFFFFF; box-shadow:0 10px 0 rgba(0,0,0,0.15); margin-bottom:56px;">💬</div>
+        <blockquote class="display reveal" style="--d:.12s; font-size:80px; color:#FFFFFF; max-width:1460px; margin:0 0 48px; line-height:1.15; text-transform:none; font-weight:800;">“make it feel like a game, and people will show up every single day.”</blockquote>
+        <div class="reveal" style="--d:.22s; display:flex; align-items:center; gap:20px;">
+          <div class="node gold" style="width:88px; height:88px; border-width:5px; font-size:40px; box-shadow:0 6px 0 rgba(0,0,0,0.15);">🦉</div>
+          <div style="text-align:left;">
+            <div style="font-weight:800; font-size:30px; color:#FFFFFF;">Duo</div>
+            <div style="font-weight:700; font-size:24px; color:#DFFFC2;">head of habit design</div>
+          </div>
+        </div>
+      </div>
+      <div class="deck-progress" style="width:83%; background:#FFFFFF;"></div>
+      <div class="deck-counter" style="color:#DFFFC2;">05 / 06</div>
+    </section>
+
+    <!-- ============ CLOSING ============ -->
+    <section class="slide" data-label="Close" style="background:#FFFFFF;">
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+        <!-- winding node path, abstracted into a horizontal progression -->
+        <div class="reveal" style="--d:.04s; display:flex; align-items:center; gap:44px; margin-bottom:64px;">
+          <div class="node gold"><span style="font-size:56px;">👑</span><span class="node-badge">done</span></div>
+          <div style="width:64px; height:10px; border-radius:9999px; background:var(--green);"></div>
+          <div class="node blue"><span style="font-size:56px;">⭐</span></div>
+          <div style="width:64px; height:10px; border-radius:9999px; background:var(--green);"></div>
+          <div class="node purple"><span style="font-size:56px;">🚀</span><span class="node-badge" style="background:var(--purple);color:#fff;">next</span></div>
+          <div style="width:64px; height:10px; border-radius:9999px; background:var(--swan);"></div>
+          <div class="node locked"><span style="font-size:56px;">🔒</span></div>
+        </div>
+        <h2 class="display reveal" style="--d:.12s; font-size:104px; margin:0 0 32px;">ready to start learning?</h2>
+        <p class="body reveal" style="--d:.20s; font-size:34px; max-width:1000px; margin:0 0 52px;">the next unit unlocks now. keep the streak alive.</p>
+        <span class="btn compressed reveal" style="--d:.28s; font-size:30px; padding:28px 60px;">get started for free</span>
+      </div>
+      <div class="deck-progress" style="width:100%;"></div>
+      <div class="deck-counter">06 / 06</div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const fit = () => {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `translate(${(innerWidth - 1920 * s) / 2}px, ${(innerHeight - 1080 * s) / 2}px) scale(${s})`;
+  };
+  const show = (n) => {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+  };
+  addEventListener('resize', fit);
+  addEventListener('keydown', (e) => {
+    if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) show(i + 1);
+    else if (['ArrowLeft', 'PageUp'].includes(e.key)) show(i - 1);
+  });
+  fit(); show(0);
+})();
+</script>
+</body>
+</html>

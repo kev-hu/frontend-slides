@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- Redline — reference render (render-first proof for design.md). 6 canonical archetypes. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redline — Reference Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Nunito:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* === MANDATORY FIXED-STAGE BASE (verbatim from viewport-base.css) === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #000); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* === DESIGN SYSTEM — "Redline" ===================================== */
+:root {
+  --stage-bg: #d8d6d0;   /* letterbox outside the 16:9 stage */
+  --slide-bg: #ffffff;   /* pure-white Swiss canvas */
+  --paper:   #ffffff;
+  --ink:     #0a0a0a;
+  --gray:    #555555;
+  --gray-2:  #8a8a8a;
+  --red:     #ff3300;
+  --line:    #e9e7e2;
+  --font-display: 'Archivo', sans-serif;
+  --font-body:    'Nunito', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+.slide { font-family: var(--font-body); color: var(--ink); }
+/* thin Swiss grid: a left structure column + a center spine */
+.slide::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-position: 130px 0, 960px 0; background-size: 1px 100%, 1px 100%; opacity: 0.7;
+}
+.content { position: absolute; inset: 96px 130px 118px; display: flex; flex-direction: column; }
+.gap-m > * + * { margin-top: 34px; }
+.spread { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.mt-a { margin-top: auto; }
+
+/* chrome / labels */
+.kicker { font-family: var(--font-mono); font-weight: 700; font-size: 24px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-2); }
+.eyebrow { font-family: var(--font-mono); font-weight: 700; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); }
+.eyebrow .num { color: var(--red); }
+.rule { width: 120px; height: 12px; background: var(--red); }
+
+/* display */
+h1.hero { font-family: var(--font-display); font-weight: 900; font-size: 168px; letter-spacing: -0.045em; line-height: 0.86; }
+h2.title { font-family: var(--font-display); font-weight: 900; font-size: 92px; letter-spacing: -0.04em; line-height: 0.95; }
+.statement { font-family: var(--font-display); font-weight: 900; font-size: 116px; letter-spacing: -0.04em; line-height: 0.95; }
+.statement .red, .red-ink { color: var(--red); }
+
+/* body */
+.lead { font-size: 36px; font-weight: 500; line-height: 1.45; color: var(--ink); max-width: 1180px; }
+.lead.muted { color: var(--gray); }
+.lead b { color: var(--red); font-weight: 700; }
+.body { font-size: 26px; line-height: 1.5; color: var(--gray); }
+
+/* cover stat row */
+.statrow { display: flex; gap: 86px; }
+.statrow .s .n { font-family: var(--font-display); font-weight: 900; font-size: 76px; letter-spacing: -0.03em; line-height: 1; }
+.statrow .s .l { font-family: var(--font-mono); font-weight: 700; font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray); margin-top: 10px; }
+
+/* bordered cards */
+.cards { display: grid; gap: 26px; }
+.cards.c3 { grid-template-columns: repeat(3, 1fr); }
+.card { border: 2px solid var(--ink); padding: 34px 34px 38px; background: var(--paper); }
+.card .cn { font-family: var(--font-display); font-weight: 900; font-size: 30px; color: var(--red); }
+.card h3 { font-family: var(--font-display); font-weight: 800; font-size: 30px; letter-spacing: -0.02em; margin: 12px 0; }
+.card p { font-size: 23px; line-height: 1.45; color: var(--gray); }
+
+/* stat band */
+.bigstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 2px solid var(--ink); }
+.bigstats .cell { padding: 44px 40px; border-right: 2px solid var(--ink); }
+.bigstats .cell:last-child { border-right: none; }
+.bigstats .n { font-family: var(--font-display); font-weight: 900; font-size: 104px; letter-spacing: -0.04em; line-height: 1; color: var(--red); }
+.bigstats .l { font-size: 24px; color: var(--ink); margin-top: 14px; font-weight: 600; }
+.bigstats .d { font-size: 20px; color: var(--gray); margin-top: 6px; }
+
+/* quote */
+.qmark { font-family: var(--font-display); font-weight: 900; font-size: 240px; line-height: 0.4; color: var(--red); height: 96px; }
+.quote { font-family: var(--font-display); font-weight: 800; font-size: 78px; letter-spacing: -0.03em; line-height: 1.05; max-width: 1500px; }
+.cite { font-family: var(--font-mono); font-weight: 700; font-size: 24px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); }
+
+/* closing pointers */
+.ptr { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.ptr .p { border: 2px solid var(--ink); padding: 30px 32px; }
+.ptr .p .f { font-family: var(--font-mono); font-weight: 700; font-size: 26px; color: var(--red); }
+.ptr .p .t { font-size: 24px; color: var(--gray); margin-top: 10px; line-height: 1.4; }
+
+/* chrome */
+.progress { position: absolute; left: 0; bottom: 0; height: 6px; background: var(--red); }
+.counter { position: absolute; right: 0; bottom: -30px; font-family: var(--font-mono); font-size: 20px; color: var(--gray); }
+
+/* one orchestrated entry */
+.slide.active .reveal { animation: rise 0.7s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <div class="deck-stage" id="stage">
+
+    <!-- COVER / HERO -->
+    <section class="slide active" data-label="Cover">
+      <div class="content gap-m">
+        <div class="kicker reveal" style="--d:.05s">Annual Operating Review</div>
+        <div class="rule reveal" style="--d:.12s"></div>
+        <div class="spread gap-m">
+          <h1 class="hero reveal" style="--d:.2s">Built to last.</h1>
+          <p class="lead reveal" style="--d:.3s">A system designed so the boring parts stay boring — and the <b>important parts never break.</b></p>
+        </div>
+        <div class="statrow reveal mt-a" style="--d:.4s">
+          <div class="s"><div class="n">12</div><div class="l">quarters shipped</div></div>
+          <div class="s"><div class="n">0</div><div class="l">data-loss incidents</div></div>
+          <div class="s"><div class="n">99.9</div><div class="l">percent uptime</div></div>
+        </div>
+        <div class="counter">01 / 06</div>
+      </div>
+      <div class="progress" style="width: 16.6%"></div>
+    </section>
+
+    <!-- SECTION HEADER -->
+    <section class="slide" data-label="Section">
+      <div class="content gap-m">
+        <div class="eyebrow reveal" style="--d:.05s"><span class="num">01</span> / The thesis</div>
+        <div class="spread gap-m">
+          <div class="rule reveal" style="--d:.12s"></div>
+          <div class="statement reveal" style="--d:.2s">Discipline beats<br>cleverness.<span class="red">.</span></div>
+          <p class="lead muted reveal" style="--d:.3s">Pick one rule for each hard problem and never bend it. The constraint is the feature — it&apos;s what lets everything downstream stop worrying.</p>
+        </div>
+        <div class="counter">02 / 06</div>
+      </div>
+      <div class="progress" style="width: 33.3%"></div>
+    </section>
+
+    <!-- CONTENT / GRID -->
+    <section class="slide" data-label="Content">
+      <div class="content gap-m">
+        <div class="eyebrow reveal" style="--d:.05s"><span class="num">02</span> / How it works</div>
+        <h2 class="title reveal" style="--d:.12s">Three moves, repeated.</h2>
+        <div class="cards c3 reveal mt-a" style="--d:.22s">
+          <div class="card"><div class="cn">01</div><h3>Commit</h3><p>One opinionated choice per problem. No options menu, no toggles, no second way to do it.</p></div>
+          <div class="card"><div class="cn">02</div><h3>Constrain</h3><p>Encode the choice as a guardrail so the wrong thing is hard to even express.</p></div>
+          <div class="card"><div class="cn">03</div><h3>Compound</h3><p>Every layer downstream trusts the one below — reliability stacks instead of leaking.</p></div>
+        </div>
+        <div class="counter">03 / 06</div>
+      </div>
+      <div class="progress" style="width: 50%"></div>
+    </section>
+
+    <!-- STAT / STATEMENT -->
+    <section class="slide" data-label="Stat">
+      <div class="content gap-m">
+        <div class="eyebrow reveal" style="--d:.05s"><span class="num">03</span> / By the numbers</div>
+        <h2 class="title reveal" style="--d:.12s">What discipline buys.</h2>
+        <div class="bigstats reveal mt-a" style="--d:.22s">
+          <div class="cell"><div class="n">10×</div><div class="l">faster to re-run</div><div class="d">A repeat pass costs essentially nothing.</div></div>
+          <div class="cell"><div class="n">1</div><div class="l">source of truth</div><div class="d">One ledger answers every freshness question.</div></div>
+          <div class="cell"><div class="n">~0</div><div class="l">silent failures</div><div class="d">Every error is recorded, never swallowed.</div></div>
+        </div>
+        <div class="counter">04 / 06</div>
+      </div>
+      <div class="progress" style="width: 66.6%"></div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="slide" data-label="Quote">
+      <div class="content">
+        <div class="spread">
+          <div class="qmark reveal" style="--d:.05s">&ldquo;</div>
+          <blockquote class="quote reveal" style="--d:.15s">The contract is the product. Everything that touches it is <span class="red-ink">disposable.</span></blockquote>
+          <div class="cite reveal" style="--d:.3s" style="margin-top:40px">— The operating principle</div>
+        </div>
+        <div class="counter">05 / 06</div>
+      </div>
+      <div class="progress" style="width: 83.3%"></div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="slide" data-label="Close">
+      <div class="content gap-m">
+        <div class="eyebrow reveal" style="--d:.05s"><span class="num">04</span> / Where to go next</div>
+        <div class="spread gap-m">
+          <div class="rule reveal" style="--d:.12s"></div>
+          <h2 class="title reveal" style="--d:.2s">Start with the rules.</h2>
+          <div class="ptr reveal" style="--d:.3s">
+            <div class="p"><div class="f">THE CONTRACT</div><div class="t">The shapes everything downstream relies on — read this first.</div></div>
+            <div class="p"><div class="f">THE BRIEF</div><div class="t">The architecture and the reasoning behind every rule.</div></div>
+          </div>
+        </div>
+        <p class="lead reveal" style="--d:.4s; font-weight:700;">Get the rules right and the rest runs <span class="red-ink">blindly.</span></p>
+        <div class="counter">06 / 06</div>
+      </div>
+      <div class="progress" style="width: 100%"></div>
+    </section>
+
+  </div>
+</div>
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const fit = () => { const s = Math.min(innerWidth/1920, innerHeight/1080); stage.style.transform = `translate(${(innerWidth-1920*s)/2}px, ${(innerHeight-1080*s)/2}px) scale(${s})`; };
+  const show = (n) => { i = Math.max(0, Math.min(slides.length-1, n)); slides.forEach((s,j) => s.classList.toggle('active', j===i)); };
+  addEventListener('resize', fit);
+  addEventListener('keydown', (e) => { if (['ArrowRight',' ','PageDown'].includes(e.key)) show(i+1); else if (['ArrowLeft','PageUp'].includes(e.key)) show(i-1); });
+  fit(); show(0);
+})();
+</script>
+</body>
+</html>
