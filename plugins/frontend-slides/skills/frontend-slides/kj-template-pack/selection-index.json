@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pack_name": "KJ Template Pack - Kevin's Custom Designs",
   "source_repo": "kev-hu/frontend-slides",
-  "template_count": 4,
+  "template_count": 5,
   "usage": {
     "selection": "Read this compact index first to shortlist KJ templates from metadata.",
     "previews": "For title-slide previews, read only the preview_md files for the shortlisted KJ candidates.",
@@ -115,6 +115,30 @@
       "avoid_for": "Formal, enterprise, luxury, legal/financial-gravitas, or somber material where bright saturated greens, rounded lowercase type, and emoji read as unserious or childish.",
       "preview_md": "kj-template-pack/templates/duolingo-learn/preview.md",
       "design_md": "kj-template-pack/templates/duolingo-learn/design.md"
+    },
+    {
+      "slug": "stagehand-dev",
+      "name": "Stagehand Dev",
+      "tagline": "Developer-tools landing-page system — dashed-border graph-paper grid, one golden-yellow accent, and isometric hatched cubes.",
+      "mood": [
+        "technical",
+        "precise",
+        "structured",
+        "under-decorated"
+      ],
+      "tone": [
+        "engineered",
+        "confident",
+        "documentation-grade",
+        "dev-native"
+      ],
+      "formality": "medium",
+      "density": "medium",
+      "scheme": "mixed",
+      "best_for": "SDK launches, dev-tool and API pitches, technical documentation decks, open-source project intros, infra/platform overviews, and engineering all-hands. Also a strong, unexpected pick for a fintech or data-product deck that wants to read as rigorous and built rather than glossy — anywhere a 'made by engineers' register beats marketing polish.",
+      "avoid_for": "Warm, emotional, or consumer-lifestyle decks and expressive brand storytelling — the flat, technical, single-accent register reads as cold there.",
+      "preview_md": "kj-template-pack/templates/stagehand-dev/preview.md",
+      "design_md": "kj-template-pack/templates/stagehand-dev/design.md"
     }
   ]
 }

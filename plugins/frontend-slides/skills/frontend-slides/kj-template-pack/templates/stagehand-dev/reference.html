@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!--
+  REFERENCE DECK — Stagehand Dev
+  Render-first reference render for the frontend-slides "stagehand-dev" template.
+  Fixed 1920x1080 stage. Dev-tool landing-page system: dashed-border grid,
+  golden-yellow accent, isometric hatched cubes, noise texture on dark surfaces.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stagehand Dev — Reference Deck</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* === MANDATORY FIXED-STAGE BASE === */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #111); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #111); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #F7F4EF); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #F7F4EF); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+/* === DESIGN SYSTEM === */
+:root {
+  --stage-bg: #14110c;
+  --slide-bg: #F7F4EF;
+
+  --bg:        #F7F4EF;   /* warm cream page ground */
+  --dark:      #1F1F1F;   /* charcoal dark section */
+  --card:      #FFFFFF;   /* white card */
+  --muted:     #E8E4DD;   /* light muted panel */
+  --ink:       #1A1A1A;   /* near-black text + borders */
+  --primary:   #F5A623;   /* golden yellow — the single brand accent */
+  --primaryDk: #D4900F;
+  --c-red:     #E74C3C;
+  --c-blue:    #3498DB;
+  --c-green:   #27AE60;
+  --c-purple:  #9B59B6;
+
+  --dash:       1px dashed #1A1A1A;
+  --dash-light: 1px dashed rgba(255,255,255,0.28);
+  --solid:      1px solid #1A1A1A;
+  --radius:     8px;
+  --radius-sm:  4px;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  --grid: repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(26,26,26,0.045) 79px, rgba(26,26,26,0.045) 80px),
+          repeating-linear-gradient(0deg,  transparent, transparent 79px, rgba(26,26,26,0.045) 79px, rgba(26,26,26,0.045) 80px);
+}
+
+* { box-sizing: border-box; }
+
+.slide { padding: 0; font-family: var(--font-sans); color: var(--ink); }
+.slide.cream { background: var(--bg); }
+.slide.cream::before { content:""; position:absolute; inset:0; background: var(--grid); pointer-events:none; }
+.slide.darkbg { background: var(--dark); color: #F4F1EC; }
+.slide.darkbg::before { content:""; position:absolute; inset:0; background-image: var(--noise); background-size: 240px 240px; opacity: 0.5; mix-blend-mode: screen; pointer-events:none; }
+
+/* ---- persistent chrome ---- */
+.frame { position:absolute; inset:56px; border:var(--dash); border-radius: var(--radius); pointer-events:none; }
+.darkbg .frame { border: var(--dash-light); }
+.topbar { position:absolute; top:56px; left:56px; right:56px; height:72px; display:flex; align-items:center; justify-content:space-between;
+          padding:0 32px; border-bottom: var(--dash); }
+.darkbg .topbar { border-bottom: var(--dash-light); }
+.brand { display:flex; align-items:center; gap:14px; }
+.brand .wm { font-family:var(--font-mono); font-weight:700; font-size:18px; letter-spacing:0.5px; }
+.brand .wm span { color: var(--primaryDk); }
+.darkbg .brand .wm span { color: var(--primary); }
+.crumb { font-family:var(--font-mono); font-size:13px; letter-spacing:1px; color:#8A857B; }
+.darkbg .crumb { color: rgba(244,241,236,0.5); }
+.counter { position:absolute; bottom:56px; right:56px; padding:8px 18px; border-top: var(--dash); border-left: var(--dash);
+           font-family:var(--font-mono); font-size:13px; letter-spacing:2px; color:#8A857B; }
+.darkbg .counter { border-color: rgba(255,255,255,0.28); color: rgba(244,241,236,0.5); }
+.pagetag { position:absolute; bottom:62px; left:88px; font-family:var(--font-mono); font-size:13px; letter-spacing:2px; color:#8A857B; }
+.darkbg .pagetag { color: rgba(244,241,236,0.45); }
+
+/* ---- type roles ---- */
+.eyebrow { font-family:var(--font-mono); font-weight:500; font-size:15px; letter-spacing:3px; text-transform:uppercase; color: var(--primaryDk); }
+.darkbg .eyebrow { color: var(--primary); }
+.hero-h { font-family:var(--font-sans); font-weight:600; font-size:92px; line-height:1.04; letter-spacing:-0.02em; margin:0; }
+.h1 { font-family:var(--font-sans); font-weight:600; font-size:68px; line-height:1.08; letter-spacing:-0.015em; margin:0; }
+.h2 { font-family:var(--font-sans); font-weight:600; font-size:40px; line-height:1.2; letter-spacing:-0.01em; margin:0; }
+.h3 { font-family:var(--font-sans); font-weight:600; font-size:26px; line-height:1.25; margin:0; }
+.body { font-family:var(--font-sans); font-weight:400; font-size:21px; line-height:1.6; color:#3A372F; }
+.darkbg .body { color: rgba(244,241,236,0.72); }
+.small { font-family:var(--font-sans); font-weight:400; font-size:16px; line-height:1.5; color:#6E6A60; }
+
+/* ---- buttons ---- */
+.btn { display:inline-flex; align-items:center; gap:12px; font-family:var(--font-sans); font-weight:600; font-size:19px;
+       padding:16px 28px; border-radius: var(--radius-sm); }
+.btn-primary { background: var(--primary); color:#1A1A1A; border:var(--solid); }
+.btn-dashed { background:transparent; border:var(--dash); color:var(--ink); font-family:var(--font-mono); font-weight:500; font-size:18px; }
+.darkbg .btn-dashed { border:var(--dash-light); color:#F4F1EC; }
+
+/* ---- code block ---- */
+.code { background:#F0ECE3; border:var(--dash); border-radius:var(--radius); padding:22px 26px; font-family:var(--font-mono);
+        font-size:18px; line-height:1.7; color:#2A2722; }
+.darkbg .code { background: rgba(255,255,255,0.04); border:var(--dash-light); color:#E9E5DC; }
+.code .k { color: var(--c-purple); } .code .s { color: var(--c-green); } .code .fn { color: var(--c-blue); } .code .c { color:#9A958A; }
+
+/* ---- feature card ---- */
+.fcard { background:var(--card); border:var(--dash); border-radius:var(--radius); padding:34px 32px; display:flex; flex-direction:column; gap:18px; }
+.fcard .ic { width:84px; height:84px; }
+.fcard .tag { font-family:var(--font-mono); font-size:13px; letter-spacing:2px; text-transform:uppercase; color:#A39E92; margin-top:auto; }
+
+/* ---- stat ---- */
+.stat-n { font-family:var(--font-sans); font-weight:700; font-size:120px; line-height:0.9; letter-spacing:-0.03em; color:var(--primary); }
+.stat-l { font-family:var(--font-mono); font-size:16px; letter-spacing:2px; text-transform:uppercase; color: rgba(244,241,236,0.6); }
+
+/* entry animation */
+.slide.active .reveal { animation: rise 0.62s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
+@keyframes rise { from { opacity:0; transform: translateY(26px); } to { opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <div class="deck-stage" id="stage">
+
+  <!-- ============ SLIDE 1 — COVER / HERO ============ -->
+  <section class="slide cream active" data-label="Cover">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand">
+        <svg class="ic" width="34" height="34" viewBox="0 0 240 240">
+          <polygon points="120,30 200,76 120,122 40,76" fill="#F5A623" stroke="#1A1A1A" stroke-width="6"/>
+          <polygon points="40,76 120,122 120,210 40,164" fill="#1A1A1A"/>
+          <polygon points="200,76 120,122 120,210 200,164" fill="#D4900F" stroke="#1A1A1A" stroke-width="6"/>
+        </svg>
+        <div class="wm">stage<span>hand</span></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:28px;">
+        <div class="crumb">v1.0.0 · MIT</div>
+        <div class="btn-dashed" style="padding:10px 18px; font-size:14px;">Docs&nbsp;↗</div>
+      </div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:300px; width:920px;">
+      <div class="eyebrow reveal" style="--d:.05s">// THE BROWSER AUTOMATION SDK</div>
+      <h1 class="hero-h reveal" style="--d:.13s; margin-top:26px;">Build agents that<br>browse like humans.</h1>
+      <p class="body reveal" style="--d:.22s; margin-top:30px; max-width:720px;">An open-source framework for reliable, self-healing web automation. Write intent, not selectors — Stagehand turns plain instructions into resilient browser actions.</p>
+      <div class="reveal" style="--d:.32s; margin-top:42px; display:flex; gap:18px; align-items:center;">
+        <div class="btn btn-primary">Get started <span style="font-family:var(--font-mono);">→</span></div>
+        <div class="btn btn-dashed">$ npm i @browserbase/stagehand</div>
+      </div>
+    </div>
+
+    <!-- isometric cube stack -->
+    <svg class="reveal" style="--d:.26s; position:absolute; right:150px; top:300px;" width="520" height="500" viewBox="0 0 520 500">
+      <defs>
+        <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="9" stroke="#1A1A1A" stroke-width="1.4"/>
+        </pattern>
+      </defs>
+      <!-- back cube -->
+      <g transform="translate(150,30)">
+        <polygon points="110,0 200,52 110,104 20,52" fill="#3498DB" stroke="#1A1A1A" stroke-width="5"/>
+        <polygon points="20,52 110,104 110,200 20,148" fill="#1A1A1A"/>
+        <polygon points="200,52 110,104 110,200 200,148" fill="url(#hatch)" stroke="#1A1A1A" stroke-width="5"/>
+        <polygon points="200,52 110,104 110,200 200,148" fill="none" stroke="#1A1A1A" stroke-width="5"/>
+      </g>
+      <!-- front big cube -->
+      <g transform="translate(60,180)">
+        <polygon points="150,0 280,75 150,150 20,75" fill="#F5A623" stroke="#1A1A1A" stroke-width="6"/>
+        <polygon points="20,75 150,150 150,290 20,215" fill="#1A1A1A"/>
+        <polygon points="280,75 150,150 150,290 280,215" fill="#D4900F" stroke="#1A1A1A" stroke-width="6"/>
+        <line x1="150" y1="150" x2="150" y2="290" stroke="#1A1A1A" stroke-width="6"/>
+      </g>
+      <!-- small red cube -->
+      <g transform="translate(360,250)">
+        <polygon points="60,0 110,29 60,58 10,29" fill="#E74C3C" stroke="#1A1A1A" stroke-width="4"/>
+        <polygon points="10,29 60,58 60,118 10,89" fill="#1A1A1A"/>
+        <polygon points="110,29 60,58 60,118 110,89" fill="url(#hatch)" stroke="#1A1A1A" stroke-width="4"/>
+      </g>
+    </svg>
+
+    <div class="pagetag">~/stagehand</div>
+    <div class="counter">01 / 06</div>
+  </section>
+
+  <!-- ============ SLIDE 2 — SECTION HEADER ============ -->
+  <section class="slide cream" data-label="Section">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">SECTION 02 — ARCHITECTURE</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:380px; display:flex; align-items:flex-start; gap:64px;">
+      <div class="reveal" style="--d:.05s; font-family:var(--font-mono); font-weight:700; font-size:240px; line-height:0.8; color:transparent; -webkit-text-stroke:2px #1A1A1A;">02</div>
+      <div style="border-left:var(--dash); padding-left:56px; padding-top:14px;">
+        <div class="eyebrow reveal" style="--d:.12s">// HOW IT WORKS</div>
+        <h1 class="h1 reveal" style="--d:.18s; margin-top:24px; max-width:760px;">From instruction<br>to action, resolved<br>at runtime.</h1>
+        <p class="body reveal" style="--d:.26s; margin-top:28px; max-width:640px;">Three primitives — act, extract, observe — compile natural language into deterministic browser steps with automatic recovery.</p>
+      </div>
+    </div>
+
+    <div class="pagetag">~/architecture</div>
+    <div class="counter">02 / 06</div>
+  </section>
+
+  <!-- ============ SLIDE 3 — CONTENT / GRID ============ -->
+  <section class="slide cream" data-label="Content">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">SECTION 02 — ARCHITECTURE</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:172px;">
+      <div class="eyebrow reveal" style="--d:.04s">// THREE PRIMITIVES</div>
+      <h2 class="h2 reveal" style="--d:.1s; margin-top:16px;">One API surface, every interaction.</h2>
+    </div>
+
+    <div style="position:absolute; left:120px; right:120px; top:320px; display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+      <div class="fcard reveal" style="--d:.16s; height:380px;">
+        <svg class="ic" viewBox="0 0 240 240">
+          <polygon points="120,30 200,76 120,122 40,76" fill="#3498DB" stroke="#1A1A1A" stroke-width="7"/>
+          <polygon points="40,76 120,122 120,210 40,164" fill="#1A1A1A"/>
+          <polygon points="200,76 120,122 120,210 200,164" fill="#3498DB" fill-opacity="0.45" stroke="#1A1A1A" stroke-width="7"/>
+        </svg>
+        <h3 class="h3">act()</h3>
+        <p class="small">Perform any UI action from a plain-English instruction. Clicks, typing, and navigation resolve to stable steps.</p>
+        <div class="tag">// MUTATION</div>
+      </div>
+      <div class="fcard reveal" style="--d:.24s; height:380px;">
+        <svg class="ic" viewBox="0 0 240 240">
+          <polygon points="120,30 200,76 120,122 40,76" fill="#27AE60" stroke="#1A1A1A" stroke-width="7"/>
+          <polygon points="40,76 120,122 120,210 40,164" fill="#1A1A1A"/>
+          <polygon points="200,76 120,122 120,210 200,164" fill="#27AE60" fill-opacity="0.45" stroke="#1A1A1A" stroke-width="7"/>
+        </svg>
+        <h3 class="h3">extract()</h3>
+        <p class="small">Pull typed, schema-validated data out of any page. Returns structured JSON you can trust downstream.</p>
+        <div class="tag">// READ</div>
+      </div>
+      <div class="fcard reveal" style="--d:.32s; height:380px;">
+        <svg class="ic" viewBox="0 0 240 240">
+          <polygon points="120,30 200,76 120,122 40,76" fill="#9B59B6" stroke="#1A1A1A" stroke-width="7"/>
+          <polygon points="40,76 120,122 120,210 40,164" fill="#1A1A1A"/>
+          <polygon points="200,76 120,122 120,210 200,164" fill="#9B59B6" fill-opacity="0.45" stroke="#1A1A1A" stroke-width="7"/>
+        </svg>
+        <h3 class="h3">observe()</h3>
+        <p class="small">Plan ahead — preview the candidate actions on a page before committing, for safe agentic loops.</p>
+        <div class="tag">// PLAN</div>
+      </div>
+    </div>
+
+    <div class="code reveal" style="--d:.4s; position:absolute; left:120px; right:120px; top:732px;">
+      <span class="c">// resilient by intent, not by selector</span><br>
+      <span class="k">await</span> page.<span class="fn">act</span>(<span class="s">"click the 'Start free trial' button"</span>);
+    </div>
+
+    <div class="pagetag">~/architecture/primitives</div>
+    <div class="counter">03 / 06</div>
+  </section>
+
+  <!-- ============ SLIDE 4 — STAT / STATEMENT (dark, noise) ============ -->
+  <section class="slide darkbg" data-label="Stat">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">BENCHMARKS — V1.0</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:208px;">
+      <div class="eyebrow reveal" style="--d:.04s">// MEASURED IN PRODUCTION</div>
+      <h2 class="h2 reveal" style="--d:.1s; margin-top:18px; max-width:900px; color:#F4F1EC;">Self-healing automation that holds up when the DOM moves.</h2>
+    </div>
+
+    <div style="position:absolute; left:120px; right:120px; top:470px; display:grid; grid-template-columns:repeat(3,1fr);">
+      <div class="reveal" style="--d:.18s; padding:40px 48px 40px 0; border-right:var(--dash-light);">
+        <div class="stat-n">92%</div>
+        <div class="stat-l" style="margin-top:18px;">task success across<br>1,000 live sites</div>
+      </div>
+      <div class="reveal" style="--d:.26s; padding:40px 48px; border-right:var(--dash-light);">
+        <div class="stat-n">3.4×</div>
+        <div class="stat-l" style="margin-top:18px;">fewer flakes vs.<br>raw selectors</div>
+      </div>
+      <div class="reveal" style="--d:.34s; padding:40px 0 40px 48px;">
+        <div class="stat-n">280<span style="font-size:64px;">ms</span></div>
+        <div class="stat-l" style="margin-top:18px;">median action<br>resolution time</div>
+      </div>
+    </div>
+
+    <div class="pagetag">~/benchmarks</div>
+    <div class="counter">04 / 06</div>
+  </section>
+
+  <!-- ============ SLIDE 5 — QUOTE ============ -->
+  <section class="slide cream" data-label="Quote">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">FIELD NOTES</div>
+    </div>
+
+    <div style="position:absolute; left:160px; right:640px; top:320px;">
+      <div class="reveal" style="--d:.05s; font-family:var(--font-mono); font-weight:700; font-size:120px; line-height:0.6; color:var(--primary); -webkit-text-stroke:2px #1A1A1A;">"</div>
+      <blockquote class="reveal" style="--d:.14s; margin:24px 0 0; font-family:var(--font-sans); font-weight:600; font-size:52px; line-height:1.28; letter-spacing:-0.01em; color:#1A1A1A;">We deleted 4,000 lines of brittle Playwright glue and replaced it with instructions a PM could read.</blockquote>
+      <div class="reveal" style="--d:.24s; margin-top:48px; display:flex; align-items:center; gap:20px;">
+        <div style="width:8px; height:56px; background:var(--primary); border:var(--solid);"></div>
+        <div>
+          <div style="font-family:var(--font-sans); font-weight:600; font-size:20px;">Dana Okafor</div>
+          <div style="font-family:var(--font-mono); font-size:15px; letter-spacing:1px; color:#8A857B;">STAFF ENG · LEDGERLOOP</div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="reveal" style="--d:.2s; position:absolute; right:170px; top:430px;" width="280" height="340" viewBox="0 0 260 320">
+      <defs>
+        <pattern id="hatch2" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="9" stroke="#1A1A1A" stroke-width="1.4"/>
+        </pattern>
+      </defs>
+      <g transform="translate(20,40)">
+        <polygon points="110,0 200,52 110,104 20,52" fill="#F5A623" stroke="#1A1A1A" stroke-width="6"/>
+        <polygon points="20,52 110,104 110,200 20,148" fill="#1A1A1A"/>
+        <polygon points="200,52 110,104 110,200 200,148" fill="url(#hatch2)" stroke="#1A1A1A" stroke-width="6"/>
+      </g>
+    </svg>
+
+    <div class="pagetag">~/field-notes</div>
+    <div class="counter">05 / 06</div>
+  </section>
+
+  <!-- ============ SLIDE 6 — CLOSING (dark, noise) ============ -->
+  <section class="slide darkbg" data-label="Close">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand">
+        <svg class="ic" width="34" height="34" viewBox="0 0 240 240">
+          <polygon points="120,30 200,76 120,122 40,76" fill="#F5A623" stroke="#1A1A1A" stroke-width="6"/>
+          <polygon points="40,76 120,122 120,210 40,164" fill="#0E0E0E"/>
+          <polygon points="200,76 120,122 120,210 200,164" fill="#D4900F" stroke="#1A1A1A" stroke-width="6"/>
+        </svg>
+        <div class="wm" style="color:#F4F1EC;">stage<span>hand</span></div>
+      </div>
+      <div class="crumb">START BUILDING</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:360px; width:1100px;">
+      <div class="eyebrow reveal" style="--d:.05s">// SHIP YOUR FIRST AGENT TODAY</div>
+      <h1 class="h1 reveal" style="--d:.13s; margin-top:26px; color:#F4F1EC; font-size:78px;">Stop writing selectors.<br>Start writing intent.</h1>
+      <div class="reveal" style="--d:.24s; margin-top:44px; display:flex; gap:18px; align-items:center;">
+        <div class="btn btn-primary">Read the docs <span style="font-family:var(--font-mono);">→</span></div>
+        <div class="btn btn-dashed">$ npx create-stagehand</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="--d:.32s; position:absolute; left:120px; right:120px; bottom:150px; padding-top:30px; border-top:var(--dash-light);
+                display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:15px; letter-spacing:1px; color:rgba(244,241,236,0.55);">
+      <div>github.com/browserbase/stagehand</div>
+      <div style="display:flex; gap:34px;">
+        <span>DOCS</span><span>DISCORD</span><span>@stagehand</span>
+      </div>
+    </div>
+
+    <div class="counter">06 / 06</div>
+  </section>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const fit = () => {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `translate(${(innerWidth - 1920 * s) / 2}px, ${(innerHeight - 1080 * s) / 2}px) scale(${s})`;
+  };
+  const show = (n) => { i = Math.max(0, Math.min(slides.length - 1, n)); slides.forEach((s, j) => s.classList.toggle('active', j === i)); };
+  addEventListener('resize', fit);
+  addEventListener('keydown', (e) => {
+    if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) show(i + 1);
+    else if (['ArrowLeft', 'PageUp'].includes(e.key)) show(i - 1);
+  });
+  fit(); show(0);
+})();
+</script>
+</body>
+</html>
