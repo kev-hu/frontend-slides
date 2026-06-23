@@ -8,12 +8,16 @@ A coding-agent skill for creating stunning HTML presentations — from scratch o
 
 **Frontend Slides** helps non-designers create beautiful web presentations without knowing CSS or JavaScript. It uses a "show, don't tell" approach: instead of asking you to describe your aesthetic preferences in words, it generates visual previews and lets you pick what you like.
 
-Here is **Redline**, a custom template added in this fork — a Swiss/Bauhaus deck system: pure white, a single hot-red accent, Archivo-black headlines, hard 2px bordered boxes, and numbered mono eyebrows.
+Here are the authored templates added in this fork: **Redline**, **Duolingo Learn**, **Stagehand Dev**, **Hedgehog OS**, and **Voltcast**.
 
 <p>
-  <img src="previews/redline-cover.png" width="32.5%" alt="Redline — cover slide" />
-  <img src="previews/redline-content.png" width="32.5%" alt="Redline — content grid" />
-  <img src="previews/redline-stat.png" width="32.5%" alt="Redline — stat band" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-01.png" width="32.5%" alt="Redline — cover slide" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-01.png" width="32.5%" alt="Duolingo Learn — cover slide" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-01.png" width="32.5%" alt="Stagehand Dev — cover slide" />
+</p>
+<p>
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-01.png" width="32.5%" alt="Hedgehog OS — cover slide" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-01.png" width="32.5%" alt="Voltcast — cover slide" />
 </p>
 
 ### Key Features
@@ -22,7 +26,7 @@ Here is **Redline**, a custom template added in this fork — a Swiss/Bauhaus de
 - **Visual Style Discovery** — Can't articulate design preferences? No problem. Pick from generated visual previews.
 - **PPT Conversion** — Convert existing PowerPoint files to web, preserving all images and content.
 - **Anti-AI-Slop** — Curated distinctive styles that avoid generic AI aesthetics (bye-bye, purple gradients on white).
-- **Bold Template Pack** — Optional design-forward templates from `beautiful-html-templates`, loaded progressively so safe presets still work as the default fallback.
+- **Template Packs** — Optional design-forward templates from `beautiful-html-templates` plus this fork's `kj-template-pack`, loaded progressively so safe presets still work as the default fallback.
 - **Production Quality** — Accessible, fixed 16:9, well-commented code you can customize.
 
 ## Installation
@@ -32,7 +36,7 @@ Here is **Redline**, a custom template added in this fork — a Swiss/Bauhaus de
 Install directly from this public GitHub repo. Run these as two separate Claude Code messages; do not paste both lines into the prompt at once.
 
 ```text
-/plugin marketplace add https://github.com/zarazhangrui/frontend-slides
+/plugin marketplace add https://github.com/kev-hu/frontend-slides
 ```
 
 After that finishes, run:
@@ -41,7 +45,7 @@ After that finishes, run:
 /plugin install frontend-slides@frontend-slides
 ```
 
-Use the HTTPS URL. The shorter `zarazhangrui/frontend-slides` form may make Claude Code try SSH, which can fail if GitHub is not already in your `known_hosts` file.
+Use the HTTPS URL. The shorter `kev-hu/frontend-slides` form may make Claude Code try SSH, which can fail if GitHub is not already in your `known_hosts` file.
 
 Then use it by typing `/frontend-slides:frontend-slides` in Claude Code. Claude Code namespaces plugin-installed skills as `/plugin-name:skill-name`.
 
@@ -55,14 +59,14 @@ mkdir -p ~/.claude/skills/frontend-slides/scripts
 
 # Copy the user-facing skill files
 cp SKILL.md STYLE_PRESETS.md viewport-base.css html-template.md animation-patterns.md ~/.claude/skills/frontend-slides/
-cp -R bold-template-pack ~/.claude/skills/frontend-slides/
+cp -R bold-template-pack kj-template-pack ~/.claude/skills/frontend-slides/
 cp scripts/extract-pptx.py scripts/deploy.sh scripts/export-pdf.sh ~/.claude/skills/frontend-slides/scripts/
 ```
 
 Or clone directly:
 
 ```bash
-git clone https://github.com/zarazhangrui/frontend-slides.git ~/.claude/skills/frontend-slides
+git clone https://github.com/kev-hu/frontend-slides.git ~/.claude/skills/frontend-slides
 ```
 
 Then use it by typing `/frontend-slides` in Claude Code. Standalone skills are not namespaced.
@@ -72,7 +76,7 @@ Then use it by typing `/frontend-slides` in Claude Code. Standalone skills are n
 Agents such as Codex, Kimi Code, OpenCode, Gemini CLI, or other local coding assistants can use the same core skill. The simplest path is to send the agent this GitHub repo link and ask it to use the Frontend Slides skill:
 
 ```text
-https://github.com/zarazhangrui/frontend-slides
+https://github.com/kev-hu/frontend-slides
 ```
 
 If the agent can read GitHub repos or browse files, it should start from `SKILL.md` and load only the referenced support files it needs:
@@ -82,6 +86,7 @@ If the agent can read GitHub repos or browse files, it should start from `SKILL.
 - `html-template.md`
 - `animation-patterns.md`
 - `bold-template-pack/`
+- `kj-template-pack/`
 - `scripts/`
 
 Some agents can also install the skill for you if they have filesystem access and a known local skills directory. If not, they can still follow `SKILL.md` directly for the current session.
@@ -148,6 +153,17 @@ The skill will:
 - **Swiss Modern** — Minimal, Bauhaus-inspired, geometric
 - **Paper & Ink** — Literary, drop caps, pull quotes
 
+### KJ Template Pack
+
+This fork adds six custom KJ templates in `kj-template-pack/selection-index.json`:
+
+- **Redline** — Swiss/Bauhaus poster meets technical spec sheet: pure white, hot-red accent, Archivo-black headlines, hard 2px boxes.
+- **Duolingo Learn** — Bright gamified learning deck: rounded Nunito, Feather Green, XP pills, lesson nodes, and streak-style accents.
+- **Stagehand Dev** — Developer-tools system: graph-paper grid, dashed borders, golden-yellow accent, and isometric hatched cubes.
+- **Hedgehog OS** — macOS-inspired glassmorphism: frosted app windows, Finder-style sidebars, warm desktop glow, friendly orange accent.
+- **Voltcast** — Dark brutalist hardware-spec deck: acid green on black, uppercase Archivo Black, mono readouts, wire grids.
+- **KJ Starter** — Placeholder starter cloned from Blue Professional for quickly drafting another KJ template.
+
 ### Bold Template Pack
 
 The skill also includes 34 optional bold design systems from
@@ -157,14 +173,68 @@ The skill also includes 34 optional bold design systems from
 During style discovery, the preview set is:
 
 - 1 safe preset from `STYLE_PRESETS.md`
-- at least 1 bold template option from `bold-template-pack/selection-index.json`
-- 1 wildcard option, either another bold template or a self-generated custom design
+- at least 1 bold or KJ template option from `bold-template-pack/selection-index.json` or `kj-template-pack/selection-index.json`
+- 1 wildcard option, either another template or a self-generated custom design
 
-The agent reads the compact bold template index first, then loads only the
+The agent reads the compact template indexes first, then loads only the
 shortlisted candidates' small `preview.md` cards for title-slide previews. It
-loads the full `design.md` for exactly one bold template only after the user
+loads the full `design.md` for exactly one template only after the user
 picks that template for the final deck. If the user picks a custom wildcard,
 the agent expands that preview's own CSS and layout system into the full deck.
+
+## KJ Template Gallery
+
+The fork-specific KJ templates live inside this repo, so their screenshots render directly from local files.
+
+### Redline
+
+<p>
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-01.png" width="32.5%" alt="Redline — slide 1" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-03.png" width="32.5%" alt="Redline — slide 3" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-05.png" width="32.5%" alt="Redline — slide 5" />
+</p>
+
+> Swiss/Bauhaus deck system with hot-red accents, hard technical boxes, and numbered mono eyebrows.
+
+### Duolingo Learn
+
+<p>
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-01.png" width="32.5%" alt="Duolingo Learn — slide 1" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-04.png" width="32.5%" alt="Duolingo Learn — slide 4" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-08.png" width="32.5%" alt="Duolingo Learn — slide 8" />
+</p>
+
+> Bright gamified learning deck with rounded type, chunky 3D buttons, lesson paths, XP pills, and green-checkmark bullets.
+
+### Stagehand Dev
+
+<p>
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-01.png" width="32.5%" alt="Stagehand Dev — slide 1" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-03.png" width="32.5%" alt="Stagehand Dev — slide 3" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-05.png" width="32.5%" alt="Stagehand Dev — slide 5" />
+</p>
+
+> Dev-tools landing-page system with graph-paper structure, dashed borders, one golden-yellow accent, and isometric cubes.
+
+### Hedgehog OS
+
+<p>
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-01.png" width="32.5%" alt="Hedgehog OS — slide 1" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-03.png" width="32.5%" alt="Hedgehog OS — slide 3" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-05.png" width="32.5%" alt="Hedgehog OS — slide 5" />
+</p>
+
+> Warm macOS-inspired glassmorphism with frosted app windows, Finder-style navigation, glass widgets, and friendly orange accents.
+
+### Voltcast
+
+<p>
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-01.png" width="32.5%" alt="Voltcast — slide 1" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-03.png" width="32.5%" alt="Voltcast — slide 3" />
+  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-05.png" width="32.5%" alt="Voltcast — slide 5" />
+</p>
+
+> Acid-green-on-black brutalist hardware-spec deck with hard grids, mono readouts, and zero rounded corners.
 
 ## Bold Template Gallery
 
@@ -521,6 +591,9 @@ This skill uses **progressive disclosure** — the main `SKILL.md` is a workflow
 | `bold-template-pack/selection-index.json` | Compact bold template metadata for candidate selection | Phase 2 (style selection) |
 | `bold-template-pack/templates/*/preview.md` | Tiny style cards for shortlisted bold previews | Phase 2 after shortlisting |
 | `bold-template-pack/templates/*/design.md` | Full design system for the selected bold template | Phase 3 after user selection |
+| `kj-template-pack/selection-index.json` | Compact KJ template metadata for candidate selection | Phase 2 (style selection) |
+| `kj-template-pack/templates/*/preview.md` | Tiny style cards for shortlisted KJ previews | Phase 2 after shortlisting |
+| `kj-template-pack/templates/*/design.md` | Full design system for the selected KJ template | Phase 3 after user selection |
 | `viewport-base.css`       | Mandatory fixed-stage CSS      | Phase 3 (generation)      |
 | `html-template.md`        | HTML structure and JS features | Phase 3 (generation)      |
 | `animation-patterns.md`   | CSS/JS animation reference     | Phase 3 (generation)      |
