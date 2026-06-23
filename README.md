@@ -8,7 +8,7 @@ A coding-agent skill for creating stunning HTML presentations — from scratch o
 
 **Frontend Slides** helps non-designers create beautiful web presentations without knowing CSS or JavaScript. It uses a "show, don't tell" approach: instead of asking you to describe your aesthetic preferences in words, it generates visual previews and lets you pick what you like.
 
-Here are the authored templates added in this fork: **Redline**, **Duolingo Learn**, **Stagehand Dev**, **Hedgehog OS**, and **Voltcast**.
+Here are the authored templates added in this fork: **Redline**, **Duolingo Learn**, **Stagehand Dev**, **Hedgehog OS**, **Voltcast**, and **Twenty SaaS**.
 
 <p>
   <img src="previews/kj-redline-01.png" width="32.5%" alt="Redline — cover slide" />
@@ -18,6 +18,7 @@ Here are the authored templates added in this fork: **Redline**, **Duolingo Lear
 <p>
   <img src="previews/kj-hedgehog-os-01.png" width="32.5%" alt="Hedgehog OS — cover slide" />
   <img src="previews/kj-voltcast-01.png" width="32.5%" alt="Voltcast — cover slide" />
+  <img src="previews/kj-twenty-saas-01.png" width="32.5%" alt="Twenty SaaS — cover slide" />
 </p>
 
 ### Key Features
@@ -155,13 +156,14 @@ The skill will:
 
 ### KJ Template Pack
 
-This fork adds six custom KJ templates in `kj-template-pack/selection-index.json`:
+This fork adds seven custom KJ templates in `kj-template-pack/selection-index.json`:
 
 - **Redline** — Swiss/Bauhaus poster meets technical spec sheet: pure white, hot-red accent, Archivo-black headlines, hard 2px boxes.
 - **Duolingo Learn** — Bright gamified learning deck: rounded Nunito, Feather Green, XP pills, lesson nodes, and streak-style accents.
 - **Stagehand Dev** — Developer-tools system: graph-paper grid, dashed borders, golden-yellow accent, and isometric hatched cubes.
 - **Hedgehog OS** — macOS-inspired glassmorphism: frosted app windows, Finder-style sidebars, warm desktop glow, friendly orange accent.
 - **Voltcast** — Dark brutalist hardware-spec deck: acid green on black, uppercase Archivo Black, mono readouts, wire grids.
+- **Twenty SaaS** — Refined high-density SaaS CRM deck: monochrome Inter product surfaces, EB Garamond italic accents, soft app chrome, and pastel isometric feature cards.
 - **KJ Starter** — Placeholder starter cloned from Blue Professional for quickly drafting another KJ template.
 
 ### Bold Template Pack
@@ -235,6 +237,16 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
 </p>
 
 > Acid-green-on-black brutalist hardware-spec deck with hard grids, mono readouts, and zero rounded corners.
+
+### Twenty SaaS
+
+<p>
+  <img src="previews/kj-twenty-saas-01.png" width="32.5%" alt="Twenty SaaS — slide 1" />
+  <img src="previews/kj-twenty-saas-03.png" width="32.5%" alt="Twenty SaaS — slide 3" />
+  <img src="previews/kj-twenty-saas-05.png" width="32.5%" alt="Twenty SaaS — slide 5" />
+</p>
+
+> Refined high-density SaaS CRM deck with monochrome Inter product surfaces, EB Garamond italic accents, soft app chrome, kanban/task/tweet modules, and pastel isometric feature cards.
 
 ## Additional Bold Templates
 
