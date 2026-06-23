@@ -2,13 +2,19 @@
 
 A coding-agent skill for creating stunning HTML presentations — from scratch or by converting PowerPoint files. It is packaged as a Claude Code plugin, and the core `SKILL.md` can also be read by other coding agents with filesystem and shell access.
 
+> **Fork note —** This is a fork of [@zarazhangrui](https://github.com/zarazhangrui)'s [frontend-slides](https://github.com/zarazhangrui/frontend-slides). It adds a personal **`kj-template-pack`** — custom design-system templates that plug into the same style-discovery flow. The previews below are made with this fork.
+
 ## What This Does
 
 **Frontend Slides** helps non-designers create beautiful web presentations without knowing CSS or JavaScript. It uses a "show, don't tell" approach: instead of asking you to describe your aesthetic preferences in words, it generates visual previews and lets you pick what you like.
 
-Here is a deck about the skill, made through the skill:
+Here is **Redline**, a custom template added in this fork — a Swiss/Bauhaus deck system: pure white, a single hot-red accent, Archivo-black headlines, hard 2px bordered boxes, and numbered mono eyebrows.
 
-https://github.com/user-attachments/assets/ef57333e-f879-432a-afb9-180388982478
+<p>
+  <img src="previews/redline-cover.png" width="32.5%" alt="Redline — cover slide" />
+  <img src="previews/redline-content.png" width="32.5%" alt="Redline — content grid" />
+  <img src="previews/redline-stat.png" width="32.5%" alt="Redline — stat band" />
+</p>
 
 ### Key Features
 
@@ -577,7 +583,7 @@ Uses [Playwright](https://playwright.dev) to screenshot each slide at 1920×1080
 
 ## Credits
 
-Created by [@zarazhangrui](https://github.com/zarazhangrui).
+Created by [@zarazhangrui](https://github.com/zarazhangrui). This fork — adding the `kj-template-pack` — is maintained by [@kev-hu](https://github.com/kev-hu).
 
 ## License
 
