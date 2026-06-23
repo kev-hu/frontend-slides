@@ -111,6 +111,43 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
 .fcard .ic { width:84px; height:84px; }
 .fcard .tag { font-family:var(--font-mono); font-size:13px; letter-spacing:2px; text-transform:uppercase; color:#A39E92; margin-top:auto; }
 
+
+
+/* ---- agenda / roadmap ---- */
+.agenda-list { position:absolute; left:120px; right:120px; top:292px; display:grid; grid-template-columns:1fr 1fr; gap:22px 28px; }
+.agenda-item { min-height:146px; background:rgba(255,255,255,0.72); border:var(--dash); border-radius:var(--radius); padding:28px 30px; display:grid; grid-template-columns:74px 1fr; gap:22px; align-items:start; }
+.agenda-num { width:58px; height:58px; display:grid; place-items:center; background:var(--primary); border:var(--solid); border-radius:var(--radius-sm); font-family:var(--font-mono); font-weight:700; font-size:20px; }
+.agenda-item p { margin:10px 0 0; }
+
+/* ---- flow diagram ---- */
+.flow { position:absolute; left:120px; right:120px; top:360px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:var(--dash); border-radius:var(--radius); background:rgba(255,255,255,0.64); }
+.flow-step { min-height:300px; padding:34px 30px; border-right:var(--dash); position:relative; }
+.flow-step:last-child { border-right:0; }
+.flow-step::after { content:'>'; position:absolute; right:-16px; top:132px; width:31px; height:31px; display:grid; place-items:center; background:var(--primary); border:var(--solid); border-radius:50%; font-family:var(--font-mono); font-weight:700; z-index:2; }
+.flow-step:last-child::after { display:none; }
+.flow-kicker { font-family:var(--font-mono); font-size:13px; letter-spacing:2px; text-transform:uppercase; color:#8A857B; }
+.flow-step .code { margin-top:24px; padding:16px 18px; font-size:15px; line-height:1.55; }
+
+/* ---- comparison matrix ---- */
+.matrix { position:absolute; left:120px; right:120px; top:300px; border:var(--dash); border-radius:var(--radius); overflow:hidden; background:rgba(255,255,255,0.72); }
+.matrix-row { display:grid; grid-template-columns:1.15fr 1fr 1fr; min-height:94px; border-bottom:var(--dash); }
+.matrix-row:last-child { border-bottom:0; }
+.matrix-cell { padding:24px 28px; border-right:var(--dash); display:flex; align-items:center; }
+.matrix-cell:last-child { border-right:0; }
+.matrix-head { background:#F0ECE3; font-family:var(--font-mono); font-size:14px; letter-spacing:2px; text-transform:uppercase; color:#6E6A60; }
+.matrix-feature { font-family:var(--font-sans); font-weight:600; font-size:22px; }
+.matrix .yes { color:#1A1A1A; font-weight:600; }
+.matrix .muted { color:#8A857B; }
+
+/* ---- timeline ---- */
+.timeline { position:absolute; left:120px; right:120px; top:332px; display:grid; grid-template-columns:repeat(4,1fr); border-top:var(--dash); }
+.timeline-step { padding:42px 32px 0 0; position:relative; }
+.timeline-step::before { content:''; position:absolute; top:-13px; left:0; width:26px; height:26px; border:var(--solid); background:var(--primary); border-radius:50%; }
+.timeline-step::after { content:''; position:absolute; top:-1px; left:26px; right:22px; border-top:var(--dash); }
+.timeline-step:last-child::after { display:none; }
+.timeline-week { font-family:var(--font-mono); font-size:14px; letter-spacing:2px; color:#8A857B; text-transform:uppercase; }
+.timeline-step p { margin:14px 0 0; }
+
 /* ---- stat ---- */
 .stat-n { font-family:var(--font-sans); font-weight:700; font-size:120px; line-height:0.9; letter-spacing:-0.03em; color:var(--primary); }
 .stat-l { font-family:var(--font-mono); font-size:16px; letter-spacing:2px; text-transform:uppercase; color: rgba(244,241,236,0.6); }
@@ -182,7 +219,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     </svg>
 
     <div class="pagetag">~/stagehand</div>
-    <div class="counter">01 / 06</div>
+    <div class="counter">01 / 10</div>
   </section>
 
   <!-- ============ SLIDE 2 — SECTION HEADER ============ -->
@@ -203,7 +240,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     </div>
 
     <div class="pagetag">~/architecture</div>
-    <div class="counter">02 / 06</div>
+    <div class="counter">02 / 10</div>
   </section>
 
   <!-- ============ SLIDE 3 — CONTENT / GRID ============ -->
@@ -258,10 +295,178 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     </div>
 
     <div class="pagetag">~/architecture/primitives</div>
-    <div class="counter">03 / 06</div>
+    <div class="counter">03 / 10</div>
   </section>
 
-  <!-- ============ SLIDE 4 — STAT / STATEMENT (dark, noise) ============ -->
+
+  <!-- ============ SLIDE 4 — AGENDA / ROADMAP ============ -->
+  <section class="slide cream" data-label="Agenda">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">DECK MAP</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:172px; width:900px;">
+      <div class="eyebrow reveal" style="--d:.04s">// TODAY'S PATH</div>
+      <h2 class="h2 reveal" style="--d:.1s; margin-top:16px;">Four questions this deck answers.</h2>
+    </div>
+
+    <div class="agenda-list">
+      <div class="agenda-item reveal" style="--d:.16s;">
+        <div class="agenda-num">01</div>
+        <div><h3 class="h3">Why selectors fail</h3><p class="small">The hidden maintenance tax behind traditional browser automation.</p></div>
+      </div>
+      <div class="agenda-item reveal" style="--d:.22s;">
+        <div class="agenda-num">02</div>
+        <div><h3 class="h3">What Stagehand changes</h3><p class="small">Intent-first actions, extraction, and observation in one API surface.</p></div>
+      </div>
+      <div class="agenda-item reveal" style="--d:.28s;">
+        <div class="agenda-num">03</div>
+        <div><h3 class="h3">Where it fits</h3><p class="small">How the SDK sits between the app, browser runtime, and model loop.</p></div>
+      </div>
+      <div class="agenda-item reveal" style="--d:.34s;">
+        <div class="agenda-num">04</div>
+        <div><h3 class="h3">How to adopt it</h3><p class="small">A practical path from one workflow to production-grade automation.</p></div>
+      </div>
+    </div>
+
+    <div class="pagetag">~/deck-map</div>
+    <div class="counter">04 / 10</div>
+  </section>
+
+  <!-- ============ SLIDE 5 — ARCHITECTURE FLOW ============ -->
+  <section class="slide cream" data-label="Flow">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">RUNTIME FLOW</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:172px; width:980px;">
+      <div class="eyebrow reveal" style="--d:.04s">// REQUEST TO BROWSER ACTION</div>
+      <h2 class="h2 reveal" style="--d:.1s; margin-top:16px;">Stagehand turns intent into verified browser steps.</h2>
+    </div>
+
+    <div class="flow reveal" style="--d:.16s;">
+      <div class="flow-step">
+        <div class="flow-kicker">Input</div>
+        <h3 class="h3" style="margin-top:18px;">Plain-language task</h3>
+        <p class="small" style="margin-top:14px;">A human-readable instruction describes the goal, not the target selector.</p>
+        <div class="code"><span class="k">await</span> page.<span class="fn">act</span>(<span class="s">"open billing"</span>)</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kicker">Observe</div>
+        <h3 class="h3" style="margin-top:18px;">DOM + screenshot context</h3>
+        <p class="small" style="margin-top:14px;">The runtime reads the current page state before choosing an action.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kicker">Resolve</div>
+        <h3 class="h3" style="margin-top:18px;">Model-guided plan</h3>
+        <p class="small" style="margin-top:14px;">Candidate actions are ranked, checked, and converted into browser operations.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-kicker">Execute</div>
+        <h3 class="h3" style="margin-top:18px;">Verified step</h3>
+        <p class="small" style="margin-top:14px;">Stagehand acts, then re-observes so the next step starts from real state.</p>
+      </div>
+    </div>
+
+    <div class="pagetag">~/runtime/flow</div>
+    <div class="counter">05 / 10</div>
+  </section>
+
+  <!-- ============ SLIDE 6 — COMPARISON MATRIX ============ -->
+  <section class="slide cream" data-label="Comparison">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">TRADEOFFS</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:172px; width:980px;">
+      <div class="eyebrow reveal" style="--d:.04s">// SELECTORS VS INTENT</div>
+      <h2 class="h2 reveal" style="--d:.1s; margin-top:16px;">Keep deterministic control where it matters. Remove brittleness where it hurts.</h2>
+    </div>
+
+    <div class="matrix reveal" style="--d:.16s;">
+      <div class="matrix-row matrix-head">
+        <div class="matrix-cell">Capability</div>
+        <div class="matrix-cell">Raw Playwright</div>
+        <div class="matrix-cell">Stagehand</div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-feature">Stable across UI churn</div>
+        <div class="matrix-cell muted">Manual selector repair</div>
+        <div class="matrix-cell yes">Intent resolves at runtime</div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-feature">Readable by non-engineers</div>
+        <div class="matrix-cell muted">Implementation detail-heavy</div>
+        <div class="matrix-cell yes">Task language stays visible</div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-feature">Typed data extraction</div>
+        <div class="matrix-cell muted">Custom scraping code</div>
+        <div class="matrix-cell yes">Schema-backed extract()</div>
+      </div>
+      <div class="matrix-row">
+        <div class="matrix-cell matrix-feature">Escape hatch</div>
+        <div class="matrix-cell yes">Full browser control</div>
+        <div class="matrix-cell yes">Use Playwright directly anytime</div>
+      </div>
+    </div>
+
+    <div class="pagetag">~/tradeoffs</div>
+    <div class="counter">06 / 10</div>
+  </section>
+
+  <!-- ============ SLIDE 7 — IMPLEMENTATION TIMELINE ============ -->
+  <section class="slide cream" data-label="Timeline">
+    <div class="frame"></div>
+    <div class="topbar">
+      <div class="brand"><div class="wm">stage<span>hand</span></div></div>
+      <div class="crumb">ADOPTION PLAN</div>
+    </div>
+
+    <div style="position:absolute; left:120px; top:172px; width:980px;">
+      <div class="eyebrow reveal" style="--d:.04s">// FROM PILOT TO PRODUCTION</div>
+      <h2 class="h2 reveal" style="--d:.1s; margin-top:16px;">Start with one brittle workflow, then widen the surface area.</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-step reveal" style="--d:.16s;">
+        <div class="timeline-week">Week 01</div>
+        <h3 class="h3" style="margin-top:20px;">Pick the workflow</h3>
+        <p class="small">Choose a high-value browser task with known selector churn and clear success criteria.</p>
+      </div>
+      <div class="timeline-step reveal" style="--d:.24s;">
+        <div class="timeline-week">Week 02</div>
+        <h3 class="h3" style="margin-top:20px;">Replace the brittle steps</h3>
+        <p class="small">Swap selectors for act() and extract(), leaving deterministic Playwright where it is already stable.</p>
+      </div>
+      <div class="timeline-step reveal" style="--d:.32s;">
+        <div class="timeline-week">Week 03</div>
+        <h3 class="h3" style="margin-top:20px;">Measure recovery</h3>
+        <p class="small">Track pass rate, fallback paths, and average action resolution time against the old job.</p>
+      </div>
+      <div class="timeline-step reveal" style="--d:.4s;">
+        <div class="timeline-week">Week 04</div>
+        <h3 class="h3" style="margin-top:20px;">Graduate the pattern</h3>
+        <p class="small">Document prompts, schemas, and review gates so other workflows can reuse the same shape.</p>
+      </div>
+    </div>
+
+    <div class="code reveal" style="--d:.46s; position:absolute; left:120px; right:120px; bottom:150px;">
+      <span class="c">// migration rule: keep deterministic code where selectors are stable</span><br>
+      <span class="k">await</span> page.<span class="fn">act</span>(<span class="s">"find the invoice row for Acme and open details"</span>);
+    </div>
+
+    <div class="pagetag">~/adoption-plan</div>
+    <div class="counter">07 / 10</div>
+  </section>
+
+  <!-- ============ SLIDE 8 — STAT / STATEMENT (dark, noise) ============ -->
   <section class="slide darkbg" data-label="Stat">
     <div class="frame"></div>
     <div class="topbar">
@@ -290,10 +495,10 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     </div>
 
     <div class="pagetag">~/benchmarks</div>
-    <div class="counter">04 / 06</div>
+    <div class="counter">08 / 10</div>
   </section>
 
-  <!-- ============ SLIDE 5 — QUOTE ============ -->
+  <!-- ============ SLIDE 9 — QUOTE ============ -->
   <section class="slide cream" data-label="Quote">
     <div class="frame"></div>
     <div class="topbar">
@@ -327,10 +532,10 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
     </svg>
 
     <div class="pagetag">~/field-notes</div>
-    <div class="counter">05 / 06</div>
+    <div class="counter">09 / 10</div>
   </section>
 
-  <!-- ============ SLIDE 6 — CLOSING (dark, noise) ============ -->
+  <!-- ============ SLIDE 10 — CLOSING (dark, noise) ============ -->
   <section class="slide darkbg" data-label="Close">
     <div class="frame"></div>
     <div class="topbar">
@@ -362,7 +567,7 @@ img, video, canvas, svg { max-width: 100%; max-height: 100%; }
       </div>
     </div>
 
-    <div class="counter">06 / 06</div>
+    <div class="counter">10 / 10</div>
   </section>
 
   </div>
