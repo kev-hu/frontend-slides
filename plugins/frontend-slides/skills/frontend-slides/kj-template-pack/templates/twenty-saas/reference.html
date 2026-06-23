@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twenty SaaS Reference Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,500;1,600&family=Fragment+Mono&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--stage-bg, #f4f4f4); }
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg, #f4f4f4); }
+.deck-stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0; background: var(--slide-bg, #fff); }
+.slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: block; visibility: hidden; opacity: 0; pointer-events: none; background: var(--slide-bg, #fff); }
+.slide.active, .slide.visible { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+img, video, canvas, svg { max-width: 100%; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } }
+
+:root {
+  --stage-bg: #eeeeee;
+  --slide-bg: #ffffff;
+  --bg: #ffffff;
+  --surface: #fcfcfc;
+  --surface-alt: #f9f9f9;
+  --ink: #111111;
+  --primary: #1a1a1a;
+  --muted: #666666;
+  --tertiary: #999999;
+  --border: #ededed;
+  --border-subtle: #f0f0f0;
+  --green: #dff7e9;
+  --cyan: #dff5fb;
+  --purple: #eee7ff;
+  --pink: #ffe8f1;
+  --yellow: #fff3c4;
+  --card-shadow: 0 2px 8px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+  --elevated-shadow: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+}
+
+* { box-sizing: border-box; }
+.slide {
+  padding: 64px 88px 72px;
+  font-family: Inter, sans-serif;
+  color: var(--ink);
+}
+.slide.active .reveal { animation: rise .62s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+.topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); margin: -64px -88px 56px; padding: 0 88px; background: rgba(255,255,255,.92); }
+.brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; }
+.mark { width: 30px; height: 30px; border-radius: 8px; background: var(--primary); position: relative; }
+.mark::after { content: ""; position: absolute; inset: 8px; border: 1px solid #fff; border-radius: 4px; }
+.nav { display: flex; gap: 28px; color: var(--muted); font-size: 13px; font-weight: 500; }
+.actions { display: flex; align-items: center; gap: 10px; }
+.pill { height: 34px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 0 14px; background: var(--bg); font-size: 12px; font-weight: 600; color: var(--muted); }
+.button { height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; padding: 0 18px; font-size: 13px; font-weight: 600; border: 1px solid var(--primary); background: var(--primary); color: #fff; }
+.button.secondary { color: var(--ink); background: #fff; border-color: var(--border); }
+.serif { font-family: "EB Garamond", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: -0.01em; }
+.eyebrow { display: inline-flex; height: 32px; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 0 13px; color: var(--muted); background: #fff; font-size: 12px; font-weight: 600; }
+.hero { text-align: center; max-width: 1180px; margin: 0 auto; }
+.hero h1 { margin: 24px 0 20px; font-size: 82px; line-height: .96; letter-spacing: -0.02em; font-weight: 600; }
+.subtitle { margin: 0 auto; max-width: 720px; color: var(--muted); font-size: 18px; line-height: 1.6; }
+.cta-row { display: flex; justify-content: center; gap: 12px; margin: 30px 0 36px; }
+.product-shell { width: 1280px; margin: 0 auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); box-shadow: var(--elevated-shadow); overflow: hidden; text-align: left; }
+.app-header { height: 54px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 0 18px; }
+.search { width: 310px; height: 34px; border: 1px solid var(--border); border-radius: 8px; color: var(--tertiary); display: flex; align-items: center; padding: 0 12px; font-size: 12px; background: var(--surface); }
+.app-body { display: grid; grid-template-columns: 210px 1fr; height: 382px; }
+.sidebar { background: var(--surface-alt); border-right: 1px solid var(--border); padding: 16px; display: grid; gap: 8px; align-content: start; }
+.side-item { height: 34px; border-radius: 8px; display: flex; align-items: center; gap: 9px; padding: 0 10px; font-size: 12px; color: var(--muted); }
+.side-item.active { background: #fff; color: var(--ink); box-shadow: var(--card-shadow); }
+.dot { width: 8px; height: 8px; border-radius: 999px; background: var(--green); border: 1px solid rgba(0,0,0,.08); }
+.dot.pink { background: var(--pink); } .dot.yellow { background: var(--yellow); } .dot.cyan { background: var(--cyan); } .dot.purple { background: var(--purple); }
+.main { padding: 18px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.tab { height: 36px; border: 1px solid var(--border); border-radius: 8px; padding: 0 13px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; background: #fff; }
+.kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.lane { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; min-height: 270px; }
+.lane-title { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+.deal { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 10px; box-shadow: var(--card-shadow); }
+.deal strong { display: block; font-size: 13px; margin-bottom: 7px; }
+.deal span { color: var(--muted); font-size: 12px; }
+.avatar-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.avatar { width: 24px; height: 24px; border-radius: 999px; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: 1px solid rgba(0,0,0,.08); }
+
+.section-grid { display: grid; grid-template-columns: 620px 1fr; gap: 64px; height: 100%; align-items: center; }
+.section-copy h2 { font-size: 64px; line-height: 1.02; letter-spacing: -0.02em; margin: 18px 0 22px; }
+.muted-line { color: var(--muted); }
+.badges-field { height: 690px; border: 1px solid var(--border); border-radius: 12px; background: radial-gradient(var(--border) 1px, transparent 1px) 0 0 / 20px 20px, var(--surface); position: relative; overflow: hidden; box-shadow: var(--card-shadow); }
+.company-badge { position: absolute; height: 48px; border-radius: 999px; border: 1px solid var(--border); background: #fff; box-shadow: var(--card-shadow); padding: 0 18px; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; }
+.company-badge:nth-child(1) { left: 80px; top: 80px; } .company-badge:nth-child(2) { right: 110px; top: 138px; } .company-badge:nth-child(3) { left: 190px; top: 268px; } .company-badge:nth-child(4) { right: 150px; top: 390px; } .company-badge:nth-child(5) { left: 110px; bottom: 110px; }
+.mini-logo { width: 22px; height: 22px; border-radius: 6px; background: var(--green); border: 1px solid rgba(0,0,0,.08); }
+
+.content-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 28px; }
+.content-head h2 { font-size: 46px; line-height: 1.06; letter-spacing: -0.02em; margin: 0; max-width: 690px; }
+.feature-layout { display: grid; grid-template-columns: 1.12fr .88fr; gap: 22px; }
+.feature-card { border: 1px solid var(--border); border-radius: 12px; background: #fff; box-shadow: var(--card-shadow); overflow: hidden; min-height: 624px; }
+.feature-card .panel-top { height: 382px; background: var(--green); position: relative; border-bottom: 1px solid rgba(0,0,0,.06); overflow: hidden; }
+.halftone { position: absolute; inset: 0; background: radial-gradient(rgba(0,0,0,.07) 1px, transparent 1.5px) 0 0 / 12px 12px; opacity: .55; }
+.cube { position: absolute; width: 164px; height: 120px; transform: skewY(-12deg) rotate(-8deg); border-radius: 14px; border: 1px solid rgba(0,0,0,.08); background: #fff; box-shadow: 18px 18px 0 rgba(0,0,0,.05); }
+.cube.one { left: 155px; top: 92px; background: #fff; } .cube.two { left: 315px; top: 168px; background: var(--cyan); } .cube.three { right: 132px; top: 100px; background: var(--purple); }
+.feature-copy { padding: 24px; display: grid; gap: 14px; }
+.step { width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center; border: 1px solid var(--border); font-size: 12px; font-weight: 700; }
+.feature-copy h3 { font-size: 25px; line-height: 1.22; margin: 0; letter-spacing: -0.01em; }
+.feature-copy p { color: var(--muted); font-size: 15px; line-height: 1.55; margin: 0; }
+.right-stack { display: grid; gap: 18px; }
+.task-card, .shortcut-card { border: 1px solid var(--border); border-radius: 12px; background: #fff; box-shadow: var(--card-shadow); padding: 22px; }
+.task-row { display: grid; grid-template-columns: 22px 1fr; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border-subtle); }
+.radio { width: 18px; height: 18px; border-radius: 999px; border: 1px solid var(--border); margin-top: 1px; }
+.task-row strong { display: block; font-size: 14px; margin-bottom: 4px; }
+.task-row span { color: var(--muted); font-size: 12px; }
+.keys { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.key { min-width: 42px; height: 34px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; font-family: "Fragment Mono", monospace; font-size: 12px; color: var(--muted); }
+
+.stat-wrap { height: 100%; display: grid; grid-template-columns: 1fr 520px; gap: 54px; align-items: center; }
+.stat-main h2 { font-size: 60px; line-height: 1.04; letter-spacing: -0.02em; margin: 0 0 20px; }
+.stat-number { font-size: 164px; line-height: .9; letter-spacing: -0.045em; font-weight: 600; margin: 22px 0 8px; }
+.stat-caption { color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 650px; }
+.metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.metric { border: 1px solid var(--border); border-radius: 12px; background: #fff; box-shadow: var(--card-shadow); padding: 20px; min-height: 138px; }
+.metric b { font-size: 34px; letter-spacing: -0.03em; }
+.metric span { display: block; margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+
+.quote-layout { display: grid; grid-template-columns: 1fr 610px; gap: 44px; height: 100%; align-items: center; }
+blockquote { font-size: 58px; line-height: 1.12; letter-spacing: -0.02em; font-weight: 600; margin: 0; }
+.quote-mark { color: var(--muted); }
+.tweet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tweet { min-height: 205px; border: 1px solid var(--border); border-radius: 12px; background: #fff; box-shadow: var(--card-shadow); padding: 18px; }
+.tweet-head { display: flex; align-items: center; gap: 10px; margin-bottom: 13px; }
+.tweet .avatar { width: 34px; height: 34px; }
+.tweet b { font-size: 13px; } .tweet small { display: block; color: var(--tertiary); font-size: 11px; margin-top: 2px; }
+.tweet p { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0; }
+
+.close { height: 100%; display: grid; grid-template-columns: 1fr 560px; gap: 60px; align-items: center; }
+.close h2 { font-size: 78px; line-height: .98; letter-spacing: -0.02em; margin: 0 0 24px; }
+.closing-panel { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); box-shadow: var(--elevated-shadow); padding: 24px; }
+.next-item { display: flex; justify-content: space-between; align-items: center; height: 62px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.next-item:last-child { border-bottom: 0; }
+.tag { border-radius: 999px; background: #fff; border: 1px solid var(--border); height: 28px; padding: 0 10px; display: inline-flex; align-items: center; font-size: 11px; color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <div class="deck-stage" id="stage">
+    <section class="slide active" data-label="Cover">
+      <div class="topbar reveal" style="--d:.02s"><div class="brand"><span class="mark"></span>Twenty OS</div><div class="nav"><span>Pipeline</span><span>Objects</span><span>Workflow</span><span>Insights</span></div><div class="actions"><span class="pill">12.4k stars</span><span class="button secondary">Docs</span><span class="button">Launch</span></div></div>
+      <div class="hero">
+        <div class="eyebrow reveal" style="--d:.05s">Discord community <span class="serif">#1</span> open CRM</div>
+        <h1 class="reveal" style="--d:.1s">The customer platform<br>that feels like <span class="serif">productivity</span></h1>
+        <p class="subtitle reveal" style="--d:.15s">A high-density CRM workspace for pipeline, tasks, companies, and workflow automation, translated into a slide-native operating system.</p>
+        <div class="cta-row reveal" style="--d:.2s"><span class="button">Start from template</span><span class="button secondary">View roadmap</span></div>
+        <div class="product-shell reveal" style="--d:.25s">
+          <div class="app-header"><div class="search">Search companies, deals, people...</div><span class="pill">Synced 2m ago</span></div>
+          <div class="app-body"><aside class="sidebar"><div class="side-item active"><span class="dot"></span>Pipeline</div><div class="side-item"><span class="dot pink"></span>Companies</div><div class="side-item"><span class="dot yellow"></span>Tasks</div><div class="side-item"><span class="dot cyan"></span>Workflows</div></aside><main class="main"><div class="tabs"><span class="tab"><span class="dot pink"></span>Views</span><span class="tab"><span class="dot yellow"></span>Permissions</span><span class="tab"><span class="dot green"></span>Data model</span><span class="tab"><span class="dot cyan"></span>Workflows</span></div><div class="kanban"><div class="lane"><div class="lane-title">Prospect <span>8</span></div><div class="deal"><strong>Northstar Labs</strong><span>$42k annual</span><div class="avatar-row"><span class="tag">New</span><span class="avatar"></span></div></div><div class="deal"><strong>Linear Foods</strong><span>$18k annual</span></div></div><div class="lane"><div class="lane-title">Qualified <span>5</span></div><div class="deal"><strong>Orbit Cloud</strong><span>$74k annual</span><div class="avatar-row"><span class="tag">Demo</span><span class="avatar"></span></div></div></div><div class="lane"><div class="lane-title">Proposal <span>3</span></div><div class="deal"><strong>Atlas Group</strong><span>$91k annual</span></div></div><div class="lane"><div class="lane-title">Won <span>12</span></div><div class="deal"><strong>Mercury Bio</strong><span>$130k annual</span></div></div></div></main></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-label="Section">
+      <div class="topbar reveal" style="--d:.02s"><div class="brand"><span class="mark"></span>Market motion</div><div class="nav"><span>01</span><span>Segment</span><span>Pipeline</span><span>Tasks</span></div><span class="pill">Q3 product review</span></div>
+      <div class="section-grid">
+        <div class="section-copy"><div class="eyebrow reveal" style="--d:.06s">Section 01</div><h2 class="reveal" style="--d:.12s">Turn scattered accounts into one <span class="muted-line">operating surface.</span></h2><p class="subtitle reveal" style="--d:.18s">Use section openers as a quiet reset: one editorial headline, one short explanatory paragraph, and a product artifact that previews the upcoming logic.</p></div>
+        <div class="badges-field reveal" style="--d:.2s"><div class="company-badge"><span class="mini-logo"></span>Northstar Labs</div><div class="company-badge"><span class="mini-logo" style="background:var(--pink)"></span>Orbit Cloud</div><div class="company-badge"><span class="mini-logo" style="background:var(--yellow)"></span>Linear Foods</div><div class="company-badge"><span class="mini-logo" style="background:var(--cyan)"></span>Atlas Group</div><div class="company-badge"><span class="mini-logo" style="background:var(--purple)"></span>Mercury Bio</div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-label="Content">
+      <div class="content-head"><h2 class="reveal" style="--d:.05s">Feature work should read like a dense, polished product screen.</h2><span class="pill reveal" style="--d:.1s">Views / permissions / workflows</span></div>
+      <div class="feature-layout">
+        <article class="feature-card reveal" style="--d:.14s"><div class="panel-top"><div class="halftone"></div><div class="cube one"></div><div class="cube two"></div><div class="cube three"></div></div><div class="feature-copy"><span class="step">01</span><h3>Composable objects, not rigid CRM records</h3><p>Pastel illustrated panels give the deck a memorable feature-card register without turning the whole system colorful or low-density.</p></div></article>
+        <div class="right-stack"><div class="task-card reveal" style="--d:.18s"><div class="tabs"><span class="tab"><span class="dot"></span>Tasks</span><span class="tab"><span class="dot pink"></span>Owners</span></div><div class="task-row"><span class="radio"></span><div><strong>Route enterprise deals</strong><span>Assign ownership when ACV crosses $50k.</span></div></div><div class="task-row"><span class="radio"></span><div><strong>Sync custom object fields</strong><span>Keep company and opportunity records aligned.</span></div></div><div class="task-row"><span class="radio"></span><div><strong>Trigger renewal workflow</strong><span>Create tasks 90 days before contract end.</span></div></div></div><div class="shortcut-card reveal" style="--d:.22s"><strong>Keyboard-first CRM</strong><p class="subtitle" style="font-size:14px;margin:10px 0 0">Use compact shortcut panels for technical process or workflow slides.</p><div class="keys"><span class="key">⌘K</span><span class="key">G</span><span class="key">V</span><span class="key">⇧A</span><span class="key">/</span></div></div></div>
+      </div>
+    </section>
+
+    <section class="slide" data-label="Stat">
+      <div class="stat-wrap"><div class="stat-main"><div class="eyebrow reveal" style="--d:.05s">Pipeline health</div><div class="stat-number reveal" style="--d:.1s">37%</div><h2 class="reveal" style="--d:.15s">faster handoff from qualified lead to first proposal.</h2><p class="stat-caption reveal" style="--d:.2s">The stat slide keeps the monochrome editorial rhythm, then adds compact supporting metrics instead of oversized decorative charts.</p></div><div class="metric-grid reveal" style="--d:.24s"><div class="metric"><b>142</b><span>accounts reviewed in weekly pipeline ritual</span></div><div class="metric"><b>18m</b><span>median time from trigger to assigned task</span></div><div class="metric"><b>4.8x</b><span>more structured notes captured per account</span></div><div class="metric"><b>91%</b><span>records with owner, stage, and next step</span></div></div></div>
+    </section>
+
+    <section class="slide" data-label="Quote">
+      <div class="quote-layout"><blockquote class="reveal" style="--d:.05s"><span class="quote-mark">"</span>It feels less like a CRM deck and more like opening the product itself, with just enough editorial restraint to keep the room focused.<span class="quote-mark">"</span><br><span class="serif">#1</span></blockquote><div class="tweet-grid reveal" style="--d:.14s"><article class="tweet"><div class="tweet-head"><span class="avatar"></span><div><b>Maya Chen</b><small>@maya · Jun 23</small></div></div><p>@twentycrm gives our operators a surface they actually understand. Pipeline review finally feels calm.</p></article><article class="tweet"><div class="tweet-head"><span class="avatar"></span><div><b>Jon Bell</b><small>@jbell · Jun 21</small></div></div><p>The object model is the unlock. We can explain the business without hiding the messy details.</p></article><article class="tweet"><div class="tweet-head"><span class="avatar"></span><div><b>Priya Rao</b><small>@priya · Jun 18</small></div></div><p>Soft borders, real density, and enough color to remember the feature story.</p></article><article class="tweet"><div class="tweet-head"><span class="avatar"></span><div><b>Sam Lee</b><small>@sam · Jun 16</small></div></div><p>This is what SaaS strategy decks should feel like: useful, scannable, and product-native.</p></article></div></div>
+    </section>
+
+    <section class="slide" data-label="Close">
+      <div class="topbar reveal" style="--d:.02s"><div class="brand"><span class="mark"></span>Twenty OS</div><div class="nav"><span>Decision</span><span>Risks</span><span>Next</span></div><span class="pill">Ready for rollout</span></div>
+      <div class="close"><div><div class="eyebrow reveal" style="--d:.06s">Close</div><h2 class="reveal" style="--d:.1s">Ship the CRM as an operating layer, not a reporting archive.</h2><p class="subtitle reveal" style="--d:.15s">Closing slides return to the hero register: one strong editorial thought, practical next steps, and enough product chrome to keep the system recognizable.</p></div><div class="closing-panel reveal" style="--d:.2s"><div class="next-item"><strong>Approve object model</strong><span class="tag">Week 1</span></div><div class="next-item"><strong>Migrate account notes</strong><span class="tag">Week 2</span></div><div class="next-item"><strong>Launch workflow triggers</strong><span class="tag">Week 3</span></div><div class="next-item"><strong>Review pipeline rituals</strong><span class="tag">Week 4</span></div></div></div>
+    </section>
+  </div>
+</div>
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const fit = () => {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `translate(${(innerWidth - 1920 * s) / 2}px, ${(innerHeight - 1080 * s) / 2}px) scale(${s})`;
+  };
+  const show = (n) => { i = Math.max(0, Math.min(slides.length - 1, n)); slides.forEach((s, j) => s.classList.toggle('active', j === i)); };
+  addEventListener('resize', fit);
+  addEventListener('keydown', (e) => { if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) show(i + 1); else if (['ArrowLeft', 'PageUp'].includes(e.key)) show(i - 1); });
+  fit(); show(0);
+})();
+</script>
+</body>
+</html>

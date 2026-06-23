@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pack_name": "KJ Template Pack - Kevin's Custom Designs",
   "source_repo": "kev-hu/frontend-slides",
-  "template_count": 6,
+  "template_count": 7,
   "usage": {
     "selection": "Read this compact index first to shortlist KJ templates from metadata.",
     "previews": "For title-slide previews, read only the preview_md files for the shortlisted KJ candidates.",
@@ -164,6 +164,32 @@
       "avoid_for": "Somber, luxury, formal-financial, or cinematic dark material where soft glass, rounded corners, friendly orange, and emoji read as light or unserious.",
       "preview_md": "kj-template-pack/templates/hedgehog-os/preview.md",
       "design_md": "kj-template-pack/templates/hedgehog-os/design.md"
+    },
+    {
+      "slug": "twenty-saas",
+      "name": "Twenty SaaS",
+      "tagline": "Refined high-density SaaS CRM deck — monochrome Inter product surfaces, EB Garamond italic accents, soft bordered app chrome, kanban/task/tweet modules, and pastel isometric feature cards.",
+      "mood": [
+        "polished",
+        "product-native",
+        "clean",
+        "operational",
+        "lightly-playful"
+      ],
+      "tone": [
+        "precise",
+        "modern",
+        "founder-product",
+        "calm",
+        "scannable"
+      ],
+      "formality": "medium-high",
+      "density": "medium-high",
+      "scheme": "light",
+      "best_for": "SaaS product launches, CRM/data/workflow decks, product strategy, roadmap reviews, GTM operating reviews, investor updates, and internal product narratives that need to feel like a real polished app rather than a generic presentation. Also strong for any \"operating system for X\" story where dense product surfaces and clean hierarchy are more persuasive than cinematic visuals.",
+      "avoid_for": "Avoid for emotional consumer storytelling, luxury/editorial fashion, cinematic dark decks, or playful education material where CRM chrome, compact UI density, and restrained monochrome surfaces feel too operational.",
+      "preview_md": "kj-template-pack/templates/twenty-saas/preview.md",
+      "design_md": "kj-template-pack/templates/twenty-saas/design.md"
     }
   ]
 }
