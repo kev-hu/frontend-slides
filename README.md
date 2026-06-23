@@ -11,13 +11,13 @@ A coding-agent skill for creating stunning HTML presentations — from scratch o
 Here are the authored templates added in this fork: **Redline**, **Duolingo Learn**, **Stagehand Dev**, **Hedgehog OS**, and **Voltcast**.
 
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-01.png" width="32.5%" alt="Redline — cover slide" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-01.png" width="32.5%" alt="Duolingo Learn — cover slide" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-01.png" width="32.5%" alt="Stagehand Dev — cover slide" />
+  <img src="previews/kj-redline-01.png" width="32.5%" alt="Redline — cover slide" />
+  <img src="previews/kj-duolingo-learn-01.png" width="32.5%" alt="Duolingo Learn — cover slide" />
+  <img src="previews/kj-stagehand-dev-01.png" width="32.5%" alt="Stagehand Dev — cover slide" />
 </p>
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-01.png" width="32.5%" alt="Hedgehog OS — cover slide" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-01.png" width="32.5%" alt="Voltcast — cover slide" />
+  <img src="previews/kj-hedgehog-os-01.png" width="32.5%" alt="Hedgehog OS — cover slide" />
+  <img src="previews/kj-voltcast-01.png" width="32.5%" alt="Voltcast — cover slide" />
 </p>
 
 ### Key Features
@@ -189,9 +189,9 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
 ### Redline
 
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-01.png" width="32.5%" alt="Redline — slide 1" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-03.png" width="32.5%" alt="Redline — slide 3" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/redline/reference-shots/slide-05.png" width="32.5%" alt="Redline — slide 5" />
+  <img src="previews/kj-redline-01.png" width="32.5%" alt="Redline — slide 1" />
+  <img src="previews/kj-redline-03.png" width="32.5%" alt="Redline — slide 3" />
+  <img src="previews/kj-redline-05.png" width="32.5%" alt="Redline — slide 5" />
 </p>
 
 > Swiss/Bauhaus deck system with hot-red accents, hard technical boxes, and numbered mono eyebrows.
@@ -199,9 +199,9 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
 ### Duolingo Learn
 
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-01.png" width="32.5%" alt="Duolingo Learn — slide 1" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-04.png" width="32.5%" alt="Duolingo Learn — slide 4" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/duolingo-learn/reference-shots/slide-08.png" width="32.5%" alt="Duolingo Learn — slide 8" />
+  <img src="previews/kj-duolingo-learn-01.png" width="32.5%" alt="Duolingo Learn — slide 1" />
+  <img src="previews/kj-duolingo-learn-04.png" width="32.5%" alt="Duolingo Learn — slide 4" />
+  <img src="previews/kj-duolingo-learn-08.png" width="32.5%" alt="Duolingo Learn — slide 8" />
 </p>
 
 > Bright gamified learning deck with rounded type, chunky 3D buttons, lesson paths, XP pills, and green-checkmark bullets.
@@ -209,9 +209,9 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
 ### Stagehand Dev
 
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-01.png" width="32.5%" alt="Stagehand Dev — slide 1" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-03.png" width="32.5%" alt="Stagehand Dev — slide 3" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/stagehand-dev/reference-shots/slide-05.png" width="32.5%" alt="Stagehand Dev — slide 5" />
+  <img src="previews/kj-stagehand-dev-01.png" width="32.5%" alt="Stagehand Dev — slide 1" />
+  <img src="previews/kj-stagehand-dev-03.png" width="32.5%" alt="Stagehand Dev — slide 3" />
+  <img src="previews/kj-stagehand-dev-05.png" width="32.5%" alt="Stagehand Dev — slide 5" />
 </p>
 
 > Dev-tools landing-page system with graph-paper structure, dashed borders, one golden-yellow accent, and isometric cubes.
@@ -219,9 +219,9 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
 ### Hedgehog OS
 
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-01.png" width="32.5%" alt="Hedgehog OS — slide 1" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-03.png" width="32.5%" alt="Hedgehog OS — slide 3" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/hedgehog-os/reference-shots/slide-05.png" width="32.5%" alt="Hedgehog OS — slide 5" />
+  <img src="previews/kj-hedgehog-os-01.png" width="32.5%" alt="Hedgehog OS — slide 1" />
+  <img src="previews/kj-hedgehog-os-03.png" width="32.5%" alt="Hedgehog OS — slide 3" />
+  <img src="previews/kj-hedgehog-os-05.png" width="32.5%" alt="Hedgehog OS — slide 5" />
 </p>
 
 > Warm macOS-inspired glassmorphism with frosted app windows, Finder-style navigation, glass widgets, and friendly orange accents.
@@ -229,9 +229,9 @@ The fork-specific KJ templates live inside this repo, so their screenshots rende
 ### Voltcast
 
 <p>
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-01.png" width="32.5%" alt="Voltcast — slide 1" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-03.png" width="32.5%" alt="Voltcast — slide 3" />
-  <img src="plugins/frontend-slides/skills/frontend-slides/kj-template-pack/templates/voltcast-brutalist/reference-shots/slide-05.png" width="32.5%" alt="Voltcast — slide 5" />
+  <img src="previews/kj-voltcast-01.png" width="32.5%" alt="Voltcast — slide 1" />
+  <img src="previews/kj-voltcast-03.png" width="32.5%" alt="Voltcast — slide 3" />
+  <img src="previews/kj-voltcast-05.png" width="32.5%" alt="Voltcast — slide 5" />
 </p>
 
 > Acid-green-on-black brutalist hardware-spec deck with hard grids, mono readouts, and zero rounded corners.
